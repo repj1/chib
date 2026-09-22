@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Chib — Mr. Tofu Ciabatta</title>
+
   <meta
     name="description"
     content="The official record of Mr. Tofu Ciabatta, known as Chib."
-  />
+  >
 
   <style>
     :root {
@@ -17,7 +19,6 @@
       --muted: #77736d;
       --line: #deddd8;
       --accent: #d87b36;
-      --soft-accent: #f2e2d4;
       --white: #ffffff;
     }
 
@@ -33,6 +34,7 @@
       margin: 0;
       background: var(--bg);
       color: var(--text);
+
       font-family:
         Inter,
         ui-sans-serif,
@@ -40,6 +42,7 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
+
       -webkit-font-smoothing: antialiased;
     }
 
@@ -48,146 +51,268 @@
       text-decoration: none;
     }
 
+
+    /* ========================================
+       HERO
+    ======================================== */
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: min(900px, 100vh);
+      min-height: 720px;
+      overflow: hidden;
+      background: #f5f1eb;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+
+      /*
+        First number = left/right crop.
+        Second number = up/down crop.
+      */
+      object-position: 54% 43%;
+    }
+
+    /*
+      Soft transition from editorial cream
+      into the photograph.
+    */
+
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(248, 246, 241, 0.99) 0%,
+          rgba(248, 246, 241, 0.97) 23%,
+          rgba(248, 246, 241, 0.78) 35%,
+          rgba(248, 246, 241, 0.34) 47%,
+          rgba(248, 246, 241, 0.08) 60%,
+          rgba(248, 246, 241, 0) 70%
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      width: min(1440px, 100%);
+      height: 100%;
+      margin: 0 auto;
+
+      padding: 42px 58px 54px;
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(440px, 0.84fr)
+        1.16fr;
+
+      grid-template-rows:
+        auto
+        1fr;
+    }
+
+    .hero-brand {
+      grid-column: 1;
+      grid-row: 1;
+
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.34em;
+
+      color: #4b4844;
+    }
+
+    .hero-nav {
+      grid-column: 2;
+      grid-row: 1;
+
+      display: flex;
+      justify-content: flex-end;
+      gap: 48px;
+
+      font-size: 14px;
+    }
+
+    .hero-nav a {
+      color: rgba(255,255,255,0.94);
+      text-shadow: 0 1px 14px rgba(0,0,0,0.24);
+      transition: opacity .2s ease;
+    }
+
+    .hero-nav a:hover {
+      opacity: .65;
+    }
+
+    .hero-main {
+      grid-column: 1;
+      grid-row: 2;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-title-wrap {
+      margin-top: -12px;
+    }
+
+    .hero-rule {
+      width: 58px;
+      height: 1px;
+      background: #4f4b47;
+      margin-bottom: 48px;
+    }
+
+    .hero h1 {
+      margin: 0;
+
+      font-size: clamp(100px, 10vw, 170px);
+      line-height: .72;
+
+      font-weight: 400;
+      letter-spacing: -0.085em;
+
+      color: #211f1d;
+    }
+
+    .formal-name {
+      margin-top: 30px;
+
+      font-size: clamp(28px, 3vw, 48px);
+      line-height: 1;
+
+      font-weight: 300;
+      letter-spacing: -0.045em;
+
+      color: #383531;
+    }
+
+    .hero-description {
+      margin: 46px 0 0;
+
+      font-size: 17px;
+      line-height: 1.7;
+
+      color: #5f5a55;
+    }
+
+    .hero-button {
+      margin-top: 36px;
+
+      width: 245px;
+      height: 62px;
+
+      padding: 0 24px 0 32px;
+
+      border: 1px solid #77716a;
+      border-radius: 999px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      text-transform: uppercase;
+      letter-spacing: .20em;
+      font-size: 12px;
+
+      transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+    }
+
+    .hero-button:hover {
+      background: #211f1d;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .hero-button .arrow {
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    .hero-note {
+      position: absolute;
+
+      right: 5%;
+      top: 35%;
+
+      color: rgba(255,255,255,.94);
+
+      font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        cursive;
+
+      font-size: clamp(20px, 2vw, 29px);
+      line-height: 1.07;
+
+      transform: rotate(-7deg);
+
+      text-shadow:
+        0 1px 7px rgba(72, 45, 25, .18);
+    }
+
+    .hero-note span {
+      display: block;
+    }
+
+    .hero-heart {
+      margin-top: 12px;
+      margin-left: 52px;
+      font-size: 30px;
+    }
+
+
+    /* ========================================
+       MAIN CONTENT
+    ======================================== */
+
     .site {
       width: min(1380px, calc(100% - 48px));
       margin: 0 auto;
     }
 
-    nav {
-      height: 84px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .logo {
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      font-size: 18px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .hero {
-      min-height: calc(100vh - 84px);
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      align-items: center;
-      gap: 64px;
-      padding: 72px 0 90px;
-    }
-
-    .hero-copy {
-      max-width: 560px;
-    }
-
-    .kicker {
-      color: var(--accent);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      margin-bottom: 22px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(78px, 10vw, 150px);
-      line-height: 0.82;
-      letter-spacing: -0.075em;
-      font-weight: 700;
-    }
-
-    .formal-name {
-      display: block;
-      margin-top: 24px;
-      font-size: clamp(22px, 2.6vw, 38px);
-      font-weight: 450;
-      letter-spacing: -0.04em;
-      color: var(--muted);
-    }
-
-    .hero-description {
-      margin-top: 34px;
-      max-width: 520px;
-      font-size: 18px;
-      line-height: 1.65;
-      color: #4d4b47;
-    }
-
-    .hero-description strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .hero-image {
-      min-height: 680px;
-      border-radius: 2px;
-      overflow: hidden;
-      background:
-        linear-gradient(
-          145deg,
-          #ece9e3,
-          #f6f4ef
-        );
-      position: relative;
-    }
-
-    .hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .placeholder {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-      padding: 40px;
-    }
-
-    .hero-caption {
-      position: absolute;
-      right: 18px;
-      bottom: 18px;
-      background: rgba(247,247,244,0.92);
-      backdrop-filter: blur(8px);
-      padding: 10px 12px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
     .intro {
       padding: 130px 0;
+
       display: grid;
-      grid-template-columns: 0.75fr 1.25fr;
+      grid-template-columns: .75fr 1.25fr;
       gap: 80px;
+
       border-top: 1px solid var(--line);
     }
 
     .section-label {
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: .16em;
       color: var(--muted);
     }
 
     .intro-copy {
-      font-size: clamp(34px, 4.2vw, 64px);
-      line-height: 1.02;
-      letter-spacing: -0.045em;
       max-width: 950px;
       margin: 0;
+
+      font-size: clamp(34px, 4.2vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -.045em;
       font-weight: 500;
     }
 
@@ -196,9 +321,13 @@
       font-style: normal;
     }
 
+
+    /* FACTS */
+
     .facts {
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
+
       display: grid;
       grid-template-columns: repeat(4, 1fr);
     }
@@ -214,17 +343,23 @@
 
     .fact-label {
       display: block;
+
+      margin-bottom: 9px;
+
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: .14em;
+
       color: var(--muted);
-      margin-bottom: 9px;
     }
 
     .fact-value {
       font-size: 20px;
-      letter-spacing: -0.02em;
+      letter-spacing: -.02em;
     }
+
+
+    /* FIELD NOTES */
 
     .field-notes {
       padding: 130px 0;
@@ -234,21 +369,24 @@
       display: flex;
       justify-content: space-between;
       align-items: end;
+
       gap: 40px;
       margin-bottom: 64px;
     }
 
     .field-header h2 {
       margin: 0;
+
       font-size: clamp(52px, 7vw, 100px);
-      line-height: 0.9;
-      letter-spacing: -0.06em;
+      line-height: .9;
+      letter-spacing: -.06em;
       font-weight: 600;
     }
 
     .field-header p {
       max-width: 400px;
       margin: 0;
+
       color: var(--muted);
       line-height: 1.6;
       font-size: 15px;
@@ -256,38 +394,49 @@
 
     .observation {
       display: grid;
-      grid-template-columns: 160px 1fr 0.6fr;
+      grid-template-columns: 160px 1fr .6fr;
+
       gap: 42px;
       align-items: start;
+
       padding: 34px 0;
+
       border-top: 1px solid var(--line);
     }
 
     .observation-number {
       font-size: 13px;
       color: var(--accent);
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
     }
 
     .observation h3 {
       margin: 0;
+
       font-size: 30px;
-      letter-spacing: -0.035em;
+      letter-spacing: -.035em;
       font-weight: 500;
     }
 
     .observation p {
       margin: 0;
+
       color: var(--muted);
       line-height: 1.65;
       font-size: 15px;
     }
 
+
+    /* SACRED CLASSIFICATION */
+
     .holy {
       margin: 40px 0 130px;
+
       background: var(--text);
       color: var(--white);
+
       min-height: 560px;
+
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
@@ -303,50 +452,63 @@
     }
 
     .holy h2 {
-      margin: 0;
-      font-size: clamp(52px, 6vw, 88px);
-      line-height: 0.95;
-      letter-spacing: -0.055em;
-      font-weight: 500;
       max-width: 620px;
+      margin: 0;
+
+      font-size: clamp(52px, 6vw, 88px);
+      line-height: .95;
+      letter-spacing: -.055em;
+      font-weight: 500;
     }
 
     .holy p {
+      max-width: 570px;
       margin-top: 28px;
+
       color: #c8c5bf;
+
       font-size: 17px;
       line-height: 1.7;
-      max-width: 570px;
     }
 
     .halo {
       min-height: 560px;
+
       display: grid;
       place-items: center;
+
       position: relative;
       overflow: hidden;
     }
 
     .halo::before {
       content: "";
+
       width: 340px;
       height: 340px;
+
       border-radius: 50%;
+
       background: var(--accent);
-      filter: blur(0px);
-      opacity: 0.95;
+
       position: absolute;
     }
 
     .halo::after {
       content: "CHIB";
+
       position: relative;
+      z-index: 2;
+
       font-size: clamp(80px, 12vw, 180px);
       font-weight: 700;
-      letter-spacing: -0.08em;
+      letter-spacing: -.08em;
+
       color: var(--white);
-      z-index: 2;
     }
+
+
+    /* GALLERY */
 
     .gallery {
       padding: 0 0 130px;
@@ -356,26 +518,34 @@
       display: flex;
       justify-content: space-between;
       align-items: end;
+
       margin-bottom: 40px;
     }
 
     .gallery-top h2 {
-      font-size: clamp(48px, 6vw, 88px);
       margin: 0;
-      letter-spacing: -0.055em;
-      line-height: 0.9;
+
+      font-size: clamp(48px, 6vw, 88px);
+      line-height: .9;
+      letter-spacing: -.055em;
       font-weight: 600;
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: 1.4fr 0.6fr;
+      grid-template-columns: 1.4fr .6fr;
       gap: 18px;
     }
 
     .gallery-large,
     .gallery-small {
-      background: #eae7e1;
+      background:
+        linear-gradient(
+          145deg,
+          #e5e1d9,
+          #f3f0e9
+        );
+
       overflow: hidden;
     }
 
@@ -392,19 +562,19 @@
       min-height: 340px;
     }
 
-    .gallery img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+
+    /* FOOTER */
 
     footer {
       border-top: 1px solid var(--line);
+
       padding: 42px 0 56px;
+
       display: flex;
       justify-content: space-between;
+
       gap: 32px;
+
       color: var(--muted);
       font-size: 13px;
     }
@@ -414,13 +584,87 @@
       font-weight: 600;
     }
 
+
+    /* ========================================
+       TABLET
+    ======================================== */
+
     @media (max-width: 900px) {
+
       .hero {
-        grid-template-columns: 1fr;
+        height: 900px;
+        min-height: 0;
       }
 
-      .hero-image {
-        min-height: 560px;
+      .hero-photo img {
+        object-position: 59% 50%;
+      }
+
+      .hero-shade {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(248,246,241,.98) 0%,
+            rgba(248,246,241,.94) 26%,
+            rgba(248,246,241,.68) 38%,
+            rgba(248,246,241,.15) 58%,
+            rgba(248,246,241,0) 73%
+          );
+      }
+
+      .hero-content {
+        padding: 28px 26px;
+        display: block;
+      }
+
+      .hero-brand {
+        position: absolute;
+        top: 28px;
+        left: 26px;
+      }
+
+      .hero-nav {
+        display: none;
+      }
+
+      .hero-main {
+        display: block;
+        padding-top: 125px;
+      }
+
+      .hero-rule {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: clamp(88px, 26vw, 130px);
+      }
+
+      .formal-name {
+        font-size: 28px;
+        margin-top: 24px;
+      }
+
+      .hero-description {
+        margin-top: 28px;
+        font-size: 15px;
+      }
+
+      .hero-button {
+        margin-top: 26px;
+
+        width: 205px;
+        height: 56px;
+
+        font-size: 11px;
+      }
+
+      .hero-note {
+        top: auto;
+        right: 24px;
+        bottom: 90px;
+
+        font-size: 19px;
       }
 
       .intro {
@@ -470,25 +714,56 @@
       }
     }
 
+
+    /* ========================================
+       MOBILE
+    ======================================== */
+
     @media (max-width: 620px) {
+
       .site {
         width: min(100% - 28px, 1380px);
       }
 
-      .nav-links {
-        display: none;
-      }
-
-      nav {
-        height: 70px;
-      }
-
       .hero {
-        padding-top: 44px;
+        height: 850px;
       }
 
-      .hero-image {
-        min-height: 440px;
+      .hero-photo img {
+        object-position: 60% 53%;
+      }
+
+      .hero-content {
+        padding: 24px 20px;
+      }
+
+      .hero-brand {
+        top: 24px;
+        left: 20px;
+
+        font-size: 12px;
+      }
+
+      .hero-main {
+        padding-top: 115px;
+      }
+
+      .hero h1 {
+        font-size: clamp(84px, 27vw, 120px);
+      }
+
+      .formal-name {
+        font-size: 25px;
+      }
+
+      .hero-description {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .hero-note {
+        right: 20px;
+        bottom: 72px;
       }
 
       .facts {
@@ -526,66 +801,107 @@
         flex-direction: column;
       }
     }
+
   </style>
 </head>
 
+
 <body>
-  <div class="site">
 
-    <nav>
-      <div class="logo">CHIB.RUN</div>
 
-      <div class="nav-links">
-        <a href="#species">Species</a>
-        <a href="#observations">Field notes</a>
+  <!-- ========================================
+       HERO
+  ======================================== -->
+
+  <section class="hero">
+
+    <div class="hero-photo">
+      <img
+        src="images/chib-hero.png"
+        alt="Mr. Tofu Ciabatta holding his evening winnings"
+      >
+    </div>
+
+    <div class="hero-shade"></div>
+
+    <div class="hero-content">
+
+      <div class="hero-brand">
+        CHIB.RUN
+      </div>
+
+      <nav class="hero-nav">
+        <a href="#species">About</a>
+        <a href="#observations">Chronicles</a>
         <a href="#miracles">Miracles</a>
         <a href="#photos">Photos</a>
-      </div>
-    </nav>
+      </nav>
 
-    <main>
+      <div class="hero-main">
 
-      <section class="hero">
-        <div class="hero-copy">
+        <div class="hero-title-wrap">
 
-          <div class="kicker">
-            A living natural wonder
-          </div>
+          <div class="hero-rule"></div>
 
           <h1>
             Chib
-            <span class="formal-name">
-              Mr. Tofu Ciabatta
-            </span>
           </h1>
 
+          <div class="formal-name">
+            Mr. Tofu Ciabatta
+          </div>
+
           <p class="hero-description">
-            A long-haired white Syrian hamster of unusual dignity,
-            extensive fur, and <strong>considerable spiritual significance.</strong>
-            He resides in a carefully maintained territory and is most
-            active after sunset.
+            A long-haired Syrian hamster<br>
+            of unusual dignity, extensive fur,<br>
+            and considerable spiritual<br>
+            significance.
           </p>
 
-        </div>
-
-        <div class="hero-image">
-
-          <!-- Later replace this placeholder with:
-          <img src="images/chib-hero.jpg" alt="Mr. Tofu Ciabatta">
-          -->
-
-          <div class="placeholder">
-            Portrait of Mr. Tofu Ciabatta
-          </div>
-
-          <div class="hero-caption">
-            Chib, in the field
-          </div>
+          <a
+            href="#species"
+            class="hero-button"
+          >
+            <span>Meet Chib</span>
+            <span class="arrow">→</span>
+          </a>
 
         </div>
-      </section>
 
-      <section class="intro" id="species">
+      </div>
+
+
+      <div class="hero-note">
+        <span>Small</span>
+        <span>creature.</span>
+        <span>Large world.</span>
+
+        <span class="hero-heart">
+          ♡
+        </span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================================
+       REST OF SITE
+  ======================================== -->
+
+  <div class="site">
+
+    <main>
+
+
+      <!-- SPECIES -->
+
+      <section
+        class="intro"
+        id="species"
+      >
 
         <div class="section-label">
           Species profile
@@ -600,31 +916,73 @@
 
       </section>
 
+
+
+      <!-- FACTS -->
+
       <section class="facts">
 
         <div class="fact">
-          <span class="fact-label">Common name</span>
-          <span class="fact-value">Chib</span>
+
+          <span class="fact-label">
+            Common name
+          </span>
+
+          <span class="fact-value">
+            Chib
+          </span>
+
         </div>
 
-        <div class="fact">
-          <span class="fact-label">Formal name</span>
-          <span class="fact-value">Mr. Tofu Ciabatta</span>
-        </div>
 
         <div class="fact">
-          <span class="fact-label">Activity</span>
-          <span class="fact-value">Primarily nocturnal</span>
+
+          <span class="fact-label">
+            Formal name
+          </span>
+
+          <span class="fact-value">
+            Mr. Tofu Ciabatta
+          </span>
+
         </div>
 
+
         <div class="fact">
-          <span class="fact-label">Known range</span>
-          <span class="fact-value">One very large enclosure</span>
+
+          <span class="fact-label">
+            Activity
+          </span>
+
+          <span class="fact-value">
+            Primarily nocturnal
+          </span>
+
+        </div>
+
+
+        <div class="fact">
+
+          <span class="fact-label">
+            Known range
+          </span>
+
+          <span class="fact-value">
+            One very large enclosure
+          </span>
+
         </div>
 
       </section>
 
-      <section class="field-notes" id="observations">
+
+
+      <!-- FIELD NOTES -->
+
+      <section
+        class="field-notes"
+        id="observations"
+      >
 
         <div class="field-header">
 
@@ -634,11 +992,12 @@
           </h2>
 
           <p>
-            Observations collected from inside the known range of
-            Mr. Tofu Ciabatta.
+            Observations collected from inside the known range
+            of Mr. Tofu Ciabatta.
           </p>
 
         </div>
+
 
         <article class="observation">
 
@@ -651,13 +1010,14 @@
           </h3>
 
           <p>
-            Shortly after dark, Chib begins a sustained journey across
-            the rotating plains. The landscape moves beneath him for
-            considerable distances, while Chib himself remains geographically
-            close to home.
+            Shortly after dark, Chib begins a sustained journey
+            across the rotating plains. The landscape moves beneath
+            him for considerable distances, while Chib himself
+            remains geographically close to home.
           </p>
 
         </article>
+
 
         <article class="observation">
 
@@ -670,12 +1030,14 @@
           </h3>
 
           <p>
-            Seeds are inspected individually, transported with urgency,
-            and subsequently stored in locations known only to Chib.
-            Some are later rediscovered. Others enter legend.
+            Seeds are inspected individually, transported with
+            urgency, and subsequently stored in locations known
+            only to Chib. Some are later rediscovered. Others
+            enter legend.
           </p>
 
         </article>
+
 
         <article class="observation">
 
@@ -697,7 +1059,14 @@
 
       </section>
 
-      <section class="holy" id="miracles">
+
+
+      <!-- MIRACLES -->
+
+      <section
+        class="holy"
+        id="miracles"
+      >
 
         <div class="holy-copy">
 
@@ -710,11 +1079,12 @@
           </h2>
 
           <p>
-            Scholars remain divided. Some point to the immaculate white
-            coat. Others cite the unexplained multiplication of hidden
-            sunflower seeds, his capacity to vanish beneath apparently
-            insufficient bedding, and the recurring restoration of tunnels
-            believed to have collapsed permanently.
+            Scholars remain divided. Some point to the immaculate
+            white coat. Others cite the unexplained multiplication
+            of hidden sunflower seeds, his capacity to vanish beneath
+            apparently insufficient bedding, and the recurring
+            restoration of tunnels believed to have collapsed
+            permanently.
           </p>
 
           <p>
@@ -728,9 +1098,17 @@
 
       </section>
 
-      <section class="gallery" id="photos">
+
+
+      <!-- PHOTOS -->
+
+      <section
+        class="gallery"
+        id="photos"
+      >
 
         <div class="gallery-top">
+
           <h2>
             Sightings
           </h2>
@@ -738,15 +1116,20 @@
           <div class="section-label">
             Photographic record
           </div>
+
         </div>
+
 
         <div class="gallery-grid">
 
           <div class="gallery-large"></div>
 
           <div class="gallery-stack">
+
             <div class="gallery-small"></div>
+
             <div class="gallery-small"></div>
+
           </div>
 
         </div>
@@ -755,10 +1138,19 @@
 
     </main>
 
+
+
+    <!-- FOOTER -->
+
     <footer>
 
       <div>
-        <span class="footer-name">Mr. Tofu Ciabatta</span><br>
+        <span class="footer-name">
+          Mr. Tofu Ciabatta
+        </span>
+
+        <br>
+
         Long-haired Syrian hamster
       </div>
 
@@ -770,5 +1162,6 @@
     </footer>
 
   </div>
+
 </body>
 </html>
