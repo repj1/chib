@@ -8,11 +8,13 @@
   <title>Chib — Mr. Tofu Ciabatta</title>
 
   <meta
+    id="meta-description"
     name="description"
     content="The official record of Mr. Tofu Ciabatta, known as Chib."
   >
 
   <style>
+
     :root {
       --bg: #f7f7f4;
       --text: #151515;
@@ -52,6 +54,7 @@
     }
 
 
+
     /* ========================================
        HERO
     ======================================== */
@@ -65,28 +68,44 @@
       background: #f5f1eb;
     }
 
+
+    /*
+      The image is deliberately slightly oversized.
+
+      The scale + translate combination:
+      - makes Chib larger
+      - moves the photograph down/right
+      - crops more of the box and right-side clutter
+    */
+
     .hero-photo {
       position: absolute;
       inset: 0;
       z-index: 0;
+      overflow: hidden;
     }
 
     .hero-photo img {
       width: 100%;
       height: 100%;
-      display: block;
-      object-fit: cover;
 
-      /*
-        First number = left/right crop.
-        Second number = up/down crop.
-      */
-      object-position: 54% 43%;
+      display: block;
+
+      object-fit: cover;
+      object-position: 50% 48%;
+
+      transform:
+        scale(1.12)
+        translate(2.7%, 2.5%);
+
+      transform-origin: center center;
     }
 
+
+
     /*
-      Soft transition from editorial cream
-      into the photograph.
+      Soft transition from the pale editorial
+      area into the photograph.
     */
 
     .hero-shade {
@@ -99,12 +118,13 @@
           90deg,
           rgba(248, 246, 241, 0.99) 0%,
           rgba(248, 246, 241, 0.97) 23%,
-          rgba(248, 246, 241, 0.78) 35%,
-          rgba(248, 246, 241, 0.34) 47%,
-          rgba(248, 246, 241, 0.08) 60%,
-          rgba(248, 246, 241, 0) 70%
+          rgba(248, 246, 241, 0.79) 35%,
+          rgba(248, 246, 241, 0.36) 47%,
+          rgba(248, 246, 241, 0.09) 59%,
+          rgba(248, 246, 241, 0) 68%
         );
     }
+
 
     .hero-content {
       position: relative;
@@ -112,6 +132,7 @@
 
       width: min(1440px, 100%);
       height: 100%;
+
       margin: 0 auto;
 
       padding: 42px 58px 54px;
@@ -127,6 +148,10 @@
         1fr;
     }
 
+
+
+    /* BRAND */
+
     .hero-brand {
       grid-column: 1;
       grid-row: 1;
@@ -138,26 +163,103 @@
       color: #4b4844;
     }
 
-    .hero-nav {
+
+
+    /* NAV + LANGUAGE */
+
+    .hero-tools {
       grid-column: 2;
       grid-row: 1;
 
       display: flex;
+      align-items: center;
       justify-content: flex-end;
-      gap: 48px;
+
+      gap: 38px;
+    }
+
+    .hero-nav {
+      display: flex;
+      align-items: center;
+
+      gap: 42px;
 
       font-size: 14px;
     }
 
     .hero-nav a {
       color: rgba(255,255,255,0.94);
-      text-shadow: 0 1px 14px rgba(0,0,0,0.24);
+
+      text-shadow:
+        0 1px 14px rgba(0,0,0,0.24);
+
       transition: opacity .2s ease;
     }
 
     .hero-nav a:hover {
       opacity: .65;
     }
+
+
+
+    /* LANGUAGE TOGGLE */
+
+    .language-toggle {
+      display: flex;
+      align-items: center;
+
+      gap: 7px;
+
+      white-space: nowrap;
+
+      padding-left: 17px;
+
+      border-left:
+        1px solid rgba(255,255,255,.38);
+    }
+
+    .language-toggle button {
+      appearance: none;
+      border: 0;
+      padding: 0;
+
+      background: none;
+
+      font: inherit;
+      font-size: 12px;
+      font-weight: 500;
+
+      letter-spacing: .08em;
+
+      color: rgba(255,255,255,.52);
+
+      cursor: pointer;
+
+      text-shadow:
+        0 1px 12px rgba(0,0,0,.22);
+
+      transition:
+        color .2s ease,
+        opacity .2s ease;
+    }
+
+    .language-toggle button:hover {
+      color: white;
+    }
+
+    .language-toggle button.active {
+      color: white;
+      font-weight: 700;
+    }
+
+    .language-divider {
+      color: rgba(255,255,255,.45);
+      font-size: 11px;
+    }
+
+
+
+    /* HERO COPY */
 
     .hero-main {
       grid-column: 1;
@@ -174,18 +276,22 @@
     .hero-rule {
       width: 58px;
       height: 1px;
+
       background: #4f4b47;
+
       margin-bottom: 48px;
     }
 
     .hero h1 {
       margin: 0;
 
-      font-size: clamp(100px, 10vw, 170px);
+      font-size:
+        clamp(100px, 10vw, 170px);
+
       line-height: .72;
 
       font-weight: 400;
-      letter-spacing: -0.085em;
+      letter-spacing: -.085em;
 
       color: #211f1d;
     }
@@ -193,16 +299,20 @@
     .formal-name {
       margin-top: 30px;
 
-      font-size: clamp(28px, 3vw, 48px);
+      font-size:
+        clamp(28px, 3vw, 48px);
+
       line-height: 1;
 
       font-weight: 300;
-      letter-spacing: -0.045em;
+      letter-spacing: -.045em;
 
       color: #383531;
     }
 
     .hero-description {
+      max-width: 430px;
+
       margin: 46px 0 0;
 
       font-size: 17px;
@@ -211,15 +321,23 @@
       color: #5f5a55;
     }
 
+
+
+    /* BUTTON */
+
     .hero-button {
       margin-top: 36px;
 
       width: 245px;
       height: 62px;
 
-      padding: 0 24px 0 32px;
+      padding:
+        0 24px
+        0 32px;
 
-      border: 1px solid #77716a;
+      border:
+        1px solid #77716a;
+
       border-radius: 999px;
 
       display: flex;
@@ -228,6 +346,7 @@
 
       text-transform: uppercase;
       letter-spacing: .20em;
+
       font-size: 12px;
 
       transition:
@@ -239,7 +358,9 @@
     .hero-button:hover {
       background: #211f1d;
       color: white;
-      transform: translateY(-2px);
+
+      transform:
+        translateY(-2px);
     }
 
     .hero-button .arrow {
@@ -247,26 +368,35 @@
       letter-spacing: 0;
     }
 
+
+
+    /* HANDWRITTEN NOTE */
+
     .hero-note {
       position: absolute;
 
-      right: 5%;
-      top: 35%;
+      right: 12%;
+      top: 38%;
 
-      color: rgba(255,255,255,.94);
+      color:
+        rgba(255,255,255,.95);
 
       font-family:
         "Segoe Print",
         "Bradley Hand",
         cursive;
 
-      font-size: clamp(20px, 2vw, 29px);
+      font-size:
+        clamp(20px, 2vw, 29px);
+
       line-height: 1.07;
 
-      transform: rotate(-7deg);
+      transform:
+        rotate(-7deg);
 
       text-shadow:
-        0 1px 7px rgba(72, 45, 25, .18);
+        0 1px 7px
+        rgba(72,45,25,.18);
     }
 
     .hero-note span {
@@ -276,8 +406,10 @@
     .hero-heart {
       margin-top: 12px;
       margin-left: 52px;
+
       font-size: 30px;
     }
+
 
 
     /* ========================================
@@ -285,34 +417,57 @@
     ======================================== */
 
     .site {
-      width: min(1380px, calc(100% - 48px));
+      width:
+        min(
+          1380px,
+          calc(100% - 48px)
+        );
+
       margin: 0 auto;
     }
 
+
+
+    /* INTRO */
+
     .intro {
-      padding: 130px 0;
+      padding:
+        130px 0;
 
       display: grid;
-      grid-template-columns: .75fr 1.25fr;
+
+      grid-template-columns:
+        .75fr 1.25fr;
+
       gap: 80px;
 
-      border-top: 1px solid var(--line);
+      border-top:
+        1px solid var(--line);
     }
 
     .section-label {
       font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      color: var(--muted);
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .16em;
+
+      color:
+        var(--muted);
     }
 
     .intro-copy {
       max-width: 950px;
       margin: 0;
 
-      font-size: clamp(34px, 4.2vw, 64px);
+      font-size:
+        clamp(34px,4.2vw,64px);
+
       line-height: 1.02;
       letter-spacing: -.045em;
+
       font-weight: 500;
     }
 
@@ -322,22 +477,31 @@
     }
 
 
+
     /* FACTS */
 
     .facts {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+      border-top:
+        1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
 
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+
+      grid-template-columns:
+        repeat(4,1fr);
     }
 
     .fact {
-      padding: 34px 0;
+      padding:
+        34px 0;
     }
 
     .fact + .fact {
-      border-left: 1px solid var(--line);
+      border-left:
+        1px solid var(--line);
+
       padding-left: 32px;
     }
 
@@ -347,10 +511,15 @@
       margin-bottom: 9px;
 
       font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .14em;
 
-      color: var(--muted);
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .14em;
+
+      color:
+        var(--muted);
     }
 
     .fact-value {
@@ -359,27 +528,38 @@
     }
 
 
-    /* FIELD NOTES */
+
+    /* ========================================
+       FIELD NOTES
+    ======================================== */
 
     .field-notes {
-      padding: 130px 0;
+      padding:
+        130px 0;
     }
 
     .field-header {
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       align-items: end;
 
       gap: 40px;
+
       margin-bottom: 64px;
     }
 
     .field-header h2 {
       margin: 0;
 
-      font-size: clamp(52px, 7vw, 100px);
+      font-size:
+        clamp(52px,7vw,100px);
+
       line-height: .9;
       letter-spacing: -.06em;
+
       font-weight: 600;
     }
 
@@ -388,26 +568,36 @@
       margin: 0;
 
       color: var(--muted);
+
       line-height: 1.6;
       font-size: 15px;
     }
 
     .observation {
       display: grid;
-      grid-template-columns: 160px 1fr .6fr;
+
+      grid-template-columns:
+        160px 1fr .6fr;
 
       gap: 42px;
+
       align-items: start;
 
-      padding: 34px 0;
+      padding:
+        34px 0;
 
-      border-top: 1px solid var(--line);
+      border-top:
+        1px solid var(--line);
     }
 
     .observation-number {
       font-size: 13px;
-      color: var(--accent);
-      letter-spacing: .12em;
+
+      color:
+        var(--accent);
+
+      letter-spacing:
+        .12em;
     }
 
     .observation h3 {
@@ -415,30 +605,43 @@
 
       font-size: 30px;
       letter-spacing: -.035em;
+
       font-weight: 500;
     }
 
     .observation p {
       margin: 0;
 
-      color: var(--muted);
+      color:
+        var(--muted);
+
       line-height: 1.65;
       font-size: 15px;
     }
 
 
-    /* SACRED CLASSIFICATION */
+
+    /* ========================================
+       SACRED CLASSIFICATION
+    ======================================== */
 
     .holy {
-      margin: 40px 0 130px;
+      margin:
+        40px 0 130px;
 
-      background: var(--text);
-      color: var(--white);
+      background:
+        var(--text);
+
+      color:
+        var(--white);
 
       min-height: 560px;
 
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       align-items: center;
     }
 
@@ -448,6 +651,7 @@
 
     .holy .section-label {
       color: #aaa69f;
+
       margin-bottom: 30px;
     }
 
@@ -455,14 +659,18 @@
       max-width: 620px;
       margin: 0;
 
-      font-size: clamp(52px, 6vw, 88px);
+      font-size:
+        clamp(52px,6vw,88px);
+
       line-height: .95;
       letter-spacing: -.055em;
+
       font-weight: 500;
     }
 
     .holy p {
       max-width: 570px;
+
       margin-top: 28px;
 
       color: #c8c5bf;
@@ -471,6 +679,10 @@
       line-height: 1.7;
     }
 
+
+
+    /* HALO */
+
     .halo {
       min-height: 560px;
 
@@ -478,6 +690,7 @@
       place-items: center;
 
       position: relative;
+
       overflow: hidden;
     }
 
@@ -489,7 +702,8 @@
 
       border-radius: 50%;
 
-      background: var(--accent);
+      background:
+        var(--accent);
 
       position: absolute;
     }
@@ -498,25 +712,38 @@
       content: "CHIB";
 
       position: relative;
+
       z-index: 2;
 
-      font-size: clamp(80px, 12vw, 180px);
-      font-weight: 700;
-      letter-spacing: -.08em;
+      font-size:
+        clamp(80px,12vw,180px);
 
-      color: var(--white);
+      font-weight: 700;
+
+      letter-spacing:
+        -.08em;
+
+      color:
+        var(--white);
     }
 
 
-    /* GALLERY */
+
+    /* ========================================
+       GALLERY
+    ======================================== */
 
     .gallery {
-      padding: 0 0 130px;
+      padding:
+        0 0 130px;
     }
 
     .gallery-top {
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       align-items: end;
 
       margin-bottom: 40px;
@@ -525,20 +752,29 @@
     .gallery-top h2 {
       margin: 0;
 
-      font-size: clamp(48px, 6vw, 88px);
+      font-size:
+        clamp(48px,6vw,88px);
+
       line-height: .9;
-      letter-spacing: -.055em;
+
+      letter-spacing:
+        -.055em;
+
       font-weight: 600;
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: 1.4fr .6fr;
+
+      grid-template-columns:
+        1.4fr .6fr;
+
       gap: 18px;
     }
 
     .gallery-large,
     .gallery-small {
+
       background:
         linear-gradient(
           145deg,
@@ -563,26 +799,71 @@
     }
 
 
-    /* FOOTER */
+
+    /* ========================================
+       FOOTER
+    ======================================== */
 
     footer {
-      border-top: 1px solid var(--line);
+      border-top:
+        1px solid var(--line);
 
-      padding: 42px 0 56px;
+      padding:
+        42px 0 56px;
 
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
 
       gap: 32px;
 
-      color: var(--muted);
+      color:
+        var(--muted);
+
       font-size: 13px;
     }
 
     .footer-name {
-      color: var(--text);
+      color:
+        var(--text);
+
       font-weight: 600;
     }
+
+
+
+    /* ========================================
+       UKRAINIAN SPACING ADJUSTMENTS
+    ======================================== */
+
+    html[lang="uk"] .hero-nav {
+      gap: 30px;
+    }
+
+    html[lang="uk"] .hero-tools {
+      gap: 28px;
+    }
+
+    html[lang="uk"] .hero-description {
+      max-width: 455px;
+    }
+
+    html[lang="uk"] .hero-button {
+      width: 270px;
+      letter-spacing: .11em;
+      font-size: 11px;
+    }
+
+    html[lang="uk"] .intro-copy {
+      font-size:
+        clamp(32px,4vw,60px);
+    }
+
+    html[lang="uk"] .fact-value {
+      font-size: 19px;
+    }
+
 
 
     /* ========================================
@@ -597,10 +878,17 @@
       }
 
       .hero-photo img {
-        object-position: 59% 50%;
+
+        object-position:
+          51% 52%;
+
+        transform:
+          scale(1.10)
+          translate(2%,2%);
       }
 
       .hero-shade {
+
         background:
           linear-gradient(
             180deg,
@@ -612,43 +900,106 @@
           );
       }
 
+
       .hero-content {
-        padding: 28px 26px;
+        padding:
+          28px 26px;
+
         display: block;
       }
 
+
       .hero-brand {
         position: absolute;
+
         top: 28px;
         left: 26px;
       }
+
+
+      .hero-tools {
+        position: absolute;
+
+        top: 27px;
+        right: 26px;
+
+        display: block;
+      }
+
 
       .hero-nav {
         display: none;
       }
 
+
+      .language-toggle {
+        border-left: 0;
+        padding-left: 0;
+
+        gap: 6px;
+      }
+
+
+      .language-toggle button {
+        color:
+          rgba(45,43,40,.42);
+
+        text-shadow: none;
+      }
+
+
+      .language-toggle button.active {
+        color: #292724;
+      }
+
+
+      .language-toggle button:hover {
+        color: #292724;
+      }
+
+
+      .language-divider {
+        color:
+          rgba(45,43,40,.32);
+      }
+
+
       .hero-main {
         display: block;
+
         padding-top: 125px;
       }
+
 
       .hero-rule {
         display: none;
       }
 
+
       .hero h1 {
-        font-size: clamp(88px, 26vw, 130px);
+
+        font-size:
+          clamp(
+            88px,
+            26vw,
+            130px
+          );
       }
+
 
       .formal-name {
         font-size: 28px;
+
         margin-top: 24px;
       }
 
+
       .hero-description {
         margin-top: 28px;
+
         font-size: 15px;
       }
+
 
       .hero-button {
         margin-top: 26px;
@@ -659,60 +1010,98 @@
         font-size: 11px;
       }
 
+
+      html[lang="uk"] .hero-button {
+        width: 250px;
+      }
+
+
       .hero-note {
         top: auto;
+
         right: 24px;
         bottom: 90px;
 
         font-size: 19px;
       }
 
+
       .intro {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
         gap: 28px;
       }
 
+
       .facts {
-        grid-template-columns: 1fr 1fr;
+
+        grid-template-columns:
+          1fr 1fr;
       }
+
 
       .fact:nth-child(3) {
+
         border-left: 0;
-        border-top: 1px solid var(--line);
+
+        border-top:
+          1px solid var(--line);
       }
 
+
       .fact:nth-child(4) {
-        border-top: 1px solid var(--line);
+
+        border-top:
+          1px solid var(--line);
       }
+
 
       .field-header {
         display: block;
       }
 
+
       .field-header p {
         margin-top: 24px;
       }
 
+
       .observation {
-        grid-template-columns: 90px 1fr;
+
+        grid-template-columns:
+          90px 1fr;
       }
+
 
       .observation p {
         grid-column: 2;
       }
 
+
       .holy {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
       }
+
 
       .gallery-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
       }
 
+
       .gallery-stack {
-        grid-template-columns: 1fr 1fr;
+
+        grid-template-columns:
+          1fr 1fr;
       }
+
     }
+
 
 
     /* ========================================
@@ -722,88 +1111,153 @@
     @media (max-width: 620px) {
 
       .site {
-        width: min(100% - 28px, 1380px);
+
+        width:
+          min(
+            100% - 28px,
+            1380px
+          );
       }
+
 
       .hero {
         height: 850px;
       }
 
+
       .hero-photo img {
-        object-position: 60% 53%;
+
+        object-position:
+          50% 54%;
+
+        transform:
+          scale(1.08)
+          translate(1.5%,1.5%);
       }
+
 
       .hero-content {
-        padding: 24px 20px;
+
+        padding:
+          24px 20px;
       }
 
+
       .hero-brand {
+
         top: 24px;
         left: 20px;
 
         font-size: 12px;
       }
 
-      .hero-main {
-        padding-top: 115px;
+
+      .hero-tools {
+
+        top: 23px;
+        right: 20px;
       }
 
-      .hero h1 {
-        font-size: clamp(84px, 27vw, 120px);
+
+      .hero-main {
+
+        padding-top:
+          115px;
       }
+
+
+      .hero h1 {
+
+        font-size:
+          clamp(
+            84px,
+            27vw,
+            120px
+          );
+      }
+
 
       .formal-name {
         font-size: 25px;
       }
+
 
       .hero-description {
         font-size: 14px;
         line-height: 1.6;
       }
 
+
       .hero-note {
+
         right: 20px;
+
         bottom: 72px;
       }
 
+
       .facts {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
       }
 
+
       .fact + .fact {
+
         border-left: 0;
-        border-top: 1px solid var(--line);
+
+        border-top:
+          1px solid var(--line);
+
         padding-left: 0;
       }
 
+
       .observation {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
         gap: 12px;
       }
+
 
       .observation p {
         grid-column: auto;
       }
 
+
       .holy-copy {
-        padding: 48px 26px;
+
+        padding:
+          48px 26px;
       }
+
 
       .halo {
         min-height: 360px;
       }
 
+
       .gallery-stack {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
       }
 
+
       footer {
-        flex-direction: column;
+
+        flex-direction:
+          column;
       }
+
     }
 
   </style>
 </head>
+
 
 
 <body>
@@ -816,26 +1270,98 @@
   <section class="hero">
 
     <div class="hero-photo">
+
       <img
         src="images/chib-hero.png"
         alt="Mr. Tofu Ciabatta holding his evening winnings"
+        id="hero-image"
       >
+
     </div>
+
 
     <div class="hero-shade"></div>
 
+
     <div class="hero-content">
+
 
       <div class="hero-brand">
         CHIB.RUN
       </div>
 
-      <nav class="hero-nav">
-        <a href="#species">About</a>
-        <a href="#observations">Chronicles</a>
-        <a href="#miracles">Miracles</a>
-        <a href="#photos">Photos</a>
-      </nav>
+
+
+      <div class="hero-tools">
+
+
+        <nav class="hero-nav">
+
+          <a
+            href="#species"
+            data-i18n="navAbout"
+          >
+            About
+          </a>
+
+          <a
+            href="#observations"
+            data-i18n="navChronicles"
+          >
+            Chronicles
+          </a>
+
+          <a
+            href="#miracles"
+            data-i18n="navMiracles"
+          >
+            Miracles
+          </a>
+
+          <a
+            href="#photos"
+            data-i18n="navPhotos"
+          >
+            Photos
+          </a>
+
+        </nav>
+
+
+
+        <div
+          class="language-toggle"
+          aria-label="Language"
+        >
+
+          <button
+            type="button"
+            id="lang-en"
+            class="active"
+            aria-label="English"
+            onclick="setLanguage('en')"
+          >
+            EN
+          </button>
+
+          <span class="language-divider">
+            /
+          </span>
+
+          <button
+            type="button"
+            id="lang-ua"
+            aria-label="Українська"
+            onclick="setLanguage('uk')"
+          >
+            UA
+          </button>
+
+        </div>
+
+      </div>
+
+
 
       <div class="hero-main">
 
@@ -843,27 +1369,41 @@
 
           <div class="hero-rule"></div>
 
+
           <h1>
             Chib
           </h1>
+
 
           <div class="formal-name">
             Mr. Tofu Ciabatta
           </div>
 
-          <p class="hero-description">
+
+          <p
+            class="hero-description"
+            data-i18n-html="heroDescription"
+          >
             A long-haired Syrian hamster<br>
             of unusual dignity, extensive fur,<br>
             and considerable spiritual<br>
             significance.
           </p>
 
+
           <a
             href="#species"
             class="hero-button"
           >
-            <span>Meet Chib</span>
-            <span class="arrow">→</span>
+
+            <span data-i18n="meetChib">
+              Meet Chib
+            </span>
+
+            <span class="arrow">
+              →
+            </span>
+
           </a>
 
         </div>
@@ -871,19 +1411,32 @@
       </div>
 
 
+
       <div class="hero-note">
-        <span>Small</span>
-        <span>creature.</span>
-        <span>Large world.</span>
+
+        <span data-i18n="small">
+          Small
+        </span>
+
+        <span data-i18n="creature">
+          creature.
+        </span>
+
+        <span data-i18n="largeWorld">
+          Large world.
+        </span>
 
         <span class="hero-heart">
           ♡
         </span>
+
       </div>
+
 
     </div>
 
   </section>
+
 
 
 
@@ -896,35 +1449,54 @@
     <main>
 
 
-      <!-- SPECIES -->
+
+      <!-- ====================================
+           SPECIES
+      ==================================== -->
 
       <section
         class="intro"
         id="species"
       >
 
-        <div class="section-label">
+
+        <div
+          class="section-label"
+          data-i18n="speciesProfile"
+        >
           Species profile
         </div>
 
-        <p class="intro-copy">
+
+        <p
+          class="intro-copy"
+          data-i18n-html="speciesCopy"
+        >
           <em>Mesocricetus auratus.</em><br>
           Domesticated Syrian hamster.<br>
           Long-haired. White.<br>
           Apparently holy.
         </p>
 
+
       </section>
 
 
 
-      <!-- FACTS -->
+
+      <!-- ====================================
+           FACTS
+      ==================================== -->
 
       <section class="facts">
 
+
         <div class="fact">
 
-          <span class="fact-label">
+          <span
+            class="fact-label"
+            data-i18n="commonName"
+          >
             Common name
           </span>
 
@@ -935,9 +1507,13 @@
         </div>
 
 
+
         <div class="fact">
 
-          <span class="fact-label">
+          <span
+            class="fact-label"
+            data-i18n="formalName"
+          >
             Formal name
           </span>
 
@@ -948,137 +1524,208 @@
         </div>
 
 
+
         <div class="fact">
 
-          <span class="fact-label">
+          <span
+            class="fact-label"
+            data-i18n="activity"
+          >
             Activity
           </span>
 
-          <span class="fact-value">
+          <span
+            class="fact-value"
+            data-i18n="activityValue"
+          >
             Primarily nocturnal
           </span>
 
         </div>
 
 
+
         <div class="fact">
 
-          <span class="fact-label">
+          <span
+            class="fact-label"
+            data-i18n="knownRange"
+          >
             Known range
           </span>
 
-          <span class="fact-value">
+          <span
+            class="fact-value"
+            data-i18n="knownRangeValue"
+          >
             One very large enclosure
           </span>
 
         </div>
 
+
       </section>
 
 
 
-      <!-- FIELD NOTES -->
+
+      <!-- ====================================
+           FIELD NOTES
+      ==================================== -->
 
       <section
         class="field-notes"
         id="observations"
       >
 
+
         <div class="field-header">
 
-          <h2>
+
+          <h2
+            data-i18n-html="fieldNotes"
+          >
             Field<br>
             notes
           </h2>
 
-          <p>
+
+          <p
+            data-i18n="fieldIntro"
+          >
             Observations collected from inside the known range
             of Mr. Tofu Ciabatta.
           </p>
 
+
         </div>
 
 
+
+
         <article class="observation">
+
 
           <div class="observation-number">
             001
           </div>
 
-          <h3>
+
+          <h3
+            data-i18n="obs1Title"
+          >
             The nightly migration
           </h3>
 
-          <p>
+
+          <p
+            data-i18n="obs1Copy"
+          >
             Shortly after dark, Chib begins a sustained journey
             across the rotating plains. The landscape moves beneath
             him for considerable distances, while Chib himself
             remains geographically close to home.
           </p>
 
+
         </article>
 
 
+
+
         <article class="observation">
+
 
           <div class="observation-number">
             002
           </div>
 
-          <h3>
+
+          <h3
+            data-i18n="obs2Title"
+          >
             The gathering of provisions
           </h3>
 
-          <p>
+
+          <p
+            data-i18n="obs2Copy"
+          >
             Seeds are inspected individually, transported with
             urgency, and subsequently stored in locations known
             only to Chib. Some are later rediscovered. Others
             enter legend.
           </p>
 
+
         </article>
 
 
+
+
         <article class="observation">
+
 
           <div class="observation-number">
             003
           </div>
 
-          <h3>
+
+          <h3
+            data-i18n="obs3Title"
+          >
             Architecture beneath the surface
           </h3>
 
-          <p>
+
+          <p
+            data-i18n="obs3Copy"
+          >
             Bedding is moved continuously according to principles
             not yet understood by outside observers. Entire districts
             may be reconstructed overnight.
           </p>
 
+
         </article>
+
 
       </section>
 
 
 
-      <!-- MIRACLES -->
+
+      <!-- ====================================
+           MIRACLES
+      ==================================== -->
 
       <section
         class="holy"
         id="miracles"
       >
 
+
         <div class="holy-copy">
 
-          <div class="section-label">
+
+          <div
+            class="section-label"
+            data-i18n="sacredClassification"
+          >
             Sacred classification
           </div>
 
-          <h2>
+
+          <h2
+            data-i18n="holyTitle"
+          >
             Why Chib is considered a holy creature.
           </h2>
 
-          <p>
+
+          <p
+            data-i18n="holyCopy1"
+          >
             Scholars remain divided. Some point to the immaculate
             white coat. Others cite the unexplained multiplication
             of hidden sunflower seeds, his capacity to vanish beneath
@@ -1087,42 +1734,63 @@
             permanently.
           </p>
 
-          <p>
+
+          <p
+            data-i18n="holyCopy2"
+          >
             Three miracles are currently recognized by tradition.
             Investigation continues.
           </p>
 
+
         </div>
 
+
         <div class="halo"></div>
+
 
       </section>
 
 
 
-      <!-- PHOTOS -->
+
+      <!-- ====================================
+           PHOTOS
+      ==================================== -->
 
       <section
         class="gallery"
         id="photos"
       >
 
+
         <div class="gallery-top">
 
-          <h2>
+
+          <h2
+            data-i18n="sightings"
+          >
             Sightings
           </h2>
 
-          <div class="section-label">
+
+          <div
+            class="section-label"
+            data-i18n="photographicRecord"
+          >
             Photographic record
           </div>
+
 
         </div>
 
 
+
         <div class="gallery-grid">
 
+
           <div class="gallery-large"></div>
+
 
           <div class="gallery-stack">
 
@@ -1132,36 +1800,490 @@
 
           </div>
 
+
         </div>
 
+
       </section>
+
 
     </main>
 
 
 
-    <!-- FOOTER -->
+
+    <!-- ====================================
+         FOOTER
+    ==================================== -->
 
     <footer>
 
+
       <div>
+
         <span class="footer-name">
           Mr. Tofu Ciabatta
         </span>
 
         <br>
 
-        Long-haired Syrian hamster
+        <span data-i18n="footerSpecies">
+          Long-haired Syrian hamster
+        </span>
+
       </div>
 
-      <div>
+
+
+      <div
+        data-i18n-html="footerCopy"
+      >
         The official record of Chib.<br>
         All miracles remain subject to peer review.
       </div>
 
+
     </footer>
+
 
   </div>
 
+
+
+
+  <!-- ========================================
+       LANGUAGE SYSTEM
+  ======================================== -->
+
+  <script>
+
+    const translations = {
+
+      en: {
+
+        title:
+          "Chib — Mr. Tofu Ciabatta",
+
+        description:
+          "The official record of Mr. Tofu Ciabatta, known as Chib.",
+
+
+        navAbout:
+          "About",
+
+        navChronicles:
+          "Chronicles",
+
+        navMiracles:
+          "Miracles",
+
+        navPhotos:
+          "Photos",
+
+
+        heroDescription:
+          "A long-haired Syrian hamster<br>of unusual dignity, extensive fur,<br>and considerable spiritual<br>significance.",
+
+        meetChib:
+          "Meet Chib",
+
+        small:
+          "Small",
+
+        creature:
+          "creature.",
+
+        largeWorld:
+          "Large world.",
+
+
+        speciesProfile:
+          "Species profile",
+
+        speciesCopy:
+          "<em>Mesocricetus auratus.</em><br>Domesticated Syrian hamster.<br>Long-haired. White.<br>Apparently holy.",
+
+
+        commonName:
+          "Common name",
+
+        formalName:
+          "Formal name",
+
+        activity:
+          "Activity",
+
+        activityValue:
+          "Primarily nocturnal",
+
+        knownRange:
+          "Known range",
+
+        knownRangeValue:
+          "One very large enclosure",
+
+
+        fieldNotes:
+          "Field<br>notes",
+
+        fieldIntro:
+          "Observations collected from inside the known range of Mr. Tofu Ciabatta.",
+
+
+        obs1Title:
+          "The nightly migration",
+
+        obs1Copy:
+          "Shortly after dark, Chib begins a sustained journey across the rotating plains. The landscape moves beneath him for considerable distances, while Chib himself remains geographically close to home.",
+
+
+        obs2Title:
+          "The gathering of provisions",
+
+        obs2Copy:
+          "Seeds are inspected individually, transported with urgency, and subsequently stored in locations known only to Chib. Some are later rediscovered. Others enter legend.",
+
+
+        obs3Title:
+          "Architecture beneath the surface",
+
+        obs3Copy:
+          "Bedding is moved continuously according to principles not yet understood by outside observers. Entire districts may be reconstructed overnight.",
+
+
+        sacredClassification:
+          "Sacred classification",
+
+        holyTitle:
+          "Why Chib is considered a holy creature.",
+
+        holyCopy1:
+          "Scholars remain divided. Some point to the immaculate white coat. Others cite the unexplained multiplication of hidden sunflower seeds, his capacity to vanish beneath apparently insufficient bedding, and the recurring restoration of tunnels believed to have collapsed permanently.",
+
+        holyCopy2:
+          "Three miracles are currently recognized by tradition. Investigation continues.",
+
+
+        sightings:
+          "Sightings",
+
+        photographicRecord:
+          "Photographic record",
+
+
+        footerSpecies:
+          "Long-haired Syrian hamster",
+
+        footerCopy:
+          "The official record of Chib.<br>All miracles remain subject to peer review."
+
+      },
+
+
+
+      uk: {
+
+        title:
+          "Чіб — Mr. Tofu Ciabatta",
+
+        description:
+          "Офіційний архів Mr. Tofu Ciabatta, відомого як Чіб.",
+
+
+        navAbout:
+          "Про Чіба",
+
+        navChronicles:
+          "Хроніки",
+
+        navMiracles:
+          "Чудеса",
+
+        navPhotos:
+          "Фото",
+
+
+        heroDescription:
+          "Довгошерстий сирійський хом’як<br>незвичайної гідності, з розкішним хутром<br>і значною духовною<br>вагою.",
+
+        meetChib:
+          "Познайомитися з Чібом",
+
+        small:
+          "Маленька",
+
+        creature:
+          "істота.",
+
+        largeWorld:
+          "Великий світ.",
+
+
+        speciesProfile:
+          "Видовий профіль",
+
+        speciesCopy:
+          "<em>Mesocricetus auratus.</em><br>Одомашнений сирійський хом’як.<br>Довгошерстий. Білий.<br>Вочевидь священний.",
+
+
+        commonName:
+          "Звичне ім’я",
+
+        formalName:
+          "Повне ім’я",
+
+        activity:
+          "Активність",
+
+        activityValue:
+          "Переважно нічна",
+
+        knownRange:
+          "Відомий ареал",
+
+        knownRangeValue:
+          "Один дуже великий вольєр",
+
+
+        fieldNotes:
+          "Польові<br>нотатки",
+
+        fieldIntro:
+          "Спостереження, зібрані в межах відомого ареалу Mr. Tofu Ciabatta.",
+
+
+        obs1Title:
+          "Нічна міграція",
+
+        obs1Copy:
+          "Невдовзі після настання темряви Чіб вирушає у тривалу подорож обертовими рівнинами. Ландшафт рухається під ним на значні відстані, тоді як сам Чіб географічно залишається неподалік від дому.",
+
+
+        obs2Title:
+          "Збір припасів",
+
+        obs2Copy:
+          "Кожну насінину оглядають окремо, терміново транспортують, а потім зберігають у місцях, відомих лише Чібу. Деякі згодом знаходять знову. Інші стають легендою.",
+
+
+        obs3Title:
+          "Архітектура під поверхнею",
+
+        obs3Copy:
+          "Підстилка безперервно переміщується відповідно до принципів, яких зовнішні спостерігачі досі не розуміють. Цілі райони можуть бути перебудовані за одну ніч.",
+
+
+        sacredClassification:
+          "Священна класифікація",
+
+        holyTitle:
+          "Чому Чіба вважають священною істотою.",
+
+        holyCopy1:
+          "Серед дослідників немає єдності. Одні вказують на бездоганно біле хутро. Інші — на незбагненне множення прихованого насіння соняшнику, його здатність зникати під, здавалося б, недостатнім шаром підстилки та регулярне відновлення тунелів, які вважалися остаточно зруйнованими.",
+
+        holyCopy2:
+          "Традиція наразі визнає три чудеса. Дослідження триває.",
+
+
+        sightings:
+          "Спостереження",
+
+        photographicRecord:
+          "Фотографічний архів",
+
+
+        footerSpecies:
+          "Довгошерстий сирійський хом’як",
+
+        footerCopy:
+          "Офіційний архів Чіба.<br>Усі чудеса ще мають пройти рецензування."
+
+      }
+
+    };
+
+
+
+    function setLanguage(language) {
+
+      const selected =
+        translations[language]
+          ? language
+          : "en";
+
+
+      /*
+        Change HTML language.
+        CSS can use this for Ukrainian-specific spacing.
+      */
+
+      document.documentElement.lang =
+        selected === "uk"
+          ? "uk"
+          : "en";
+
+
+      /*
+        Plain text elements
+      */
+
+      document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+          const key =
+            element.dataset.i18n;
+
+          if (
+            translations[selected][key] !== undefined
+          ) {
+
+            element.textContent =
+              translations[selected][key];
+
+          }
+
+        });
+
+
+
+      /*
+        Elements that intentionally contain <br> or <em>.
+      */
+
+      document
+        .querySelectorAll("[data-i18n-html]")
+        .forEach(element => {
+
+          const key =
+            element.dataset.i18nHtml;
+
+          if (
+            translations[selected][key] !== undefined
+          ) {
+
+            element.innerHTML =
+              translations[selected][key];
+
+          }
+
+        });
+
+
+
+      /*
+        Browser title + description
+      */
+
+      document.title =
+        translations[selected].title;
+
+      document
+        .getElementById("meta-description")
+        .setAttribute(
+          "content",
+          translations[selected].description
+        );
+
+
+
+      /*
+        Active toggle state
+      */
+
+      document
+        .getElementById("lang-en")
+        .classList
+        .toggle(
+          "active",
+          selected === "en"
+        );
+
+      document
+        .getElementById("lang-ua")
+        .classList
+        .toggle(
+          "active",
+          selected === "uk"
+        );
+
+
+
+      /*
+        Accessibility state
+      */
+
+      document
+        .getElementById("lang-en")
+        .setAttribute(
+          "aria-pressed",
+          selected === "en"
+            ? "true"
+            : "false"
+        );
+
+      document
+        .getElementById("lang-ua")
+        .setAttribute(
+          "aria-pressed",
+          selected === "uk"
+            ? "true"
+            : "false"
+        );
+
+
+
+      /*
+        Remember choice for next visit
+      */
+
+      try {
+
+        localStorage.setItem(
+          "chib-language",
+          selected
+        );
+
+      } catch (error) {
+
+        /*
+          Site still works if storage
+          is blocked by the browser.
+        */
+
+      }
+
+    }
+
+
+
+    /*
+      Restore language choice.
+      Default = English.
+    */
+
+    let savedLanguage = "en";
+
+    try {
+
+      savedLanguage =
+        localStorage.getItem(
+          "chib-language"
+        ) || "en";
+
+    } catch (error) {
+
+      savedLanguage = "en";
+
+    }
+
+
+    setLanguage(savedLanguage);
+
+  </script>
+
+
 </body>
+
 </html>
