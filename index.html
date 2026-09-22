@@ -54,7 +54,6 @@
     }
 
 
-
     /* ========================================
        HERO
     ======================================== */
@@ -69,21 +68,23 @@
     }
 
 
-    /*
-      The image is deliberately slightly oversized.
-
-      The scale + translate combination:
-      - makes Chib larger
-      - moves the photograph down/right
-      - crops more of the box and right-side clutter
-    */
-
     .hero-photo {
       position: absolute;
       inset: 0;
       z-index: 0;
       overflow: hidden;
     }
+
+
+    /*
+      HERO CROP
+
+      Lower horizontal percentage = photograph moves
+      visually farther right.
+
+      Scale is deliberately subtle so more of Chib
+      and the pumpkin remain visible.
+    */
 
     .hero-photo img {
       width: 100%;
@@ -92,20 +93,18 @@
       display: block;
 
       object-fit: cover;
-      object-position: 50% 48%;
 
-      transform:
-        scale(1.12)
-        translate(2.7%, 2.5%);
+      object-position: 42% 47%;
+
+      transform: scale(1.045);
 
       transform-origin: center center;
     }
 
 
-
     /*
-      Soft transition from the pale editorial
-      area into the photograph.
+      Soft transition from editorial cream
+      into the actual photograph.
     */
 
     .hero-shade {
@@ -117,10 +116,10 @@
         linear-gradient(
           90deg,
           rgba(248, 246, 241, 0.99) 0%,
-          rgba(248, 246, 241, 0.97) 23%,
-          rgba(248, 246, 241, 0.79) 35%,
-          rgba(248, 246, 241, 0.36) 47%,
-          rgba(248, 246, 241, 0.09) 59%,
+          rgba(248, 246, 241, 0.97) 22%,
+          rgba(248, 246, 241, 0.80) 34%,
+          rgba(248, 246, 241, 0.37) 46%,
+          rgba(248, 246, 241, 0.09) 58%,
           rgba(248, 246, 241, 0) 68%
         );
     }
@@ -178,6 +177,7 @@
       gap: 38px;
     }
 
+
     .hero-nav {
       display: flex;
       align-items: center;
@@ -187,6 +187,7 @@
       font-size: 14px;
     }
 
+
     .hero-nav a {
       color: rgba(255,255,255,0.94);
 
@@ -195,6 +196,7 @@
 
       transition: opacity .2s ease;
     }
+
 
     .hero-nav a:hover {
       opacity: .65;
@@ -218,14 +220,17 @@
         1px solid rgba(255,255,255,.38);
     }
 
+
     .language-toggle button {
       appearance: none;
+
       border: 0;
       padding: 0;
 
       background: none;
 
       font: inherit;
+
       font-size: 12px;
       font-weight: 500;
 
@@ -243,14 +248,17 @@
         opacity .2s ease;
     }
 
+
     .language-toggle button:hover {
       color: white;
     }
+
 
     .language-toggle button.active {
       color: white;
       font-weight: 700;
     }
+
 
     .language-divider {
       color: rgba(255,255,255,.45);
@@ -269,9 +277,11 @@
       align-items: center;
     }
 
+
     .hero-title-wrap {
       margin-top: -12px;
     }
+
 
     .hero-rule {
       width: 58px;
@@ -281,6 +291,7 @@
 
       margin-bottom: 48px;
     }
+
 
     .hero h1 {
       margin: 0;
@@ -296,6 +307,7 @@
       color: #211f1d;
     }
 
+
     .formal-name {
       margin-top: 30px;
 
@@ -309,6 +321,7 @@
 
       color: #383531;
     }
+
 
     .hero-description {
       max-width: 430px;
@@ -355,6 +368,7 @@
         transform .2s ease;
     }
 
+
     .hero-button:hover {
       background: #211f1d;
       color: white;
@@ -362,6 +376,7 @@
       transform:
         translateY(-2px);
     }
+
 
     .hero-button .arrow {
       font-size: 24px;
@@ -375,8 +390,8 @@
     .hero-note {
       position: absolute;
 
-      right: 12%;
-      top: 38%;
+      right: 13%;
+      top: 39%;
 
       color:
         rgba(255,255,255,.95);
@@ -399,9 +414,11 @@
         rgba(72,45,25,.18);
     }
 
+
     .hero-note span {
       display: block;
     }
+
 
     .hero-heart {
       margin-top: 12px;
@@ -445,6 +462,7 @@
         1px solid var(--line);
     }
 
+
     .section-label {
       font-size: 12px;
 
@@ -458,6 +476,7 @@
         var(--muted);
     }
 
+
     .intro-copy {
       max-width: 950px;
       margin: 0;
@@ -470,6 +489,7 @@
 
       font-weight: 500;
     }
+
 
     .intro-copy em {
       color: var(--accent);
@@ -493,10 +513,12 @@
         repeat(4,1fr);
     }
 
+
     .fact {
       padding:
         34px 0;
     }
+
 
     .fact + .fact {
       border-left:
@@ -504,6 +526,7 @@
 
       padding-left: 32px;
     }
+
 
     .fact-label {
       display: block;
@@ -522,6 +545,7 @@
         var(--muted);
     }
 
+
     .fact-value {
       font-size: 20px;
       letter-spacing: -.02em;
@@ -538,6 +562,7 @@
         130px 0;
     }
 
+
     .field-header {
       display: flex;
 
@@ -551,6 +576,7 @@
       margin-bottom: 64px;
     }
 
+
     .field-header h2 {
       margin: 0;
 
@@ -563,6 +589,7 @@
       font-weight: 600;
     }
 
+
     .field-header p {
       max-width: 400px;
       margin: 0;
@@ -572,6 +599,7 @@
       line-height: 1.6;
       font-size: 15px;
     }
+
 
     .observation {
       display: grid;
@@ -590,6 +618,7 @@
         1px solid var(--line);
     }
 
+
     .observation-number {
       font-size: 13px;
 
@@ -600,6 +629,7 @@
         .12em;
     }
 
+
     .observation h3 {
       margin: 0;
 
@@ -608,6 +638,7 @@
 
       font-weight: 500;
     }
+
 
     .observation p {
       margin: 0;
@@ -645,15 +676,18 @@
       align-items: center;
     }
 
+
     .holy-copy {
       padding: 76px;
     }
+
 
     .holy .section-label {
       color: #aaa69f;
 
       margin-bottom: 30px;
     }
+
 
     .holy h2 {
       max-width: 620px;
@@ -667,6 +701,7 @@
 
       font-weight: 500;
     }
+
 
     .holy p {
       max-width: 570px;
@@ -694,6 +729,7 @@
       overflow: hidden;
     }
 
+
     .halo::before {
       content: "";
 
@@ -707,6 +743,7 @@
 
       position: absolute;
     }
+
 
     .halo::after {
       content: "CHIB";
@@ -738,6 +775,7 @@
         0 0 130px;
     }
 
+
     .gallery-top {
       display: flex;
 
@@ -748,6 +786,7 @@
 
       margin-bottom: 40px;
     }
+
 
     .gallery-top h2 {
       margin: 0;
@@ -763,6 +802,7 @@
       font-weight: 600;
     }
 
+
     .gallery-grid {
       display: grid;
 
@@ -771,6 +811,7 @@
 
       gap: 18px;
     }
+
 
     .gallery-large,
     .gallery-small {
@@ -785,14 +826,17 @@
       overflow: hidden;
     }
 
+
     .gallery-large {
       min-height: 700px;
     }
+
 
     .gallery-stack {
       display: grid;
       gap: 18px;
     }
+
 
     .gallery-small {
       min-height: 340px;
@@ -824,6 +868,7 @@
       font-size: 13px;
     }
 
+
     .footer-name {
       color:
         var(--text);
@@ -834,20 +879,23 @@
 
 
     /* ========================================
-       UKRAINIAN SPACING ADJUSTMENTS
+       UKRAINIAN SPACING
     ======================================== */
 
     html[lang="uk"] .hero-nav {
       gap: 30px;
     }
 
+
     html[lang="uk"] .hero-tools {
       gap: 28px;
     }
 
+
     html[lang="uk"] .hero-description {
       max-width: 455px;
     }
+
 
     html[lang="uk"] .hero-button {
       width: 270px;
@@ -855,10 +903,12 @@
       font-size: 11px;
     }
 
+
     html[lang="uk"] .intro-copy {
       font-size:
         clamp(32px,4vw,60px);
     }
+
 
     html[lang="uk"] .fact-value {
       font-size: 19px;
@@ -877,18 +927,15 @@
         min-height: 0;
       }
 
+
       .hero-photo img {
+        object-position: 44% 51%;
 
-        object-position:
-          51% 52%;
-
-        transform:
-          scale(1.10)
-          translate(2%,2%);
+        transform: scale(1.035);
       }
 
-      .hero-shade {
 
+      .hero-shade {
         background:
           linear-gradient(
             180deg,
@@ -977,7 +1024,6 @@
 
 
       .hero h1 {
-
         font-size:
           clamp(
             88px,
@@ -1027,7 +1073,6 @@
 
 
       .intro {
-
         grid-template-columns:
           1fr;
 
@@ -1036,14 +1081,12 @@
 
 
       .facts {
-
         grid-template-columns:
           1fr 1fr;
       }
 
 
       .fact:nth-child(3) {
-
         border-left: 0;
 
         border-top:
@@ -1052,7 +1095,6 @@
 
 
       .fact:nth-child(4) {
-
         border-top:
           1px solid var(--line);
       }
@@ -1069,7 +1111,6 @@
 
 
       .observation {
-
         grid-template-columns:
           90px 1fr;
       }
@@ -1081,25 +1122,21 @@
 
 
       .holy {
-
         grid-template-columns:
           1fr;
       }
 
 
       .gallery-grid {
-
         grid-template-columns:
           1fr;
       }
 
 
       .gallery-stack {
-
         grid-template-columns:
           1fr 1fr;
       }
-
     }
 
 
@@ -1111,7 +1148,6 @@
     @media (max-width: 620px) {
 
       .site {
-
         width:
           min(
             100% - 28px,
@@ -1126,25 +1162,19 @@
 
 
       .hero-photo img {
+        object-position: 46% 54%;
 
-        object-position:
-          50% 54%;
-
-        transform:
-          scale(1.08)
-          translate(1.5%,1.5%);
+        transform: scale(1.025);
       }
 
 
       .hero-content {
-
         padding:
           24px 20px;
       }
 
 
       .hero-brand {
-
         top: 24px;
         left: 20px;
 
@@ -1153,21 +1183,18 @@
 
 
       .hero-tools {
-
         top: 23px;
         right: 20px;
       }
 
 
       .hero-main {
-
         padding-top:
           115px;
       }
 
 
       .hero h1 {
-
         font-size:
           clamp(
             84px,
@@ -1189,7 +1216,6 @@
 
 
       .hero-note {
-
         right: 20px;
 
         bottom: 72px;
@@ -1197,14 +1223,12 @@
 
 
       .facts {
-
         grid-template-columns:
           1fr;
       }
 
 
       .fact + .fact {
-
         border-left: 0;
 
         border-top:
@@ -1215,7 +1239,6 @@
 
 
       .observation {
-
         grid-template-columns:
           1fr;
 
@@ -1229,7 +1252,6 @@
 
 
       .holy-copy {
-
         padding:
           48px 26px;
       }
@@ -1241,18 +1263,15 @@
 
 
       .gallery-stack {
-
         grid-template-columns:
           1fr;
       }
 
 
       footer {
-
         flex-direction:
           column;
       }
-
     }
 
   </style>
@@ -1268,6 +1287,7 @@
   ======================================== -->
 
   <section class="hero">
+
 
     <div class="hero-photo">
 
@@ -1450,9 +1470,7 @@
 
 
 
-      <!-- ====================================
-           SPECIES
-      ==================================== -->
+      <!-- SPECIES -->
 
       <section
         class="intro"
@@ -1484,9 +1502,7 @@
 
 
 
-      <!-- ====================================
-           FACTS
-      ==================================== -->
+      <!-- FACTS -->
 
       <section class="facts">
 
@@ -1569,9 +1585,7 @@
 
 
 
-      <!-- ====================================
-           FIELD NOTES
-      ==================================== -->
+      <!-- FIELD NOTES -->
 
       <section
         class="field-notes"
@@ -1695,9 +1709,7 @@
 
 
 
-      <!-- ====================================
-           MIRACLES
-      ==================================== -->
+      <!-- MIRACLES -->
 
       <section
         class="holy"
@@ -1754,9 +1766,7 @@
 
 
 
-      <!-- ====================================
-           PHOTOS
-      ==================================== -->
+      <!-- PHOTOS -->
 
       <section
         class="gallery"
@@ -1812,9 +1822,7 @@
 
 
 
-    <!-- ====================================
-         FOOTER
-    ==================================== -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -2113,20 +2121,11 @@
           : "en";
 
 
-      /*
-        Change HTML language.
-        CSS can use this for Ukrainian-specific spacing.
-      */
-
       document.documentElement.lang =
         selected === "uk"
           ? "uk"
           : "en";
 
-
-      /*
-        Plain text elements
-      */
 
       document
         .querySelectorAll("[data-i18n]")
@@ -2147,11 +2146,6 @@
         });
 
 
-
-      /*
-        Elements that intentionally contain <br> or <em>.
-      */
-
       document
         .querySelectorAll("[data-i18n-html]")
         .forEach(element => {
@@ -2171,13 +2165,9 @@
         });
 
 
-
-      /*
-        Browser title + description
-      */
-
       document.title =
         translations[selected].title;
+
 
       document
         .getElementById("meta-description")
@@ -2187,11 +2177,6 @@
         );
 
 
-
-      /*
-        Active toggle state
-      */
-
       document
         .getElementById("lang-en")
         .classList
@@ -2199,6 +2184,7 @@
           "active",
           selected === "en"
         );
+
 
       document
         .getElementById("lang-ua")
@@ -2209,11 +2195,6 @@
         );
 
 
-
-      /*
-        Accessibility state
-      */
-
       document
         .getElementById("lang-en")
         .setAttribute(
@@ -2222,6 +2203,7 @@
             ? "true"
             : "false"
         );
+
 
       document
         .getElementById("lang-ua")
@@ -2232,11 +2214,6 @@
             : "false"
         );
 
-
-
-      /*
-        Remember choice for next visit
-      */
 
       try {
 
@@ -2247,23 +2224,14 @@
 
       } catch (error) {
 
-        /*
-          Site still works if storage
-          is blocked by the browser.
-        */
-
       }
 
     }
 
 
 
-    /*
-      Restore language choice.
-      Default = English.
-    */
-
     let savedLanguage = "en";
+
 
     try {
 
