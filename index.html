@@ -14,7 +14,6 @@
   >
 
   <style>
-
     :root {
       --bg: #f7f7f4;
       --text: #151515;
@@ -53,76 +52,62 @@
       text-decoration: none;
     }
 
+    img {
+      max-width: 100%;
+    }
 
-    /* ========================================
+
+    /* ==================================================
        HERO
-    ======================================== */
+    ================================================== */
 
     .hero {
       position: relative;
-
       width: 100%;
+      min-height: 760px;
       height: min(900px, 100vh);
-      min-height: 720px;
-
       overflow: hidden;
 
-      background: #f7f5f0;
+      background: #f6f4ef;
     }
+    
+    .hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  z-index: 1;
+  pointer-events: none;
 
-
-    /*
-      The new hero image is portrait-oriented.
-
-      Instead of forcing it across the entire browser,
-      it occupies the photographic right-hand portion.
-
-      This gives us a much more predictable crop.
-    */
-
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.28) 0%,
+      rgba(0, 0, 0, 0.14) 38%,
+      rgba(0, 0, 0, 0.04) 72%,
+      rgba(0, 0, 0, 0) 100%
+    );
+}
     .hero-photo {
       position: absolute;
-
-      top: 0;
-      right: 0;
-
-      width: 67%;
-      height: 100%;
-
+      inset: 0;
       z-index: 0;
-
-      overflow: hidden;
     }
-
 
     .hero-photo img {
       width: 100%;
       height: 100%;
-
       display: block;
 
       object-fit: cover;
-
-      /*
-        Chib sits relatively low in the original.
-        This keeps him prominently visible.
-      */
-
-      object-position: 52% 58%;
+      object-position: 54% 56%;
     }
-
-
-    /*
-      Pale editorial background/fade.
-
-      Notice this now fades into the right-side
-      image instead of whitening the entire animal.
-    */
 
     .hero-shade {
       position: absolute;
       inset: 0;
-
       z-index: 1;
 
       pointer-events: none;
@@ -131,34 +116,28 @@
         linear-gradient(
           90deg,
           rgba(248,246,241,1) 0%,
-          rgba(248,246,241,1) 24%,
-          rgba(248,246,241,.98) 33%,
-          rgba(248,246,241,.82) 40%,
-          rgba(248,246,241,.48) 47%,
-          rgba(248,246,241,.16) 54%,
-          rgba(248,246,241,0) 62%
+          rgba(248,246,241,1) 23%,
+          rgba(248,246,241,.97) 31%,
+          rgba(248,246,241,.78) 40%,
+          rgba(248,246,241,.42) 49%,
+          rgba(248,246,241,.13) 58%,
+          rgba(248,246,241,0) 67%
         );
     }
 
-
     .hero-content {
       position: relative;
-
       z-index: 2;
 
       width: min(1440px, 100%);
       height: 100%;
 
       margin: 0 auto;
-
-      padding:
-        42px 58px
-        54px;
+      padding: 42px 58px 54px;
 
       display: grid;
-
       grid-template-columns:
-        minmax(440px, .82fr)
+        minmax(430px, .82fr)
         1.18fr;
 
       grid-template-rows:
@@ -166,23 +145,16 @@
         1fr;
     }
 
-
-    /* BRAND */
-
     .hero-brand {
       grid-column: 1;
       grid-row: 1;
 
       font-size: 14px;
       font-weight: 600;
-
       letter-spacing: .34em;
 
       color: #4b4844;
     }
-
-
-    /* NAV + LANGUAGE */
 
     .hero-tools {
       grid-column: 2;
@@ -192,50 +164,42 @@
       align-items: center;
       justify-content: flex-end;
 
-      gap: 38px;
+      gap: 36px;
     }
-
 
     .hero-nav {
       display: flex;
       align-items: center;
-
-      gap: 42px;
+      gap: 38px;
 
       font-size: 14px;
     }
-
 
     .hero-nav a {
       color: rgba(255,255,255,.96);
 
       text-shadow:
-        0 1px 14px rgba(0,0,0,.27);
+        0 1px 14px rgba(0,0,0,.30);
 
-      transition:
-        opacity .2s ease;
+      transition: opacity .2s ease;
     }
-
 
     .hero-nav a:hover {
       opacity: .65;
     }
 
-
     .language-toggle {
       display: flex;
       align-items: center;
-
       gap: 7px;
-
-      white-space: nowrap;
 
       padding-left: 17px;
 
       border-left:
         1px solid rgba(255,255,255,.38);
-    }
 
+      white-space: nowrap;
+    }
 
     .language-toggle button {
       appearance: none;
@@ -243,48 +207,34 @@
       border: 0;
       padding: 0;
 
-      background: none;
+      background: transparent;
 
       font: inherit;
-
       font-size: 12px;
       font-weight: 500;
-
       letter-spacing: .08em;
 
-      color:
-        rgba(255,255,255,.52);
+      color: rgba(255,255,255,.55);
 
       cursor: pointer;
 
       text-shadow:
         0 1px 12px rgba(0,0,0,.22);
-
-      transition:
-        color .2s ease;
     }
 
-
-    .language-toggle button:hover,
-    .language-toggle button.active {
-      color: white;
+    .language-toggle button.active,
+    .language-toggle button:hover {
+      color: #fff;
     }
-
 
     .language-toggle button.active {
       font-weight: 700;
     }
 
-
     .language-divider {
-      color:
-        rgba(255,255,255,.45);
-
       font-size: 11px;
+      color: rgba(255,255,255,.45);
     }
-
-
-    /* HERO COPY */
 
     .hero-main {
       grid-column: 1;
@@ -294,11 +244,9 @@
       align-items: center;
     }
 
-
     .hero-title-wrap {
-      margin-top: -12px;
+      margin-top: -10px;
     }
-
 
     .hero-rule {
       width: 58px;
@@ -309,7 +257,6 @@
       background: #4f4b47;
     }
 
-
     .hero h1 {
       margin: 0;
 
@@ -319,12 +266,10 @@
       line-height: .72;
 
       font-weight: 400;
-
       letter-spacing: -.085em;
 
       color: #211f1d;
     }
-
 
     .formal-name {
       margin-top: 30px;
@@ -335,38 +280,28 @@
       line-height: 1;
 
       font-weight: 300;
-
       letter-spacing: -.045em;
 
       color: #383531;
     }
 
-
     .hero-description {
       max-width: 430px;
 
-      margin:
-        46px 0 0;
+      margin-top: 46px;
 
       font-size: 17px;
-
       line-height: 1.7;
 
       color: #5f5a55;
     }
 
-
-    /* BUTTON */
-
     .hero-button {
-      margin-top: 36px;
-
       width: 245px;
       height: 62px;
 
-      padding:
-        0 24px
-        0 32px;
+      margin-top: 36px;
+      padding: 0 24px 0 32px;
 
       border:
         1px solid #77716a;
@@ -374,12 +309,10 @@
       border-radius: 999px;
 
       display: flex;
-
       align-items: center;
       justify-content: space-between;
 
       text-transform: uppercase;
-
       letter-spacing: .20em;
 
       font-size: 12px;
@@ -390,34 +323,25 @@
         transform .2s ease;
     }
 
-
     .hero-button:hover {
       background: #211f1d;
-
       color: white;
 
-      transform:
-        translateY(-2px);
+      transform: translateY(-2px);
     }
-
 
     .hero-button .arrow {
       font-size: 24px;
-
       letter-spacing: 0;
     }
-
-
-    /* HANDWRITTEN NOTE */
 
     .hero-note {
       position: absolute;
 
       right: 8%;
-      top: 46%;
+      top: 47%;
 
-      color:
-        rgba(255,255,255,.96);
+      color: rgba(255,255,255,.96);
 
       font-family:
         "Segoe Print",
@@ -429,18 +353,15 @@
 
       line-height: 1.07;
 
-      transform:
-        rotate(-6deg);
+      transform: rotate(-6deg);
 
       text-shadow:
-        0 2px 9px rgba(0,0,0,.22);
+        0 2px 10px rgba(0,0,0,.22);
     }
-
 
     .hero-note span {
       display: block;
     }
-
 
     .hero-heart {
       margin-top: 12px;
@@ -450,10 +371,9 @@
     }
 
 
-
-    /* ========================================
-       MAIN CONTENT
-    ======================================== */
+    /* ==================================================
+       GLOBAL CONTENT
+    ================================================== */
 
     .site {
       width:
@@ -465,88 +385,102 @@
       margin: 0 auto;
     }
 
-
-    /* INTRO */
-
-    .intro {
-      padding:
-        130px 0;
-
-      display: grid;
-
-      grid-template-columns:
-        .75fr 1.25fr;
-
-      gap: 80px;
-
-      border-top:
-        1px solid var(--line);
-    }
-
-
     .section-label {
       font-size: 12px;
 
       text-transform: uppercase;
-
       letter-spacing: .16em;
 
       color: var(--muted);
     }
 
 
-    .intro-copy {
-      max-width: 950px;
+    /* ==================================================
+       SPECIES
+    ================================================== */
 
+    .intro {
+      padding: 130px 0;
+
+      display: grid;
+      grid-template-columns: .68fr 1.32fr;
+
+      gap: 70px;
+
+      border-top:
+        1px solid var(--line);
+    }
+
+    .intro-right {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+
+      gap: 60px;
+      align-items: center;
+    }
+
+    .intro-copy {
+      max-width: 850px;
       margin: 0;
 
       font-size:
-        clamp(34px,4.2vw,64px);
+        clamp(34px,4vw,62px);
 
       line-height: 1.02;
 
       letter-spacing: -.045em;
-
       font-weight: 500;
     }
 
-
     .intro-copy em {
       color: var(--accent);
-
       font-style: normal;
     }
 
+    .species-portrait {
+      height: 390px;
+      overflow: hidden;
 
-    /* FACTS */
+      background: #ece9e2;
+    }
+
+    .species-portrait img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      object-position: 50% 46%;
+
+      display: block;
+    }
+
+
+    /* ==================================================
+       FACTS
+    ================================================== */
 
     .facts {
+      display: grid;
+      grid-template-columns:
+        repeat(4,1fr);
+
       border-top:
         1px solid var(--line);
 
       border-bottom:
         1px solid var(--line);
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(4,1fr);
     }
-
 
     .fact {
-      padding:
-        34px 0;
+      padding: 34px 0;
     }
-
 
     .fact + .fact {
+      padding-left: 32px;
+
       border-left:
         1px solid var(--line);
-
-      padding-left: 32px;
     }
-
 
     .fact-label {
       display: block;
@@ -556,34 +490,27 @@
       font-size: 12px;
 
       text-transform: uppercase;
-
       letter-spacing: .14em;
 
       color: var(--muted);
     }
 
-
     .fact-value {
       font-size: 20px;
-
       letter-spacing: -.02em;
     }
 
 
-
-    /* ========================================
+    /* ==================================================
        FIELD NOTES
-    ======================================== */
+    ================================================== */
 
     .field-notes {
-      padding:
-        130px 0;
+      padding: 130px 0;
     }
-
 
     .field-header {
       display: flex;
-
       justify-content: space-between;
       align-items: end;
 
@@ -591,7 +518,6 @@
 
       margin-bottom: 64px;
     }
-
 
     .field-header h2 {
       margin: 0;
@@ -602,41 +528,37 @@
       line-height: .9;
 
       letter-spacing: -.06em;
-
       font-weight: 600;
     }
 
-
     .field-header p {
       max-width: 400px;
-
       margin: 0;
 
       color: var(--muted);
 
       line-height: 1.6;
-
       font-size: 15px;
     }
-
 
     .observation {
       display: grid;
 
       grid-template-columns:
-        160px 1fr .6fr;
+        90px
+        .9fr
+        1fr
+        260px;
 
-      gap: 42px;
+      gap: 36px;
 
-      align-items: start;
+      align-items: center;
 
-      padding:
-        34px 0;
+      padding: 36px 0;
 
       border-top:
         1px solid var(--line);
     }
-
 
     .observation-number {
       font-size: 13px;
@@ -646,17 +568,14 @@
       letter-spacing: .12em;
     }
 
-
     .observation h3 {
       margin: 0;
 
       font-size: 30px;
 
       letter-spacing: -.035em;
-
       font-weight: 500;
     }
-
 
     .observation p {
       margin: 0;
@@ -664,52 +583,69 @@
       color: var(--muted);
 
       line-height: 1.65;
-
       font-size: 15px;
     }
 
+    .observation-image {
+      height: 190px;
+      overflow: hidden;
+
+      background: #ece8df;
+    }
+
+    .observation-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      display: block;
+    }
+
+    .observation:nth-of-type(1) .observation-image img {
+      object-position: 50% 48%;
+    }
+
+    .observation:nth-of-type(2) .observation-image img {
+      object-position: 50% 57%;
+    }
+
+    .observation:nth-of-type(3) .observation-image img {
+      object-position: 50% 44%;
+    }
 
 
-    /* ========================================
-       SACRED CLASSIFICATION
-    ======================================== */
+    /* ==================================================
+       MIRACLES
+    ================================================== */
 
     .holy {
       margin:
         40px 0 130px;
 
-      background:
-        var(--text);
-
-      color:
-        var(--white);
-
-      min-height: 560px;
+      min-height: 600px;
 
       display: grid;
-
       grid-template-columns:
-        1fr 1fr;
+        1.05fr .95fr;
 
-      align-items: center;
+      align-items: stretch;
+
+      background: var(--text);
+      color: var(--white);
     }
-
 
     .holy-copy {
       padding: 76px;
     }
 
-
     .holy .section-label {
-      color: #aaa69f;
-
       margin-bottom: 30px;
-    }
 
+      color: #aaa69f;
+    }
 
     .holy h2 {
       max-width: 620px;
-
       margin: 0;
 
       font-size:
@@ -718,10 +654,8 @@
       line-height: .95;
 
       letter-spacing: -.055em;
-
       font-weight: 500;
     }
-
 
     .holy p {
       max-width: 570px;
@@ -731,75 +665,92 @@
       color: #c8c5bf;
 
       font-size: 17px;
-
       line-height: 1.7;
     }
 
-
-    .halo {
-      min-height: 560px;
-
-      display: grid;
-      place-items: center;
-
+    .holy-image {
       position: relative;
+
+      min-height: 600px;
 
       overflow: hidden;
     }
 
+    .holy-image img {
+      width: 100%;
+      height: 100%;
 
-    .halo::before {
-      content: "";
+      object-fit: cover;
+      object-position: 50% 38%;
 
-      width: 340px;
-      height: 340px;
-
-      border-radius: 50%;
-
-      background: var(--accent);
-
-      position: absolute;
+      display: block;
     }
 
+    .holy-image::after {
+      content: "";
 
-    .halo::after {
-      content: "CHIB";
+      position: absolute;
+      inset: 0;
 
-      position: relative;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(21,21,21,.86) 0%,
+          rgba(21,21,21,.28) 28%,
+          rgba(21,21,21,0) 62%
+        );
+    }
+
+    .miracle-seal {
+      position: absolute;
+
+      right: 34px;
+      bottom: 32px;
 
       z-index: 2;
 
-      font-size:
-        clamp(80px,12vw,180px);
+      width: 126px;
+      height: 126px;
 
-      font-weight: 700;
+      border:
+        1px solid rgba(255,255,255,.58);
 
-      letter-spacing: -.08em;
+      border-radius: 50%;
 
-      color: var(--white);
+      display: grid;
+      place-items: center;
+
+      text-align: center;
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+      letter-spacing: .15em;
+
+      line-height: 1.45;
+
+      color: rgba(255,255,255,.9);
+
+      transform: rotate(-7deg);
     }
 
 
-
-    /* ========================================
-       GALLERY / SIGHTINGS
-    ======================================== */
+    /* ==================================================
+       SIGHTINGS
+    ================================================== */
 
     .gallery {
       padding:
         0 0 130px;
     }
 
-
     .gallery-top {
       display: flex;
-
       justify-content: space-between;
       align-items: end;
 
       margin-bottom: 40px;
     }
-
 
     .gallery-top h2 {
       margin: 0;
@@ -810,50 +761,41 @@
       line-height: .9;
 
       letter-spacing: -.055em;
-
       font-weight: 600;
     }
 
+    .gallery-intro {
+      max-width: 420px;
 
-    .gallery-grid {
+      margin: 0;
+
+      font-size: 14px;
+      line-height: 1.65;
+
+      color: var(--muted);
+    }
+
+
+    .photo-grid {
       display: grid;
 
       grid-template-columns:
-        1.35fr .65fr;
+        repeat(12,1fr);
 
-      gap: 18px;
+      gap: 16px;
     }
 
+    .photo-card {
+      position: relative;
 
-    .gallery-large,
-    .gallery-small {
+      min-height: 360px;
+
       overflow: hidden;
 
-      background: #ece8df;
+      background: #ebe7df;
     }
 
-
-    .gallery-large {
-      min-height: 720px;
-    }
-
-
-    .gallery-stack {
-      display: grid;
-
-      grid-template-rows:
-        1fr 1fr;
-
-      gap: 18px;
-    }
-
-
-    .gallery-small {
-      min-height: 351px;
-    }
-
-
-    .gallery img {
+    .photo-card img {
       width: 100%;
       height: 100%;
 
@@ -862,58 +804,134 @@
       object-fit: cover;
 
       transition:
-        transform .45s ease;
+        transform .5s ease;
     }
 
-
-    .gallery-large img {
-      object-position:
-        50% 48%;
-    }
-
-
-    .gallery-small:first-child img {
-      object-position:
-        50% 45%;
-    }
-
-
-    .gallery-small:last-child img {
-      object-position:
-        50% 42%;
-    }
-
-
-    .gallery-large:hover img,
-    .gallery-small:hover img {
+    .photo-card:hover img {
       transform:
-        scale(1.015);
+        scale(1.018);
+    }
+
+    .photo-caption {
+      position: absolute;
+
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      gap: 20px;
+
+      color: white;
+
+      text-shadow:
+        0 1px 9px rgba(0,0,0,.55);
+
+      font-size: 12px;
+    }
+
+    .photo-caption strong {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .photo-card::after {
+      content: "";
+
+      position: absolute;
+      inset: 55% 0 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,0),
+          rgba(0,0,0,.34)
+        );
+    }
+
+    .photo-caption {
+      z-index: 2;
     }
 
 
+    /* asymmetrical masonry-ish desktop layout */
 
-    /* ========================================
+    .photo-card:nth-child(1) {
+      grid-column: span 7;
+      min-height: 620px;
+    }
+
+    .photo-card:nth-child(2) {
+      grid-column: span 5;
+      min-height: 620px;
+    }
+
+    .photo-card:nth-child(3) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(4) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(5) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(6) {
+      grid-column: span 5;
+      min-height: 540px;
+    }
+
+    .photo-card:nth-child(7) {
+      grid-column: span 7;
+      min-height: 540px;
+    }
+
+    .photo-card:nth-child(8) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(9) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(10) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+
+    /* ==================================================
        FOOTER
-    ======================================== */
+    ================================================== */
 
     footer {
-      border-top:
-        1px solid var(--line);
-
       padding:
         42px 0 56px;
 
       display: flex;
-
       justify-content: space-between;
 
       gap: 32px;
+
+      border-top:
+        1px solid var(--line);
 
       color: var(--muted);
 
       font-size: 13px;
     }
-
 
     .footer-name {
       color: var(--text);
@@ -922,101 +940,73 @@
     }
 
 
-
-    /* ========================================
-       UKRAINIAN SPACING
-    ======================================== */
+    /* ==================================================
+       UKRAINIAN
+    ================================================== */
 
     html[lang="uk"] .hero-nav {
-      gap: 30px;
-    }
-
-
-    html[lang="uk"] .hero-tools {
       gap: 28px;
     }
 
-
-    html[lang="uk"] .hero-description {
-      max-width: 455px;
+    html[lang="uk"] .hero-tools {
+      gap: 26px;
     }
 
+    html[lang="uk"] .hero-description {
+      max-width: 460px;
+    }
 
     html[lang="uk"] .hero-button {
-      width: 270px;
+      width: 272px;
 
-      letter-spacing: .11em;
-
+      letter-spacing: .10em;
       font-size: 11px;
     }
 
-
     html[lang="uk"] .intro-copy {
       font-size:
-        clamp(32px,4vw,60px);
+        clamp(32px,3.8vw,58px);
     }
-
 
     html[lang="uk"] .fact-value {
       font-size: 19px;
     }
 
 
-
-    /* ========================================
+    /* ==================================================
        TABLET
-    ======================================== */
+    ================================================== */
 
-    @media (max-width: 900px) {
+    @media (max-width: 980px) {
 
       .hero {
         height: 900px;
-
         min-height: 0;
       }
 
-
-      /*
-        On tablet/mobile, let the photo once again
-        fill the whole background.
-
-        The original portrait ratio suits this much
-        better than desktop.
-      */
-
-      .hero-photo {
-        width: 100%;
-        height: 100%;
-      }
-
-
       .hero-photo img {
-        object-position:
-          50% 59%;
+        object-position: 50% 57%;
       }
-
 
       .hero-shade {
         background:
           linear-gradient(
             180deg,
             rgba(248,246,241,.99) 0%,
-            rgba(248,246,241,.96) 24%,
-            rgba(248,246,241,.74) 38%,
-            rgba(248,246,241,.23) 55%,
+            rgba(248,246,241,.97) 24%,
+            rgba(248,246,241,.77) 38%,
+            rgba(248,246,241,.27) 55%,
             rgba(248,246,241,.03) 70%,
             rgba(248,246,241,0) 78%
           );
       }
 
-
       .hero-content {
+        display: block;
+
         padding:
           28px 26px;
-
-        display: block;
       }
-
 
       .hero-brand {
         position: absolute;
@@ -1025,30 +1015,22 @@
         left: 26px;
       }
 
-
       .hero-tools {
         position: absolute;
 
         top: 27px;
         right: 26px;
-
-        display: block;
       }
-
 
       .hero-nav {
         display: none;
       }
 
-
       .language-toggle {
-        border-left: 0;
-
         padding-left: 0;
 
-        gap: 6px;
+        border-left: 0;
       }
-
 
       .language-toggle button {
         color:
@@ -1057,18 +1039,15 @@
         text-shadow: none;
       }
 
-
       .language-toggle button.active,
       .language-toggle button:hover {
         color: #292724;
       }
 
-
       .language-divider {
         color:
           rgba(45,43,40,.32);
       }
-
 
       .hero-main {
         display: block;
@@ -1076,28 +1055,20 @@
         padding-top: 125px;
       }
 
-
       .hero-rule {
         display: none;
       }
 
-
       .hero h1 {
         font-size:
-          clamp(
-            88px,
-            26vw,
-            130px
-          );
+          clamp(88px,26vw,130px);
       }
-
 
       .formal-name {
-        font-size: 28px;
-
         margin-top: 24px;
-      }
 
+        font-size: 28px;
+      }
 
       .hero-description {
         margin-top: 28px;
@@ -1105,45 +1076,45 @@
         font-size: 15px;
       }
 
-
       .hero-button {
-        margin-top: 26px;
-
         width: 205px;
         height: 56px;
 
+        margin-top: 26px;
+
         font-size: 11px;
       }
-
 
       html[lang="uk"] .hero-button {
         width: 250px;
       }
 
-
       .hero-note {
         top: auto;
-
         right: 24px;
-        bottom: 84px;
+        bottom: 78px;
 
         font-size: 19px;
       }
-
 
       .intro {
         grid-template-columns:
           1fr;
 
-        gap: 28px;
+        gap: 30px;
       }
 
+      .intro-right {
+        grid-template-columns:
+          1fr 260px;
+
+        gap: 30px;
+      }
 
       .facts {
         grid-template-columns:
           1fr 1fr;
       }
-
 
       .fact:nth-child(3) {
         border-left: 0;
@@ -1152,70 +1123,55 @@
           1px solid var(--line);
       }
 
-
       .fact:nth-child(4) {
         border-top:
           1px solid var(--line);
       }
 
-
       .field-header {
         display: block;
       }
-
 
       .field-header p {
         margin-top: 24px;
       }
 
-
       .observation {
         grid-template-columns:
-          90px 1fr;
+          60px 1fr;
+
+        gap: 22px;
       }
 
-
-      .observation p {
+      .observation p,
+      .observation-image {
         grid-column: 2;
       }
 
+      .observation-image {
+        height: 360px;
+      }
 
       .holy {
         grid-template-columns:
           1fr;
       }
 
-
-      .gallery-grid {
-        grid-template-columns:
-          1fr;
+      .holy-image {
+        min-height: 500px;
       }
 
+      .photo-card:nth-child(n) {
+        grid-column: span 6;
 
-      .gallery-large {
-        min-height: 620px;
+        min-height: 500px;
       }
-
-
-      .gallery-stack {
-        grid-template-columns:
-          1fr 1fr;
-
-        grid-template-rows: none;
-      }
-
-
-      .gallery-small {
-        min-height: 400px;
-      }
-
     }
 
 
-
-    /* ========================================
+    /* ==================================================
        MOBILE
-    ======================================== */
+    ================================================== */
 
     @media (max-width: 620px) {
 
@@ -1227,23 +1183,18 @@
           );
       }
 
-
       .hero {
         height: 850px;
       }
 
-
       .hero-photo img {
-        object-position:
-          51% 60%;
+        object-position: 50% 59%;
       }
-
 
       .hero-content {
         padding:
           24px 20px;
       }
-
 
       .hero-brand {
         top: 24px;
@@ -1252,110 +1203,106 @@
         font-size: 12px;
       }
 
-
       .hero-tools {
         top: 23px;
         right: 20px;
       }
 
-
       .hero-main {
-        padding-top:
-          115px;
+        padding-top: 115px;
       }
-
 
       .hero h1 {
         font-size:
-          clamp(
-            84px,
-            27vw,
-            120px
-          );
+          clamp(84px,27vw,120px);
       }
-
 
       .formal-name {
         font-size: 25px;
       }
 
-
       .hero-description {
-        font-size: 14px;
-
-        line-height: 1.6;
-
         max-width: 330px;
-      }
 
+        font-size: 14px;
+        line-height: 1.6;
+      }
 
       .hero-note {
         right: 18px;
-
-        bottom: 58px;
+        bottom: 56px;
       }
 
+      .intro-right {
+        grid-template-columns:
+          1fr;
+      }
+
+      .species-portrait {
+        height: 460px;
+      }
 
       .facts {
         grid-template-columns:
           1fr;
       }
 
-
       .fact + .fact {
+        padding-left: 0;
+
         border-left: 0;
 
         border-top:
           1px solid var(--line);
-
-        padding-left: 0;
       }
-
 
       .observation {
         grid-template-columns:
           1fr;
 
-        gap: 12px;
+        gap: 14px;
       }
 
-
-      .observation p {
+      .observation p,
+      .observation-image {
         grid-column: auto;
       }
 
+      .observation-image {
+        height: 420px;
+      }
 
       .holy-copy {
         padding:
           48px 26px;
       }
 
-
-      .halo {
-        min-height: 360px;
+      .holy-image {
+        min-height: 440px;
       }
 
-
-      .gallery-large {
-        min-height: 520px;
+      .gallery-top {
+        display: block;
       }
 
+      .gallery-intro {
+        margin-top: 20px;
+      }
 
-      .gallery-stack {
+      .photo-grid {
         grid-template-columns:
           1fr;
       }
 
+      .photo-card:nth-child(n) {
+        grid-column: auto;
 
-      .gallery-small {
-        min-height: 470px;
+        min-height: 520px;
       }
-
 
       footer {
         flex-direction: column;
       }
-
     }
 
   </style>
@@ -1366,21 +1313,18 @@
 <body>
 
 
-  <!-- ========================================
+  <!-- ==================================================
        HERO
-  ======================================== -->
+  ================================================== -->
 
   <section class="hero">
 
     <div class="hero-photo">
-
       <img
-        src="images/chib-hero.jpg"
+        src="images/chib-hero.jpeg"
         alt="Mr. Tofu Ciabatta standing in his enclosure"
       >
-
     </div>
-
 
     <div class="hero-shade"></div>
 
@@ -1393,9 +1337,7 @@
       </div>
 
 
-
       <div class="hero-tools">
-
 
         <nav class="hero-nav">
 
@@ -1406,7 +1348,6 @@
             About
           </a>
 
-
           <a
             href="#observations"
             data-i18n="navChronicles"
@@ -1414,14 +1355,12 @@
             Chronicles
           </a>
 
-
           <a
             href="#miracles"
             data-i18n="navMiracles"
           >
             Miracles
           </a>
-
 
           <a
             href="#photos"
@@ -1433,7 +1372,6 @@
         </nav>
 
 
-
         <div
           class="language-toggle"
           aria-label="Language"
@@ -1443,22 +1381,18 @@
             type="button"
             id="lang-en"
             class="active"
-            aria-label="English"
             onclick="setLanguage('en')"
           >
             EN
           </button>
 
-
           <span class="language-divider">
             /
           </span>
 
-
           <button
             type="button"
             id="lang-ua"
-            aria-label="Українська"
             onclick="setLanguage('uk')"
           >
             UA
@@ -1469,24 +1403,19 @@
       </div>
 
 
-
       <div class="hero-main">
 
         <div class="hero-title-wrap">
 
-
           <div class="hero-rule"></div>
-
 
           <h1>
             Chib
           </h1>
 
-
           <div class="formal-name">
             Mr. Tofu Ciabatta
           </div>
-
 
           <p
             class="hero-description"
@@ -1497,7 +1426,6 @@
             and considerable spiritual<br>
             significance.
           </p>
-
 
           <a
             href="#species"
@@ -1517,7 +1445,6 @@
         </div>
 
       </div>
-
 
 
       <div class="hero-note">
@@ -1547,16 +1474,14 @@
 
 
 
-  <!-- ========================================
-       REST OF SITE
-  ======================================== -->
-
   <div class="site">
 
     <main>
 
 
-      <!-- SPECIES -->
+      <!-- ==================================================
+           SPECIES
+      ================================================== -->
 
       <section
         class="intro"
@@ -1571,21 +1496,37 @@
         </div>
 
 
-        <p
-          class="intro-copy"
-          data-i18n-html="speciesCopy"
-        >
-          <em>Mesocricetus auratus.</em><br>
-          Domesticated Syrian hamster.<br>
-          Long-haired. White.<br>
-          Apparently holy.
-        </p>
+        <div class="intro-right">
+
+          <p
+            class="intro-copy"
+            data-i18n-html="speciesCopy"
+          >
+            <em>Mesocricetus auratus.</em><br>
+            Domesticated Syrian hamster.<br>
+            Long-haired. White.<br>
+            Apparently holy.
+          </p>
+
+
+          <div class="species-portrait">
+
+            <img
+              src="images/chib-14.jpeg"
+              alt="Portrait of Mr. Tofu Ciabatta"
+            >
+
+          </div>
+
+        </div>
 
       </section>
 
 
 
-      <!-- FACTS -->
+      <!-- ==================================================
+           FACTS
+      ================================================== -->
 
       <section class="facts">
 
@@ -1662,7 +1603,9 @@
 
 
 
-      <!-- FIELD NOTES -->
+      <!-- ==================================================
+           FIELD NOTES
+      ================================================== -->
 
       <section
         class="field-notes"
@@ -1671,19 +1614,14 @@
 
         <div class="field-header">
 
-
-          <h2
-            data-i18n-html="fieldNotes"
-          >
+          <h2 data-i18n-html="fieldNotes">
             Field<br>
             notes
           </h2>
 
-
-          <p
-            data-i18n="fieldIntro"
-          >
-            Observations collected from inside the known range of Mr. Tofu Ciabatta.
+          <p data-i18n="fieldIntro">
+            Observations collected from inside the known range
+            of Mr. Tofu Ciabatta.
           </p>
 
         </div>
@@ -1696,21 +1634,25 @@
             001
           </div>
 
-
-          <h3
-            data-i18n="obs1Title"
-          >
+          <h3 data-i18n="obs1Title">
             The nightly migration
           </h3>
 
-
-          <p
-            data-i18n="obs1Copy"
-          >
-            Shortly after dark, Chib begins a sustained journey across the rotating plains.
-            The landscape moves beneath him for considerable distances, while Chib himself
-            remains geographically close to home.
+          <p data-i18n="obs1Copy">
+            Shortly after dark, Chib begins a sustained journey across
+            the rotating plains. The landscape moves beneath him for
+            considerable distances, while Chib himself remains
+            geographically close to home.
           </p>
+
+          <div class="observation-image">
+
+            <img
+              src="images/chib-12.jpeg"
+              alt="Chib beside his exercise wheel"
+            >
+
+          </div>
 
         </article>
 
@@ -1722,21 +1664,25 @@
             002
           </div>
 
-
-          <h3
-            data-i18n="obs2Title"
-          >
+          <h3 data-i18n="obs2Title">
             The gathering of provisions
           </h3>
 
-
-          <p
-            data-i18n="obs2Copy"
-          >
-            Seeds are inspected individually, transported with urgency, and subsequently
-            stored in locations known only to Chib. Some are later rediscovered.
-            Others enter legend.
+          <p data-i18n="obs2Copy">
+            Fresh vegetation is investigated at close range and
+            transported according to priorities known only to Chib.
+            Some provisions are eaten immediately. Others disappear
+            into strategic reserves.
           </p>
+
+          <div class="observation-image">
+
+            <img
+              src="images/chib-11.jpeg"
+              alt="Chib examining fresh parsley"
+            >
+
+          </div>
 
         </article>
 
@@ -1748,20 +1694,25 @@
             003
           </div>
 
-
-          <h3
-            data-i18n="obs3Title"
-          >
+          <h3 data-i18n="obs3Title">
             Architecture beneath the surface
           </h3>
 
-
-          <p
-            data-i18n="obs3Copy"
-          >
-            Bedding is moved continuously according to principles not yet understood
-            by outside observers. Entire districts may be reconstructed overnight.
+          <p data-i18n="obs3Copy">
+            Openings, tunnels and chambers are evaluated continuously.
+            A circular access point may become a lookout post, an
+            entrance or simply a place from which to contemplate
+            the surrounding district.
           </p>
+
+          <div class="observation-image">
+
+            <img
+              src="images/chib-10.jpeg"
+              alt="Chib emerging through a circular opening"
+            >
+
+          </div>
 
         </article>
 
@@ -1769,7 +1720,9 @@
 
 
 
-      <!-- MIRACLES -->
+      <!-- ==================================================
+           MIRACLES
+      ================================================== -->
 
       <section
         class="holy"
@@ -1778,7 +1731,6 @@
 
         <div class="holy-copy">
 
-
           <div
             class="section-label"
             data-i18n="sacredClassification"
@@ -1786,27 +1738,19 @@
             Sacred classification
           </div>
 
-
-          <h2
-            data-i18n="holyTitle"
-          >
+          <h2 data-i18n="holyTitle">
             Why Chib is considered a holy creature.
           </h2>
 
-
-          <p
-            data-i18n="holyCopy1"
-          >
-            Scholars remain divided. Some point to the immaculate white coat.
-            Others cite the unexplained multiplication of hidden sunflower seeds,
-            his capacity to vanish beneath apparently insufficient bedding,
-            and the recurring restoration of tunnels believed to have collapsed permanently.
+          <p data-i18n="holyCopy1">
+            Scholars remain divided. Some point to the immaculate
+            white coat. Others cite the unexplained multiplication
+            of hidden sunflower seeds, his ability to appear suddenly
+            above enclosure walls, and the recurring restoration of
+            tunnels believed to have collapsed permanently.
           </p>
 
-
-          <p
-            data-i18n="holyCopy2"
-          >
+          <p data-i18n="holyCopy2">
             Three miracles are currently recognized by tradition.
             Investigation continues.
           </p>
@@ -1814,13 +1758,30 @@
         </div>
 
 
-        <div class="halo"></div>
+        <div class="holy-image">
+
+          <img
+            src="images/chib-13.jpeg"
+            alt="Mr. Tofu Ciabatta raising one paw"
+          >
+
+          <div
+            class="miracle-seal"
+            data-i18n-html="miracleSeal"
+          >
+            authenticated<br>
+            apparition
+          </div>
+
+        </div>
 
       </section>
 
 
 
-      <!-- PHOTOS -->
+      <!-- ==================================================
+           SIGHTINGS
+      ================================================== -->
 
       <section
         class="gallery"
@@ -1829,62 +1790,264 @@
 
         <div class="gallery-top">
 
+          <div>
 
-          <h2
-            data-i18n="sightings"
-          >
-            Sightings
-          </h2>
+            <div
+              class="section-label"
+              data-i18n="photographicRecord"
+            >
+              Photographic record
+            </div>
 
+            <h2 data-i18n="sightings">
+              Sightings
+            </h2>
 
-          <div
-            class="section-label"
-            data-i18n="photographicRecord"
-          >
-            Photographic record
           </div>
+
+          <p
+            class="gallery-intro"
+            data-i18n="galleryIntro"
+          >
+            A selection of verified encounters from Chib's known territory
+            and several supervised expeditions beyond it.
+          </p>
 
         </div>
 
 
 
-        <div class="gallery-grid">
+        <div class="photo-grid">
 
 
-          <div class="gallery-large">
+          <figure class="photo-card">
 
             <img
-              src="images/chib-3.png"
-              alt="Mr. Tofu Ciabatta with a pumpkin"
+              src="images/chib-4.jpeg"
+              alt="Chib overseeing furniture assembly instructions"
             >
 
-          </div>
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap4">
+                Industrial consultation
+              </strong>
+
+              <span>
+                004
+              </span>
+
+            </figcaption>
+
+          </figure>
 
 
-          <div class="gallery-stack">
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-5.jpeg"
+              alt="Chib meeting a LEGO hamster"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap5">
+                First contact
+              </strong>
+
+              <span>
+                005
+              </span>
+
+            </figcaption>
+
+          </figure>
 
 
-            <div class="gallery-small">
 
-              <img
-                src="images/chib-1.jpg"
-                alt="Mr. Tofu Ciabatta emerging from a wooden platform"
-              >
+          <figure class="photo-card">
 
-            </div>
+            <img
+              src="images/chib-6.jpeg"
+              alt="Chib drinking from the mushroom water station"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap6">
+                The mushroom spring
+              </strong>
+
+              <span>
+                006
+              </span>
+
+            </figcaption>
+
+          </figure>
 
 
-            <div class="gallery-small">
 
-              <img
-                src="images/chib-2.jpg"
-                alt="Portrait of Mr. Tofu Ciabatta"
-              >
+          <figure class="photo-card">
 
-            </div>
+            <img
+              src="images/chib-7.jpeg"
+              alt="Chib emerging from an orange ceramic hide"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap7">
+                Emergence from the orange citadel
+              </strong>
+
+              <span>
+                007
+              </span>
+
+            </figcaption>
+
+          </figure>
 
 
-          </div>
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-8.jpeg"
+              alt="Chib standing at the enclosure wall"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap8">
+                The western boundary
+              </strong>
+
+              <span>
+                008
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-9.jpeg"
+              alt="Chib sitting inside a coconut hide"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap9">
+                The coconut sanctuary
+              </strong>
+
+              <span>
+                009
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-15.jpeg"
+              alt="Chib sitting among pillows and plush toys"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap15">
+                Expedition to the softlands
+              </strong>
+
+              <span>
+                015
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-16.jpeg"
+              alt="Chib approaching a small celebratory snack"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap16">
+                Ceremonial provisions
+              </strong>
+
+              <span>
+                016
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-0.jpg"
+              alt="Chib standing in his enclosure"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap0">
+                Survey of the home province
+              </strong>
+
+              <span>
+                000
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-hero.jpeg"
+              alt="Mr. Tofu Ciabatta in his enclosure"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="capHero">
+                The official field portrait
+              </strong>
+
+              <span>
+                CHIB
+              </span>
+
+            </figcaption>
+
+          </figure>
+
 
         </div>
 
@@ -1894,10 +2057,7 @@
 
 
 
-    <!-- FOOTER -->
-
     <footer>
-
 
       <div>
 
@@ -1927,9 +2087,9 @@
 
 
 
-  <!-- ========================================
-       LANGUAGE SYSTEM
-  ======================================== -->
+  <!-- ==================================================
+       MANUAL LANGUAGE TOGGLE
+  ================================================== -->
 
   <script>
 
@@ -2017,14 +2177,14 @@
           "The gathering of provisions",
 
         obs2Copy:
-          "Seeds are inspected individually, transported with urgency, and subsequently stored in locations known only to Chib. Some are later rediscovered. Others enter legend.",
+          "Fresh vegetation is investigated at close range and transported according to priorities known only to Chib. Some provisions are eaten immediately. Others disappear into strategic reserves.",
 
 
         obs3Title:
           "Architecture beneath the surface",
 
         obs3Copy:
-          "Bedding is moved continuously according to principles not yet understood by outside observers. Entire districts may be reconstructed overnight.",
+          "Openings, tunnels and chambers are evaluated continuously. A circular access point may become a lookout post, an entrance or simply a place from which to contemplate the surrounding district.",
 
 
         sacredClassification:
@@ -2034,10 +2194,13 @@
           "Why Chib is considered a holy creature.",
 
         holyCopy1:
-          "Scholars remain divided. Some point to the immaculate white coat. Others cite the unexplained multiplication of hidden sunflower seeds, his capacity to vanish beneath apparently insufficient bedding, and the recurring restoration of tunnels believed to have collapsed permanently.",
+          "Scholars remain divided. Some point to the immaculate white coat. Others cite the unexplained multiplication of hidden sunflower seeds, his ability to appear suddenly above enclosure walls, and the recurring restoration of tunnels believed to have collapsed permanently.",
 
         holyCopy2:
           "Three miracles are currently recognized by tradition. Investigation continues.",
+
+        miracleSeal:
+          "authenticated<br>apparition",
 
 
         sightings:
@@ -2045,6 +2208,40 @@
 
         photographicRecord:
           "Photographic record",
+
+        galleryIntro:
+          "A selection of verified encounters from Chib's known territory and several supervised expeditions beyond it.",
+
+
+        cap4:
+          "Industrial consultation",
+
+        cap5:
+          "First contact",
+
+        cap6:
+          "The mushroom spring",
+
+        cap7:
+          "Emergence from the orange citadel",
+
+        cap8:
+          "The western boundary",
+
+        cap9:
+          "The coconut sanctuary",
+
+        cap15:
+          "Expedition to the softlands",
+
+        cap16:
+          "Ceremonial provisions",
+
+        cap0:
+          "Survey of the home province",
+
+        capHero:
+          "The official field portrait",
 
 
         footerSpecies:
@@ -2054,6 +2251,7 @@
           "The official record of Chib.<br>All miracles remain subject to peer review."
 
       },
+
 
 
       uk: {
@@ -2138,14 +2336,14 @@
           "Збір припасів",
 
         obs2Copy:
-          "Кожну насінину оглядають окремо, терміново транспортують, а потім зберігають у місцях, відомих лише Чібу. Деякі згодом знаходять знову. Інші стають легендою.",
+          "Свіжа зелень досліджується з близької відстані та транспортується відповідно до пріоритетів, відомих лише Чібу. Частину припасів з’їдають одразу. Інші зникають у стратегічних запасах.",
 
 
         obs3Title:
           "Архітектура під поверхнею",
 
         obs3Copy:
-          "Підстилка безперервно переміщується відповідно до принципів, яких зовнішні спостерігачі досі не розуміють. Цілі райони можуть бути перебудовані за одну ніч.",
+          "Отвори, тунелі та камери оцінюються безперервно. Круглий прохід може стати оглядовим пунктом, входом або просто місцем для споглядання навколишнього району.",
 
 
         sacredClassification:
@@ -2155,10 +2353,13 @@
           "Чому Чіба вважають священною істотою.",
 
         holyCopy1:
-          "Серед дослідників немає єдності. Одні вказують на бездоганно біле хутро. Інші — на незбагненне множення прихованого насіння соняшнику, його здатність зникати під, здавалося б, недостатнім шаром підстилки та регулярне відновлення тунелів, які вважалися остаточно зруйнованими.",
+          "Серед дослідників немає єдності. Одні вказують на бездоганно біле хутро. Інші — на незбагненне множення прихованого насіння соняшнику, його здатність раптово з’являтися над стінами вольєра та регулярне відновлення тунелів, які вважалися остаточно зруйнованими.",
 
         holyCopy2:
           "Традиція наразі визнає три чудеса. Дослідження триває.",
+
+        miracleSeal:
+          "підтверджена<br>поява",
 
 
         sightings:
@@ -2166,6 +2367,40 @@
 
         photographicRecord:
           "Фотографічний архів",
+
+        galleryIntro:
+          "Добірка підтверджених зустрічей у межах відомої території Чіба та кількох контрольованих експедицій за її межі.",
+
+
+        cap4:
+          "Промислова консультація",
+
+        cap5:
+          "Перший контакт",
+
+        cap6:
+          "Грибне джерело",
+
+        cap7:
+          "Вихід з помаранчевої цитаделі",
+
+        cap8:
+          "Західний кордон",
+
+        cap9:
+          "Кокосове святилище",
+
+        cap15:
+          "Експедиція до м’яких земель",
+
+        cap16:
+          "Церемоніальні припаси",
+
+        cap0:
+          "Огляд домашньої провінції",
+
+        capHero:
+          "Офіційний польовий портрет",
 
 
         footerSpecies:
@@ -2177,6 +2412,7 @@
       }
 
     };
+
 
 
     function setLanguage(language) {
@@ -2295,6 +2531,7 @@
     }
 
 
+
     let savedLanguage = "en";
 
 
@@ -2314,87 +2551,8 @@
 
     setLanguage(savedLanguage);
 
-<script>
-  const translations = {
-    /* keep your existing translations object exactly as-is */
-  };
+  </script>
 
-  function setLanguage(language) {
-    const selected = translations[language] ? language : "en";
-
-    document.documentElement.lang = selected === "uk" ? "uk" : "en";
-
-    document.querySelectorAll("[data-i18n]").forEach(element => {
-      const key = element.dataset.i18n;
-
-      if (translations[selected][key] !== undefined) {
-        element.textContent = translations[selected][key];
-      }
-    });
-
-    document.querySelectorAll("[data-i18n-html]").forEach(element => {
-      const key = element.dataset.i18nHtml;
-
-      if (translations[selected][key] !== undefined) {
-        element.innerHTML = translations[selected][key];
-      }
-    });
-
-    document.title = translations[selected].title;
-
-    document
-      .getElementById("meta-description")
-      .setAttribute(
-        "content",
-        translations[selected].description
-      );
-
-    document
-      .getElementById("lang-en")
-      .classList.toggle("active", selected === "en");
-
-    document
-      .getElementById("lang-ua")
-      .classList.toggle("active", selected === "uk");
-
-    document
-      .getElementById("lang-en")
-      .setAttribute(
-        "aria-pressed",
-        selected === "en" ? "true" : "false"
-      );
-
-    document
-      .getElementById("lang-ua")
-      .setAttribute(
-        "aria-pressed",
-        selected === "uk" ? "true" : "false"
-      );
-
-    try {
-      localStorage.setItem("chib-language", selected);
-    } catch (error) {}
-  }
-
-  const params = new URLSearchParams(window.location.search);
-  const forcedLanguage = params.get("lang");
-
-  let savedLanguage = "en";
-
-  try {
-    savedLanguage =
-      localStorage.getItem("chib-language") || "en";
-  } catch (error) {
-    savedLanguage = "en";
-  }
-
-  if (forcedLanguage === "uk" || forcedLanguage === "en") {
-    setLanguage(forcedLanguage);
-  } else {
-    setLanguage(savedLanguage);
-  }
-</script>
 
 </body>
-
 </html>
