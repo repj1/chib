@@ -60,72 +60,90 @@
 
     .hero {
       position: relative;
+
       width: 100%;
       height: min(900px, 100vh);
       min-height: 720px;
+
       overflow: hidden;
-      background: #f5f1eb;
+
+      background: #f7f5f0;
     }
 
+
+    /*
+      The new hero image is portrait-oriented.
+
+      Instead of forcing it across the entire browser,
+      it occupies the photographic right-hand portion.
+
+      This gives us a much more predictable crop.
+    */
 
     .hero-photo {
       position: absolute;
-      inset: 0;
+
+      top: 0;
+      right: 0;
+
+      width: 67%;
+      height: 100%;
+
       z-index: 0;
+
       overflow: hidden;
     }
 
 
-    /*
-      HERO CROP
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
 
-      Lower horizontal percentage = photograph moves
-      visually farther right.
+      display: block;
 
-      Scale is deliberately subtle so more of Chib
-      and the pumpkin remain visible.
-    */
+      object-fit: cover;
 
-.hero-photo img {
-  position: absolute;
+      /*
+        Chib sits relatively low in the original.
+        This keeps him prominently visible.
+      */
 
-  height: 108%;
-  width: auto;
-
-  top: -2%;
-  right: -7%;
-
-  display: block;
-
-  max-width: none;
-}
+      object-position: 52% 58%;
+    }
 
 
     /*
-      Soft transition from editorial cream
-      into the actual photograph.
+      Pale editorial background/fade.
+
+      Notice this now fades into the right-side
+      image instead of whitening the entire animal.
     */
 
     .hero-shade {
       position: absolute;
       inset: 0;
+
       z-index: 1;
+
+      pointer-events: none;
 
       background:
         linear-gradient(
           90deg,
-          rgba(248, 246, 241, 0.99) 0%,
-          rgba(248, 246, 241, 0.97) 22%,
-          rgba(248, 246, 241, 0.80) 34%,
-          rgba(248, 246, 241, 0.37) 46%,
-          rgba(248, 246, 241, 0.09) 58%,
-          rgba(248, 246, 241, 0) 68%
+          rgba(248,246,241,1) 0%,
+          rgba(248,246,241,1) 24%,
+          rgba(248,246,241,.98) 33%,
+          rgba(248,246,241,.82) 40%,
+          rgba(248,246,241,.48) 47%,
+          rgba(248,246,241,.16) 54%,
+          rgba(248,246,241,0) 62%
         );
     }
 
 
     .hero-content {
       position: relative;
+
       z-index: 2;
 
       width: min(1440px, 100%);
@@ -133,19 +151,20 @@
 
       margin: 0 auto;
 
-      padding: 42px 58px 54px;
+      padding:
+        42px 58px
+        54px;
 
       display: grid;
 
       grid-template-columns:
-        minmax(440px, 0.84fr)
-        1.16fr;
+        minmax(440px, .82fr)
+        1.18fr;
 
       grid-template-rows:
         auto
         1fr;
     }
-
 
 
     /* BRAND */
@@ -156,11 +175,11 @@
 
       font-size: 14px;
       font-weight: 600;
-      letter-spacing: 0.34em;
+
+      letter-spacing: .34em;
 
       color: #4b4844;
     }
-
 
 
     /* NAV + LANGUAGE */
@@ -188,12 +207,13 @@
 
 
     .hero-nav a {
-      color: rgba(255,255,255,0.94);
+      color: rgba(255,255,255,.96);
 
       text-shadow:
-        0 1px 14px rgba(0,0,0,0.24);
+        0 1px 14px rgba(0,0,0,.27);
 
-      transition: opacity .2s ease;
+      transition:
+        opacity .2s ease;
     }
 
 
@@ -201,9 +221,6 @@
       opacity: .65;
     }
 
-
-
-    /* LANGUAGE TOGGLE */
 
     .language-toggle {
       display: flex;
@@ -235,7 +252,8 @@
 
       letter-spacing: .08em;
 
-      color: rgba(255,255,255,.52);
+      color:
+        rgba(255,255,255,.52);
 
       cursor: pointer;
 
@@ -243,27 +261,27 @@
         0 1px 12px rgba(0,0,0,.22);
 
       transition:
-        color .2s ease,
-        opacity .2s ease;
+        color .2s ease;
     }
 
 
-    .language-toggle button:hover {
+    .language-toggle button:hover,
+    .language-toggle button.active {
       color: white;
     }
 
 
     .language-toggle button.active {
-      color: white;
       font-weight: 700;
     }
 
 
     .language-divider {
-      color: rgba(255,255,255,.45);
+      color:
+        rgba(255,255,255,.45);
+
       font-size: 11px;
     }
-
 
 
     /* HERO COPY */
@@ -286,9 +304,9 @@
       width: 58px;
       height: 1px;
 
-      background: #4f4b47;
-
       margin-bottom: 48px;
+
+      background: #4f4b47;
     }
 
 
@@ -296,11 +314,12 @@
       margin: 0;
 
       font-size:
-        clamp(100px, 10vw, 170px);
+        clamp(100px,10vw,170px);
 
       line-height: .72;
 
       font-weight: 400;
+
       letter-spacing: -.085em;
 
       color: #211f1d;
@@ -311,11 +330,12 @@
       margin-top: 30px;
 
       font-size:
-        clamp(28px, 3vw, 48px);
+        clamp(28px,3vw,48px);
 
       line-height: 1;
 
       font-weight: 300;
+
       letter-spacing: -.045em;
 
       color: #383531;
@@ -325,14 +345,15 @@
     .hero-description {
       max-width: 430px;
 
-      margin: 46px 0 0;
+      margin:
+        46px 0 0;
 
       font-size: 17px;
+
       line-height: 1.7;
 
       color: #5f5a55;
     }
-
 
 
     /* BUTTON */
@@ -353,10 +374,12 @@
       border-radius: 999px;
 
       display: flex;
+
       align-items: center;
       justify-content: space-between;
 
       text-transform: uppercase;
+
       letter-spacing: .20em;
 
       font-size: 12px;
@@ -370,6 +393,7 @@
 
     .hero-button:hover {
       background: #211f1d;
+
       color: white;
 
       transform:
@@ -379,9 +403,9 @@
 
     .hero-button .arrow {
       font-size: 24px;
+
       letter-spacing: 0;
     }
-
 
 
     /* HANDWRITTEN NOTE */
@@ -389,11 +413,11 @@
     .hero-note {
       position: absolute;
 
-      right: 13%;
-      top: 39%;
+      right: 8%;
+      top: 46%;
 
       color:
-        rgba(255,255,255,.95);
+        rgba(255,255,255,.96);
 
       font-family:
         "Segoe Print",
@@ -401,16 +425,15 @@
         cursive;
 
       font-size:
-        clamp(20px, 2vw, 29px);
+        clamp(19px,1.8vw,28px);
 
       line-height: 1.07;
 
       transform:
-        rotate(-7deg);
+        rotate(-6deg);
 
       text-shadow:
-        0 1px 7px
-        rgba(72,45,25,.18);
+        0 2px 9px rgba(0,0,0,.22);
     }
 
 
@@ -421,7 +444,7 @@
 
     .hero-heart {
       margin-top: 12px;
-      margin-left: 52px;
+      margin-left: 50px;
 
       font-size: 30px;
     }
@@ -441,7 +464,6 @@
 
       margin: 0 auto;
     }
-
 
 
     /* INTRO */
@@ -465,25 +487,24 @@
     .section-label {
       font-size: 12px;
 
-      text-transform:
-        uppercase;
+      text-transform: uppercase;
 
-      letter-spacing:
-        .16em;
+      letter-spacing: .16em;
 
-      color:
-        var(--muted);
+      color: var(--muted);
     }
 
 
     .intro-copy {
       max-width: 950px;
+
       margin: 0;
 
       font-size:
         clamp(34px,4.2vw,64px);
 
       line-height: 1.02;
+
       letter-spacing: -.045em;
 
       font-weight: 500;
@@ -492,9 +513,9 @@
 
     .intro-copy em {
       color: var(--accent);
+
       font-style: normal;
     }
-
 
 
     /* FACTS */
@@ -534,19 +555,17 @@
 
       font-size: 12px;
 
-      text-transform:
-        uppercase;
+      text-transform: uppercase;
 
-      letter-spacing:
-        .14em;
+      letter-spacing: .14em;
 
-      color:
-        var(--muted);
+      color: var(--muted);
     }
 
 
     .fact-value {
       font-size: 20px;
+
       letter-spacing: -.02em;
     }
 
@@ -565,9 +584,7 @@
     .field-header {
       display: flex;
 
-      justify-content:
-        space-between;
-
+      justify-content: space-between;
       align-items: end;
 
       gap: 40px;
@@ -583,6 +600,7 @@
         clamp(52px,7vw,100px);
 
       line-height: .9;
+
       letter-spacing: -.06em;
 
       font-weight: 600;
@@ -591,11 +609,13 @@
 
     .field-header p {
       max-width: 400px;
+
       margin: 0;
 
       color: var(--muted);
 
       line-height: 1.6;
+
       font-size: 15px;
     }
 
@@ -621,11 +641,9 @@
     .observation-number {
       font-size: 13px;
 
-      color:
-        var(--accent);
+      color: var(--accent);
 
-      letter-spacing:
-        .12em;
+      letter-spacing: .12em;
     }
 
 
@@ -633,6 +651,7 @@
       margin: 0;
 
       font-size: 30px;
+
       letter-spacing: -.035em;
 
       font-weight: 500;
@@ -642,10 +661,10 @@
     .observation p {
       margin: 0;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
       line-height: 1.65;
+
       font-size: 15px;
     }
 
@@ -690,12 +709,14 @@
 
     .holy h2 {
       max-width: 620px;
+
       margin: 0;
 
       font-size:
         clamp(52px,6vw,88px);
 
       line-height: .95;
+
       letter-spacing: -.055em;
 
       font-weight: 500;
@@ -710,12 +731,10 @@
       color: #c8c5bf;
 
       font-size: 17px;
+
       line-height: 1.7;
     }
 
-
-
-    /* HALO */
 
     .halo {
       min-height: 560px;
@@ -737,8 +756,7 @@
 
       border-radius: 50%;
 
-      background:
-        var(--accent);
+      background: var(--accent);
 
       position: absolute;
     }
@@ -756,17 +774,15 @@
 
       font-weight: 700;
 
-      letter-spacing:
-        -.08em;
+      letter-spacing: -.08em;
 
-      color:
-        var(--white);
+      color: var(--white);
     }
 
 
 
     /* ========================================
-       GALLERY
+       GALLERY / SIGHTINGS
     ======================================== */
 
     .gallery {
@@ -778,9 +794,7 @@
     .gallery-top {
       display: flex;
 
-      justify-content:
-        space-between;
-
+      justify-content: space-between;
       align-items: end;
 
       margin-bottom: 40px;
@@ -795,8 +809,7 @@
 
       line-height: .9;
 
-      letter-spacing:
-        -.055em;
+      letter-spacing: -.055em;
 
       font-weight: 600;
     }
@@ -806,7 +819,7 @@
       display: grid;
 
       grid-template-columns:
-        1.4fr .6fr;
+        1.35fr .65fr;
 
       gap: 18px;
     }
@@ -814,31 +827,67 @@
 
     .gallery-large,
     .gallery-small {
-
-      background:
-        linear-gradient(
-          145deg,
-          #e5e1d9,
-          #f3f0e9
-        );
-
       overflow: hidden;
+
+      background: #ece8df;
     }
 
 
     .gallery-large {
-      min-height: 700px;
+      min-height: 720px;
     }
 
 
     .gallery-stack {
       display: grid;
+
+      grid-template-rows:
+        1fr 1fr;
+
       gap: 18px;
     }
 
 
     .gallery-small {
-      min-height: 340px;
+      min-height: 351px;
+    }
+
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+      transition:
+        transform .45s ease;
+    }
+
+
+    .gallery-large img {
+      object-position:
+        50% 48%;
+    }
+
+
+    .gallery-small:first-child img {
+      object-position:
+        50% 45%;
+    }
+
+
+    .gallery-small:last-child img {
+      object-position:
+        50% 42%;
+    }
+
+
+    .gallery-large:hover img,
+    .gallery-small:hover img {
+      transform:
+        scale(1.015);
     }
 
 
@@ -856,21 +905,18 @@
 
       display: flex;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
 
       gap: 32px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
       font-size: 13px;
     }
 
 
     .footer-name {
-      color:
-        var(--text);
+      color: var(--text);
 
       font-weight: 600;
     }
@@ -898,7 +944,9 @@
 
     html[lang="uk"] .hero-button {
       width: 270px;
+
       letter-spacing: .11em;
+
       font-size: 11px;
     }
 
@@ -923,14 +971,28 @@
 
       .hero {
         height: 900px;
+
         min-height: 0;
       }
 
 
-      .hero-photo img {
-        object-position: 44% 51%;
+      /*
+        On tablet/mobile, let the photo once again
+        fill the whole background.
 
-        transform: scale(1.035);
+        The original portrait ratio suits this much
+        better than desktop.
+      */
+
+      .hero-photo {
+        width: 100%;
+        height: 100%;
+      }
+
+
+      .hero-photo img {
+        object-position:
+          50% 59%;
       }
 
 
@@ -938,11 +1000,12 @@
         background:
           linear-gradient(
             180deg,
-            rgba(248,246,241,.98) 0%,
-            rgba(248,246,241,.94) 26%,
-            rgba(248,246,241,.68) 38%,
-            rgba(248,246,241,.15) 58%,
-            rgba(248,246,241,0) 73%
+            rgba(248,246,241,.99) 0%,
+            rgba(248,246,241,.96) 24%,
+            rgba(248,246,241,.74) 38%,
+            rgba(248,246,241,.23) 55%,
+            rgba(248,246,241,.03) 70%,
+            rgba(248,246,241,0) 78%
           );
       }
 
@@ -980,6 +1043,7 @@
 
       .language-toggle {
         border-left: 0;
+
         padding-left: 0;
 
         gap: 6px;
@@ -994,11 +1058,7 @@
       }
 
 
-      .language-toggle button.active {
-        color: #292724;
-      }
-
-
+      .language-toggle button.active,
       .language-toggle button:hover {
         color: #292724;
       }
@@ -1065,7 +1125,7 @@
         top: auto;
 
         right: 24px;
-        bottom: 90px;
+        bottom: 84px;
 
         font-size: 19px;
       }
@@ -1132,10 +1192,23 @@
       }
 
 
+      .gallery-large {
+        min-height: 620px;
+      }
+
+
       .gallery-stack {
         grid-template-columns:
           1fr 1fr;
+
+        grid-template-rows: none;
       }
+
+
+      .gallery-small {
+        min-height: 400px;
+      }
+
     }
 
 
@@ -1161,9 +1234,8 @@
 
 
       .hero-photo img {
-        object-position: 46% 54%;
-
-        transform: scale(1.025);
+        object-position:
+          51% 60%;
       }
 
 
@@ -1210,14 +1282,17 @@
 
       .hero-description {
         font-size: 14px;
+
         line-height: 1.6;
+
+        max-width: 330px;
       }
 
 
       .hero-note {
-        right: 20px;
+        right: 18px;
 
-        bottom: 72px;
+        bottom: 58px;
       }
 
 
@@ -1261,16 +1336,26 @@
       }
 
 
+      .gallery-large {
+        min-height: 520px;
+      }
+
+
       .gallery-stack {
         grid-template-columns:
           1fr;
       }
 
 
-      footer {
-        flex-direction:
-          column;
+      .gallery-small {
+        min-height: 470px;
       }
+
+
+      footer {
+        flex-direction: column;
+      }
+
     }
 
   </style>
@@ -1287,13 +1372,11 @@
 
   <section class="hero">
 
-
     <div class="hero-photo">
 
       <img
-        src="images/chib-hero.png"
-        alt="Mr. Tofu Ciabatta holding his evening winnings"
-        id="hero-image"
+        src="images/chib-hero.jpg"
+        alt="Mr. Tofu Ciabatta standing in his enclosure"
       >
 
     </div>
@@ -1323,6 +1406,7 @@
             About
           </a>
 
+
           <a
             href="#observations"
             data-i18n="navChronicles"
@@ -1330,12 +1414,14 @@
             Chronicles
           </a>
 
+
           <a
             href="#miracles"
             data-i18n="navMiracles"
           >
             Miracles
           </a>
+
 
           <a
             href="#photos"
@@ -1363,9 +1449,11 @@
             EN
           </button>
 
+
           <span class="language-divider">
             /
           </span>
+
 
           <button
             type="button"
@@ -1385,6 +1473,7 @@
       <div class="hero-main">
 
         <div class="hero-title-wrap">
+
 
           <div class="hero-rule"></div>
 
@@ -1458,7 +1547,6 @@
 
 
 
-
   <!-- ========================================
        REST OF SITE
   ======================================== -->
@@ -1468,14 +1556,12 @@
     <main>
 
 
-
       <!-- SPECIES -->
 
       <section
         class="intro"
         id="species"
       >
-
 
         <div
           class="section-label"
@@ -1495,16 +1581,13 @@
           Apparently holy.
         </p>
 
-
       </section>
-
 
 
 
       <!-- FACTS -->
 
       <section class="facts">
-
 
         <div class="fact">
 
@@ -1522,7 +1605,6 @@
         </div>
 
 
-
         <div class="fact">
 
           <span
@@ -1537,7 +1619,6 @@
           </span>
 
         </div>
-
 
 
         <div class="fact">
@@ -1559,7 +1640,6 @@
         </div>
 
 
-
         <div class="fact">
 
           <span
@@ -1578,9 +1658,7 @@
 
         </div>
 
-
       </section>
-
 
 
 
@@ -1590,7 +1668,6 @@
         class="field-notes"
         id="observations"
       >
-
 
         <div class="field-header">
 
@@ -1606,18 +1683,14 @@
           <p
             data-i18n="fieldIntro"
           >
-            Observations collected from inside the known range
-            of Mr. Tofu Ciabatta.
+            Observations collected from inside the known range of Mr. Tofu Ciabatta.
           </p>
-
 
         </div>
 
 
 
-
         <article class="observation">
-
 
           <div class="observation-number">
             001
@@ -1634,20 +1707,16 @@
           <p
             data-i18n="obs1Copy"
           >
-            Shortly after dark, Chib begins a sustained journey
-            across the rotating plains. The landscape moves beneath
-            him for considerable distances, while Chib himself
+            Shortly after dark, Chib begins a sustained journey across the rotating plains.
+            The landscape moves beneath him for considerable distances, while Chib himself
             remains geographically close to home.
           </p>
-
 
         </article>
 
 
 
-
         <article class="observation">
-
 
           <div class="observation-number">
             002
@@ -1664,20 +1733,16 @@
           <p
             data-i18n="obs2Copy"
           >
-            Seeds are inspected individually, transported with
-            urgency, and subsequently stored in locations known
-            only to Chib. Some are later rediscovered. Others
-            enter legend.
+            Seeds are inspected individually, transported with urgency, and subsequently
+            stored in locations known only to Chib. Some are later rediscovered.
+            Others enter legend.
           </p>
-
 
         </article>
 
 
 
-
         <article class="observation">
-
 
           <div class="observation-number">
             003
@@ -1694,17 +1759,13 @@
           <p
             data-i18n="obs3Copy"
           >
-            Bedding is moved continuously according to principles
-            not yet understood by outside observers. Entire districts
-            may be reconstructed overnight.
+            Bedding is moved continuously according to principles not yet understood
+            by outside observers. Entire districts may be reconstructed overnight.
           </p>
-
 
         </article>
 
-
       </section>
-
 
 
 
@@ -1714,7 +1775,6 @@
         class="holy"
         id="miracles"
       >
-
 
         <div class="holy-copy">
 
@@ -1737,12 +1797,10 @@
           <p
             data-i18n="holyCopy1"
           >
-            Scholars remain divided. Some point to the immaculate
-            white coat. Others cite the unexplained multiplication
-            of hidden sunflower seeds, his capacity to vanish beneath
-            apparently insufficient bedding, and the recurring
-            restoration of tunnels believed to have collapsed
-            permanently.
+            Scholars remain divided. Some point to the immaculate white coat.
+            Others cite the unexplained multiplication of hidden sunflower seeds,
+            his capacity to vanish beneath apparently insufficient bedding,
+            and the recurring restoration of tunnels believed to have collapsed permanently.
           </p>
 
 
@@ -1753,15 +1811,12 @@
             Investigation continues.
           </p>
 
-
         </div>
 
 
         <div class="halo"></div>
 
-
       </section>
-
 
 
 
@@ -1771,7 +1826,6 @@
         class="gallery"
         id="photos"
       >
-
 
         <div class="gallery-top">
 
@@ -1790,7 +1844,6 @@
             Photographic record
           </div>
 
-
         </div>
 
 
@@ -1798,26 +1851,46 @@
         <div class="gallery-grid">
 
 
-          <div class="gallery-large"></div>
+          <div class="gallery-large">
 
-
-          <div class="gallery-stack">
-
-            <div class="gallery-small"></div>
-
-            <div class="gallery-small"></div>
+            <img
+              src="images/chib-3.png"
+              alt="Mr. Tofu Ciabatta with a pumpkin"
+            >
 
           </div>
 
 
-        </div>
+          <div class="gallery-stack">
 
+
+            <div class="gallery-small">
+
+              <img
+                src="images/chib-1.jpg"
+                alt="Mr. Tofu Ciabatta emerging from a wooden platform"
+              >
+
+            </div>
+
+
+            <div class="gallery-small">
+
+              <img
+                src="images/chib-2.jpg"
+                alt="Portrait of Mr. Tofu Ciabatta"
+              >
+
+            </div>
+
+
+          </div>
+
+        </div>
 
       </section>
 
-
     </main>
-
 
 
 
@@ -1841,7 +1914,6 @@
       </div>
 
 
-
       <div
         data-i18n-html="footerCopy"
       >
@@ -1849,12 +1921,9 @@
         All miracles remain subject to peer review.
       </div>
 
-
     </footer>
 
-
   </div>
-
 
 
 
@@ -1987,7 +2056,6 @@
       },
 
 
-
       uk: {
 
         title:
@@ -2111,7 +2179,6 @@
     };
 
 
-
     function setLanguage(language) {
 
       const selected =
@@ -2226,7 +2293,6 @@
       }
 
     }
-
 
 
     let savedLanguage = "en";
