@@ -1,0 +1,2760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Chib — Mr. Tofu Ciabatta</title>
+
+  <meta
+    id="meta-description"
+    name="description"
+    content="The official record of Mr. Tofu Ciabatta, known as Chib."
+  >
+
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --text: #151515;
+      --muted: #77736d;
+      --line: #deddd8;
+      --accent: #d87b36;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+
+    /* ==================================================
+       HERO
+    ================================================== */
+
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 760px;
+      height: min(900px, 100vh);
+      overflow: hidden;
+
+      background: #f6f4ef;
+    }
+    
+    .hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.28) 0%,
+      rgba(0, 0, 0, 0.14) 38%,
+      rgba(0, 0, 0, 0.04) 72%,
+      rgba(0, 0, 0, 0) 100%
+    );
+}
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+
+      object-fit: cover;
+      object-position: 54% 56%;
+    }
+
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(248,246,241,1) 0%,
+          rgba(248,246,241,1) 23%,
+          rgba(248,246,241,.97) 31%,
+          rgba(248,246,241,.78) 40%,
+          rgba(248,246,241,.42) 49%,
+          rgba(248,246,241,.13) 58%,
+          rgba(248,246,241,0) 67%
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      width: min(1440px, 100%);
+      height: 100%;
+
+      margin: 0 auto;
+      padding: 42px 58px 54px;
+
+      display: grid;
+      grid-template-columns:
+        minmax(430px, .82fr)
+        1.18fr;
+
+      grid-template-rows:
+        auto
+        1fr;
+    }
+
+    .hero-brand {
+      grid-column: 1;
+      grid-row: 1;
+
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .34em;
+
+      color: #4b4844;
+    }
+
+    .hero-tools {
+      grid-column: 2;
+      grid-row: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      gap: 36px;
+    }
+
+    .hero-nav {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+
+      font-size: 14px;
+    }
+
+    .hero-nav a {
+      color: rgba(255,255,255,.96);
+
+      text-shadow:
+        0 1px 14px rgba(0,0,0,.30);
+
+      transition: opacity .2s ease;
+    }
+
+    .hero-nav a:hover {
+      opacity: .65;
+    }
+
+    .language-toggle {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      padding-left: 17px;
+
+      border-left:
+        1px solid rgba(255,255,255,.38);
+
+      white-space: nowrap;
+    }
+
+    .language-toggle button {
+      appearance: none;
+
+      border: 0;
+      padding: 0;
+
+      background: transparent;
+
+      font: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .08em;
+
+      color: rgba(255,255,255,.55);
+
+      cursor: pointer;
+
+      text-shadow:
+        0 1px 12px rgba(0,0,0,.22);
+    }
+
+    .language-toggle button.active,
+    .language-toggle button:hover {
+      color: #fff;
+    }
+
+    .language-toggle button.active {
+      font-weight: 700;
+    }
+
+    .language-divider {
+      font-size: 11px;
+      color: rgba(255,255,255,.45);
+    }
+
+    .hero-main {
+      grid-column: 1;
+      grid-row: 2;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-title-wrap {
+      margin-top: -10px;
+    }
+
+    .hero-rule {
+      width: 58px;
+      height: 1px;
+
+      margin-bottom: 48px;
+
+      background: #4f4b47;
+    }
+
+    .hero h1 {
+      margin: 0;
+
+      font-size:
+        clamp(100px,10vw,170px);
+
+      line-height: .72;
+
+      font-weight: 400;
+      letter-spacing: -.085em;
+
+      color: #211f1d;
+    }
+
+    .formal-name {
+      margin-top: 30px;
+
+      font-size:
+        clamp(28px,3vw,48px);
+
+      line-height: 1;
+
+      font-weight: 300;
+      letter-spacing: -.045em;
+
+      color: #383531;
+    }
+
+    .hero-description {
+      max-width: 430px;
+
+      margin-top: 46px;
+
+      font-size: 17px;
+      line-height: 1.7;
+
+      color: #5f5a55;
+    }
+
+    .hero-button {
+      width: 245px;
+      height: 62px;
+
+      margin-top: 36px;
+      padding: 0 24px 0 32px;
+
+      border:
+        1px solid #77716a;
+
+      border-radius: 999px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      text-transform: uppercase;
+      letter-spacing: .20em;
+
+      font-size: 12px;
+
+      transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+    }
+
+    .hero-button:hover {
+      background: #211f1d;
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+    .hero-button .arrow {
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    .hero-note {
+      position: absolute;
+
+      right: 8%;
+      top: 47%;
+
+      color: rgba(255,255,255,.96);
+
+      font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        cursive;
+
+      font-size:
+        clamp(19px,1.8vw,28px);
+
+      line-height: 1.07;
+
+      transform: rotate(-6deg);
+
+      text-shadow:
+        0 2px 10px rgba(0,0,0,.22);
+    }
+
+    .hero-note span {
+      display: block;
+    }
+
+    .hero-heart {
+      margin-top: 12px;
+      margin-left: 50px;
+
+      font-size: 30px;
+    }
+
+
+    /* ==================================================
+       GLOBAL CONTENT
+    ================================================== */
+
+    .site {
+      width:
+        min(
+          1380px,
+          calc(100% - 48px)
+        );
+
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+
+      text-transform: uppercase;
+      letter-spacing: .16em;
+
+      color: var(--muted);
+    }
+
+
+    /* ==================================================
+       SPECIES
+    ================================================== */
+
+    .intro {
+      padding: 130px 0;
+
+      display: grid;
+      grid-template-columns: .68fr 1.32fr;
+
+      gap: 70px;
+
+      border-top:
+        1px solid var(--line);
+    }
+
+    .intro-right {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+
+      gap: 60px;
+      align-items: center;
+    }
+
+    .intro-copy {
+      max-width: 850px;
+      margin: 0;
+
+      font-size:
+        clamp(34px,4vw,62px);
+
+      line-height: 1.02;
+
+      letter-spacing: -.045em;
+      font-weight: 500;
+    }
+
+    .intro-copy em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .species-portrait {
+      height: 390px;
+      overflow: hidden;
+
+      background: #ece9e2;
+    }
+
+    .species-portrait img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      object-position: 50% 46%;
+
+      display: block;
+    }
+
+
+    /* ==================================================
+       FACTS
+    ================================================== */
+
+    .facts {
+      display: grid;
+      grid-template-columns:
+        repeat(4,1fr);
+
+      border-top:
+        1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
+    }
+
+    .fact {
+      padding: 34px 0;
+    }
+
+    .fact + .fact {
+      padding-left: 32px;
+
+      border-left:
+        1px solid var(--line);
+    }
+
+    .fact-label {
+      display: block;
+
+      margin-bottom: 9px;
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+      letter-spacing: .14em;
+
+      color: var(--muted);
+    }
+
+    .fact-value {
+      font-size: 20px;
+      letter-spacing: -.02em;
+    }
+
+
+    .secondary-note {
+      margin: 54px 0 10px auto;
+      width: fit-content;
+      padding-right: 7%;
+      color: var(--accent);
+      font-family: "Segoe Print", "Bradley Hand", cursive;
+      font-size: clamp(22px,2vw,30px);
+      line-height: 1.08;
+      transform: rotate(-4deg);
+    }
+
+    .extra-facts {
+      margin: 30px 0 120px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .extra-fact {
+      padding: 24px 22px 24px 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .extra-fact:nth-child(4n) { border-right: 0; padding-left: 22px; }
+    .extra-fact:nth-child(n+5) { border-top: 1px solid var(--line); }
+
+    .extra-fact strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .extra-fact span {
+      font-size: 18px;
+      letter-spacing: -.02em;
+    }
+
+    .dietary {
+      margin: 0 0 130px;
+      display: grid;
+      grid-template-columns: .72fr 1.28fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .dietary-copy h2,
+    .anatomy h2 {
+      margin: 0 0 24px;
+      font-size: clamp(44px,5vw,74px);
+      line-height: .95;
+      letter-spacing: -.05em;
+      font-weight: 500;
+    }
+
+    .dietary-copy p,
+    .anatomy p {
+      margin: 0 0 18px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .anatomy {
+      margin: 0 0 130px;
+      padding-top: 70px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ==================================================
+       FIELD NOTES
+    ================================================== */
+
+    .field-notes {
+      padding: 130px 0;
+    }
+
+    .field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      gap: 40px;
+
+      margin-bottom: 64px;
+    }
+
+    .field-header h2 {
+      margin: 0;
+
+      font-size:
+        clamp(52px,7vw,100px);
+
+      line-height: .9;
+
+      letter-spacing: -.06em;
+      font-weight: 600;
+    }
+
+    .field-header p {
+      max-width: 400px;
+      margin: 0;
+
+      color: var(--muted);
+
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .observation {
+      display: grid;
+
+      grid-template-columns:
+        90px
+        .9fr
+        1fr
+        260px;
+
+      gap: 36px;
+
+      align-items: center;
+
+      padding: 36px 0;
+
+      border-top:
+        1px solid var(--line);
+    }
+
+    .observation-number {
+      font-size: 13px;
+
+      color: var(--accent);
+
+      letter-spacing: .12em;
+    }
+
+    .observation h3 {
+      margin: 0;
+
+      font-size: 30px;
+
+      letter-spacing: -.035em;
+      font-weight: 500;
+    }
+
+    .observation p {
+      margin: 0;
+
+      color: var(--muted);
+
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .observation-image {
+      height: 190px;
+      overflow: hidden;
+
+      background: #ece8df;
+    }
+
+    .observation-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      display: block;
+    }
+
+    .observation:nth-of-type(1) .observation-image img {
+      object-position: 50% 48%;
+    }
+
+    .observation:nth-of-type(2) .observation-image img {
+      object-position: 50% 57%;
+    }
+
+    .observation:nth-of-type(3) .observation-image img {
+      object-position: 50% 44%;
+    }
+
+
+    /* ==================================================
+       MIRACLES
+    ================================================== */
+
+    .holy {
+      margin:
+        40px 0 130px;
+
+      min-height: 600px;
+
+      display: grid;
+      grid-template-columns:
+        1.05fr .95fr;
+
+      align-items: stretch;
+
+      background: var(--text);
+      color: var(--white);
+    }
+
+    .holy-copy {
+      padding: 76px;
+    }
+
+    .holy .section-label {
+      margin-bottom: 30px;
+
+      color: #aaa69f;
+    }
+
+    .holy h2 {
+      max-width: 620px;
+      margin: 0;
+
+      font-size:
+        clamp(52px,6vw,88px);
+
+      line-height: .95;
+
+      letter-spacing: -.055em;
+      font-weight: 500;
+    }
+
+    .holy p {
+      max-width: 570px;
+
+      margin-top: 28px;
+
+      color: #c8c5bf;
+
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .holy-image {
+      position: relative;
+
+      min-height: 600px;
+
+      overflow: hidden;
+    }
+
+    .holy-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      object-position: 50% 38%;
+
+      display: block;
+    }
+
+    .holy-image::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(21,21,21,.86) 0%,
+          rgba(21,21,21,.28) 28%,
+          rgba(21,21,21,0) 62%
+        );
+    }
+
+    .miracle-seal {
+      position: absolute;
+
+      right: 34px;
+      bottom: 32px;
+
+      z-index: 2;
+
+      width: 126px;
+      height: 126px;
+
+      border:
+        1px solid rgba(255,255,255,.58);
+
+      border-radius: 50%;
+
+      display: grid;
+      place-items: center;
+
+      text-align: center;
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+      letter-spacing: .15em;
+
+      line-height: 1.45;
+
+      color: rgba(255,255,255,.9);
+
+      transform: rotate(-7deg);
+    }
+
+
+    /* ==================================================
+       SIGHTINGS
+    ================================================== */
+
+    .gallery {
+      padding:
+        0 0 130px;
+    }
+
+    .gallery-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      margin-bottom: 40px;
+    }
+
+    .gallery-top h2 {
+      margin: 0;
+
+      font-size:
+        clamp(48px,6vw,88px);
+
+      line-height: .9;
+
+      letter-spacing: -.055em;
+      font-weight: 600;
+    }
+
+    .gallery-intro {
+      max-width: 420px;
+
+      margin: 0;
+
+      font-size: 14px;
+      line-height: 1.65;
+
+      color: var(--muted);
+    }
+
+
+    .photo-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(12,1fr);
+
+      gap: 16px;
+    }
+
+    .photo-card {
+      position: relative;
+
+      min-height: 360px;
+
+      overflow: hidden;
+
+      background: #ebe7df;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+      transition:
+        transform .5s ease;
+    }
+
+    .photo-card:hover img {
+      transform:
+        scale(1.018);
+    }
+
+    .photo-caption {
+      position: absolute;
+
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      gap: 20px;
+
+      color: white;
+
+      text-shadow:
+        0 1px 9px rgba(0,0,0,.55);
+
+      font-size: 12px;
+    }
+
+    .photo-caption strong {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .photo-card::after {
+      content: "";
+
+      position: absolute;
+      inset: 55% 0 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,0),
+          rgba(0,0,0,.34)
+        );
+    }
+
+    .photo-caption {
+      z-index: 2;
+    }
+
+
+    /* asymmetrical masonry-ish desktop layout */
+
+    .photo-card:nth-child(1) {
+      grid-column: span 7;
+      min-height: 620px;
+    }
+
+    .photo-card:nth-child(2) {
+      grid-column: span 5;
+      min-height: 620px;
+    }
+
+    .photo-card:nth-child(3) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(4) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(5) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(6) {
+      grid-column: span 5;
+      min-height: 540px;
+    }
+
+    .photo-card:nth-child(7) {
+      grid-column: span 7;
+      min-height: 540px;
+    }
+
+    .photo-card:nth-child(8) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(9) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+    .photo-card:nth-child(10) {
+      grid-column: span 4;
+      min-height: 470px;
+    }
+
+
+    /* ==================================================
+       FOOTER
+    ================================================== */
+
+    footer {
+      padding:
+        42px 0 56px;
+
+      display: flex;
+      justify-content: space-between;
+
+      gap: 32px;
+
+      border-top:
+        1px solid var(--line);
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .footer-name {
+      color: var(--text);
+
+      font-weight: 600;
+    }
+
+
+    /* ==================================================
+       UKRAINIAN
+    ================================================== */
+
+    html[lang="uk"] .hero-nav {
+      gap: 28px;
+    }
+
+    html[lang="uk"] .hero-tools {
+      gap: 26px;
+    }
+
+    html[lang="uk"] .hero-description {
+      max-width: 460px;
+    }
+
+    html[lang="uk"] .hero-button {
+      width: 272px;
+
+      letter-spacing: .10em;
+      font-size: 11px;
+    }
+
+    html[lang="uk"] .intro-copy {
+      font-size:
+        clamp(32px,3.8vw,58px);
+    }
+
+    html[lang="uk"] .fact-value {
+      font-size: 19px;
+    }
+
+
+    /* ==================================================
+       TABLET
+    ================================================== */
+
+    @media (max-width: 980px) {
+
+      .hero {
+        height: 900px;
+        min-height: 0;
+      }
+
+      .hero-photo img {
+        object-position: 50% 57%;
+      }
+
+      .hero-shade {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(248,246,241,.99) 0%,
+            rgba(248,246,241,.97) 24%,
+            rgba(248,246,241,.77) 38%,
+            rgba(248,246,241,.27) 55%,
+            rgba(248,246,241,.03) 70%,
+            rgba(248,246,241,0) 78%
+          );
+      }
+
+      .hero-content {
+        display: block;
+
+        padding:
+          28px 26px;
+      }
+
+      .hero-brand {
+        position: absolute;
+
+        top: 28px;
+        left: 26px;
+      }
+
+      .hero-tools {
+        position: absolute;
+
+        top: 27px;
+        right: 26px;
+      }
+
+      .hero-nav {
+        display: none;
+      }
+
+      .language-toggle {
+        padding-left: 0;
+
+        border-left: 0;
+      }
+
+      .language-toggle button {
+        color:
+          rgba(45,43,40,.42);
+
+        text-shadow: none;
+      }
+
+      .language-toggle button.active,
+      .language-toggle button:hover {
+        color: #292724;
+      }
+
+      .language-divider {
+        color:
+          rgba(45,43,40,.32);
+      }
+
+      .hero-main {
+        display: block;
+
+        padding-top: 125px;
+      }
+
+      .hero-rule {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size:
+          clamp(88px,26vw,130px);
+      }
+
+      .formal-name {
+        margin-top: 24px;
+
+        font-size: 28px;
+      }
+
+      .hero-description {
+        margin-top: 28px;
+
+        font-size: 15px;
+      }
+
+      .hero-button {
+        width: 205px;
+        height: 56px;
+
+        margin-top: 26px;
+
+        font-size: 11px;
+      }
+
+      html[lang="uk"] .hero-button {
+        width: 250px;
+      }
+
+      .hero-note {
+        top: auto;
+        right: 24px;
+        bottom: 78px;
+
+        font-size: 19px;
+      }
+
+      .intro {
+        grid-template-columns:
+          1fr;
+
+        gap: 30px;
+      }
+
+      .intro-right {
+        grid-template-columns:
+          1fr 260px;
+
+        gap: 30px;
+      }
+
+      .facts {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .fact:nth-child(3) {
+        border-left: 0;
+
+        border-top:
+          1px solid var(--line);
+      }
+
+      .fact:nth-child(4) {
+        border-top:
+          1px solid var(--line);
+      }
+
+      .field-header {
+        display: block;
+      }
+
+      .field-header p {
+        margin-top: 24px;
+      }
+
+      .observation {
+        grid-template-columns:
+          60px 1fr;
+
+        gap: 22px;
+      }
+
+      .observation p,
+      .observation-image {
+        grid-column: 2;
+      }
+
+      .observation-image {
+        height: 360px;
+      }
+
+      .holy {
+        grid-template-columns:
+          1fr;
+      }
+
+      .holy-image {
+        min-height: 500px;
+      }
+
+      .photo-card:nth-child(n) {
+        grid-column: span 6;
+
+        min-height: 500px;
+      }
+
+      .extra-facts {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .extra-fact:nth-child(2n) {
+        border-right: 0;
+        padding-left: 22px;
+      }
+
+      .extra-fact:nth-child(n+3) {
+        border-top: 1px solid var(--line);
+      }
+
+      .dietary {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+
+    /* ==================================================
+       MOBILE
+    ================================================== */
+
+    @media (max-width: 620px) {
+
+      .site {
+        width:
+          min(
+            100% - 28px,
+            1380px
+          );
+      }
+
+      .hero {
+        height: 850px;
+      }
+
+      .hero-photo img {
+        object-position: 50% 59%;
+      }
+
+      .hero-content {
+        padding:
+          24px 20px;
+      }
+
+      .hero-brand {
+        top: 24px;
+        left: 20px;
+
+        font-size: 12px;
+      }
+
+      .hero-tools {
+        top: 23px;
+        right: 20px;
+      }
+
+      .hero-main {
+        padding-top: 115px;
+      }
+
+      .hero h1 {
+        font-size:
+          clamp(84px,27vw,120px);
+      }
+
+      .formal-name {
+        font-size: 25px;
+      }
+
+      .hero-description {
+        max-width: 330px;
+
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .hero-note {
+        right: 18px;
+        bottom: 56px;
+      }
+
+      .intro-right {
+        grid-template-columns:
+          1fr;
+      }
+
+      .species-portrait {
+        height: 460px;
+      }
+
+      .facts {
+        grid-template-columns:
+          1fr;
+      }
+
+      .fact + .fact {
+        padding-left: 0;
+
+        border-left: 0;
+
+        border-top:
+          1px solid var(--line);
+      }
+
+      .observation {
+        grid-template-columns:
+          1fr;
+
+        gap: 14px;
+      }
+
+      .observation p,
+      .observation-image {
+        grid-column: auto;
+      }
+
+      .observation-image {
+        height: 420px;
+      }
+
+      .holy-copy {
+        padding:
+          48px 26px;
+      }
+
+      .holy-image {
+        min-height: 440px;
+      }
+
+      .gallery-top {
+        display: block;
+      }
+
+      .gallery-intro {
+        margin-top: 20px;
+      }
+
+      .photo-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+      .photo-card:nth-child(n) {
+        grid-column: auto;
+
+        min-height: 520px;
+      }
+
+      .secondary-note {
+        padding-right: 0;
+        margin-right: 14px;
+      }
+
+      .extra-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .extra-fact,
+      .extra-fact:nth-child(2n),
+      .extra-fact:nth-child(4n) {
+        border-right: 0;
+        border-top: 1px solid var(--line);
+        padding: 22px 0;
+      }
+
+      .extra-fact:first-child {
+        border-top: 0;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+
+  </style>
+</head>
+
+
+
+<body>
+
+
+  <!-- ==================================================
+       HERO
+  ================================================== -->
+
+  <section class="hero">
+
+    <div class="hero-photo">
+      <img
+        src="images/chib-hero.jpeg"
+        alt="Mr. Tofu Ciabatta standing in his enclosure"
+      >
+    </div>
+
+    <div class="hero-shade"></div>
+
+
+    <div class="hero-content">
+
+
+      <div class="hero-brand">
+        CHIB.RUN
+      </div>
+
+
+      <div class="hero-tools">
+
+        <nav class="hero-nav">
+
+          <a
+            href="#species"
+            data-i18n="navAbout"
+          >
+            About
+          </a>
+
+          <a
+            href="#observations"
+            data-i18n="navChronicles"
+          >
+            Chronicles
+          </a>
+
+          <a
+            href="#miracles"
+            data-i18n="navMiracles"
+          >
+            Titles
+          </a>
+
+          <a
+            href="#photos"
+            data-i18n="navPhotos"
+          >
+            Photos
+          </a>
+
+        </nav>
+
+
+        <div
+          class="language-toggle"
+          aria-label="Language"
+        >
+
+          <button
+            type="button"
+            id="lang-en"
+            class="active"
+            onclick="setLanguage('en')"
+          >
+            EN
+          </button>
+
+          <span class="language-divider">
+            /
+          </span>
+
+          <button
+            type="button"
+            id="lang-ua"
+            onclick="setLanguage('uk')"
+          >
+            UA
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-main">
+
+        <div class="hero-title-wrap">
+
+          <div class="hero-rule"></div>
+
+          <h1>
+            Chib
+          </h1>
+
+          <div class="formal-name">
+            Mr. Tofu Ciabatta
+          </div>
+
+          <p
+            class="hero-description"
+            data-i18n-html="heroDescription"
+          >
+            A long-haired Syrian hamster.<br>
+            He fills his pouch, and eats my couch.<br>
+            Join us in watching his wheel turn.
+          </p>
+
+          <a
+            href="#species"
+            class="hero-button"
+          >
+
+            <span data-i18n="meetChib">
+              Meet Chib
+            </span>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-note">
+
+        <span data-i18n="small">
+          Small
+        </span>
+
+        <span data-i18n="creature">
+          creature.
+        </span>
+
+        <span data-i18n="largeWorld">
+          Large world.
+        </span>
+
+        <span class="hero-heart">
+          ♡
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <div class="site">
+
+    <main>
+
+
+      <!-- ==================================================
+           SPECIES
+      ================================================== -->
+
+      <section
+        class="intro"
+        id="species"
+      >
+
+        <div
+          class="section-label"
+          data-i18n="speciesProfile"
+        >
+          Species profile
+        </div>
+
+
+        <div class="intro-right">
+
+          <p
+            class="intro-copy"
+            data-i18n-html="speciesCopy"
+          >
+            <em>Mesocricetus auratus.</em><br>
+            White. Fluffy. Round-eared.<br><br>
+            At various angles, Chib appears to be part hamster, but also possibly part cow, and part polar bear. Taxonomists have declined to comment.<br><br>
+            His four little paws are used for climbing, gathering provisions, and reliably displaying the number four.
+          </p>
+
+
+          <div class="species-portrait">
+
+            <img
+              src="images/chib-14.jpeg"
+              alt="Portrait of Mr. Tofu Ciabatta"
+            >
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==================================================
+           FACTS
+      ================================================== -->
+
+      <section class="facts">
+
+        <div class="fact">
+
+          <span
+            class="fact-label"
+            data-i18n="commonName"
+          >
+            Common name
+          </span>
+
+          <span class="fact-value">
+            Chib
+          </span>
+
+        </div>
+
+
+        <div class="fact">
+
+          <span
+            class="fact-label"
+            data-i18n="formalName"
+          >
+            Formal name
+          </span>
+
+          <span class="fact-value">
+            Mr. Tofu Ciabatta
+          </span>
+
+        </div>
+
+
+        <div class="fact">
+
+          <span
+            class="fact-label"
+            data-i18n="activity"
+          >
+            Activity
+          </span>
+
+          <span
+            class="fact-value"
+            data-i18n="activityValue"
+          >
+            Primarily nocturnal
+          </span>
+
+        </div>
+
+
+        <div class="fact">
+
+          <span
+            class="fact-label"
+            data-i18n="knownRange"
+          >
+            Known range
+          </span>
+
+          <span
+            class="fact-value"
+            data-i18n="knownRangeValue"
+          >
+            One very large enclosure
+          </span>
+
+        </div>
+
+      </section>
+
+      <div class="secondary-note" data-i18n-html="secondaryNote">
+        Four paws.<br>
+        One wheel.<br>
+        No limits. ♡
+      </div>
+
+
+
+      <!-- ==================================================
+           FIELD NOTES
+      ================================================== -->
+
+      <section
+        class="field-notes"
+        id="observations"
+      >
+
+        <div class="field-header">
+
+          <h2 data-i18n-html="fieldNotes">
+            Field<br>
+            notes
+          </h2>
+
+          <p data-i18n="fieldIntro">
+            Observations collected from inside the known range
+            of Mr. Tofu Ciabatta.
+          </p>
+
+        </div>
+
+
+
+        <article class="observation">
+
+          <div class="observation-number">
+            001
+          </div>
+
+          <h3 data-i18n="obs1Title">
+            The nightly migration
+          </h3>
+
+          <p data-i18n="obs1Copy">
+            Shortly after dark, Chib begins a sustained journey across the rotating plains.
+            The wheel turns beneath him for considerable distances while Chib himself remains,
+            geographically speaking, almost exactly where he started.
+            His step counts are substantial.
+          </p>
+
+          <div class="observation-image">
+
+            <img
+              src="images/chib-12.jpeg"
+              alt="Chib beside his exercise wheel"
+            >
+
+          </div>
+
+        </article>
+
+
+
+        <article class="observation">
+
+          <div class="observation-number">
+            002
+          </div>
+
+          <h3 data-i18n="obs2Title">
+            The gathering of provisions
+          </h3>
+
+          <p data-i18n="obs2Copy">
+            Chib approaches food with the seriousness of an animal who has never once been told
+            there will be more tomorrow. Each item is inspected, reconsidered, stuffed into a cheek,
+            removed from the cheek, and occasionally hidden somewhere to be discovered during vacuuming
+            months later. His logistical system is opaque but apparently effective.
+          </p>
+
+          <div class="observation-image">
+
+            <img
+              src="images/chib-11.jpeg"
+              alt="Chib examining fresh parsley"
+            >
+
+          </div>
+
+        </article>
+
+
+
+        <article class="observation">
+
+          <div class="observation-number">
+            003
+          </div>
+
+          <h3 data-i18n="obs3Title">
+            The shrimp state
+          </h3>
+
+          <p data-i18n="obs3Copy">
+            During waking hours, Chib is roughly hamster-shaped. During sleep, this classification
+            becomes less reliable. He may curl inward, flatten, or assume a form that independent
+            observers have described as “a shrimp.” The transformation is temporary.
+          </p>
+
+          <div class="observation-image">
+
+            <img
+              src="images/chib-10.jpeg"
+              alt="Chib emerging through a circular opening"
+            >
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+
+      <!-- ==================================================
+           MIRACLES
+      ================================================== -->
+
+      <section
+        class="holy"
+        id="miracles"
+      >
+
+        <div class="holy-copy">
+
+          <div
+            class="section-label"
+            data-i18n="sacredClassification"
+          >
+            Names & titles
+          </div>
+
+          <h2 data-i18n="holyTitle">
+            Names, titles & concentration of power.
+          </h2>
+
+          <p data-i18n="holyCopy1">
+            He is formally Mr. Tofu Ciabatta. He has also been known as Chester Mofu Thibatta,
+            Senator Tofu Ciabatta, Emperor Tofu Ciabatta, and Totalitarian Tofu, as his power has
+            become increasingly centralized.
+          </p>
+
+          <p data-i18n="holyCopy2">
+            On certain occasions he has additionally been identified as a Japanese Mouse, despite no
+            supporting evidence from geography, taxonomy, or Japan. No elections are currently scheduled.
+          </p>
+
+        </div>
+
+
+        <div class="holy-image">
+
+          <img
+            src="images/chib-13.jpeg"
+            alt="Mr. Tofu Ciabatta raising one paw"
+          >
+
+          <div
+            class="miracle-seal"
+            data-i18n-html="miracleSeal"
+          >
+            centralized<br>
+            authority
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <section class="extra-facts">
+        <div class="extra-fact"><strong data-i18n="factNut">Favorite nut</strong><span data-i18n="factNutVal">Pine</span></div>
+        <div class="extra-fact"><strong data-i18n="factCount">Counting ability</strong><span>4</span></div>
+        <div class="extra-fact"><strong data-i18n="factSleep">Sleep morphology</strong><span data-i18n="factSleepVal">shrimp</span></div>
+        <div class="extra-fact"><strong data-i18n="factWheel">Wheel policy</strong><span data-i18n="factWheelVal">turn</span></div>
+        <div class="extra-fact"><strong data-i18n="factMilk">Milk</strong><span data-i18n="factMilkVal">interested</span></div>
+        <div class="extra-fact"><strong data-i18n="factYogurt">Yogurt</strong><span data-i18n="factYogurtVal">plain only</span></div>
+        <div class="extra-fact"><strong data-i18n="factPaws">Paws</strong><span data-i18n="factPawsVal">yes</span></div>
+        <div class="extra-fact"><strong data-i18n="factConflict">Conflict posture</strong><span data-i18n="factConflictVal">will kill 4 carrot slices</span></div>
+      </section>
+
+      <section class="dietary">
+        <div class="section-label" data-i18n="dietLabel">Private dietary preferences</div>
+        <div class="dietary-copy">
+          <h2 data-i18n="dietTitle">The approved diet is sensible. The private one is not.</h2>
+          <p data-i18n="dietCopy1">Chib has shown particular interest in milk and plain yogurt, perhaps because he himself resembles a small dairy product.</p>
+          <p data-i18n="dietCopy2">His favorite nut is the pine nut. He receives one, sometimes two, per day. Artificial intelligence has repeatedly advised that this may constitute excessive fat intake.</p>
+          <p data-i18n="dietCopy3">Chib has reviewed the recommendation. He continues to receive pine nuts.</p>
+        </div>
+      </section>
+
+      <section class="anatomy">
+        <div class="section-label" data-i18n="anatomyLabel">Comparative anatomy</div>
+        <h2 data-i18n="anatomyTitle">The resemblance is not facial.</h2>
+        <p data-i18n="anatomyCopy">Chib is notable for a white coat, round ears, tiny pink paws, and an unusually confident rear profile. He has occasionally been compared to former DOGE staffer Edward Coristine, better known online as “Big Balls.” The resemblance is not facial. When Chib runs, the relevant anatomy may visibly wiggle. No further comment is available at this time.</p>
+      </section>
+
+
+
+      <!-- ==================================================
+           SIGHTINGS
+      ================================================== -->
+
+      <section
+        class="gallery"
+        id="photos"
+      >
+
+        <div class="gallery-top">
+
+          <div>
+
+            <div
+              class="section-label"
+              data-i18n="photographicRecord"
+            >
+              Photographic record
+            </div>
+
+            <h2 data-i18n="sightings">
+              Sightings
+            </h2>
+
+          </div>
+
+          <p
+            class="gallery-intro"
+            data-i18n="galleryIntro"
+          >
+            A selection of verified encounters from Chib's known territory
+            and several supervised expeditions beyond it.
+          </p>
+
+        </div>
+
+
+
+        <div class="photo-grid">
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-4.jpeg"
+              alt="Chib overseeing furniture assembly instructions"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap4">
+                Industrial consultation
+              </strong>
+
+              <span>
+                004
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-5.jpeg"
+              alt="Chib meeting a LEGO hamster"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap5">
+                First contact
+              </strong>
+
+              <span>
+                005
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-6.jpeg"
+              alt="Chib drinking from the mushroom water station"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap6">
+                The mushroom spring
+              </strong>
+
+              <span>
+                006
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-7.jpeg"
+              alt="Chib emerging from an orange ceramic hide"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap7">
+                Emergence from the orange citadel
+              </strong>
+
+              <span>
+                007
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-8.jpeg"
+              alt="Chib standing at the enclosure wall"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap8">
+                The western boundary
+              </strong>
+
+              <span>
+                008
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-9.jpeg"
+              alt="Chib sitting inside a coconut hide"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap9">
+                The coconut sanctuary
+              </strong>
+
+              <span>
+                009
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-15.jpeg"
+              alt="Chib sitting among pillows and plush toys"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap15">
+                Expedition to the softlands
+              </strong>
+
+              <span>
+                015
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-16.jpeg"
+              alt="Chib approaching a small celebratory snack"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap16">
+                Ceremonial provisions
+              </strong>
+
+              <span>
+                016
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-0.jpg"
+              alt="Chib standing in his enclosure"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="cap0">
+                Survey of the home province
+              </strong>
+
+              <span>
+                000
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <figure class="photo-card">
+
+            <img
+              src="images/chib-hero.jpeg"
+              alt="Mr. Tofu Ciabatta in his enclosure"
+            >
+
+            <figcaption class="photo-caption">
+
+              <strong data-i18n="capHero">
+                The official field portrait
+              </strong>
+
+              <span>
+                CHIB
+              </span>
+
+            </figcaption>
+
+          </figure>
+
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+
+    <footer>
+
+      <div>
+
+        <span class="footer-name">
+          Mr. Tofu Ciabatta
+        </span>
+
+        <br>
+
+        <span data-i18n="footerSpecies">
+          Long-haired Syrian hamster
+        </span>
+
+      </div>
+
+
+      <div
+        data-i18n-html="footerCopy"
+      >
+        The official record of Chib.<br>
+        All observations subject to further investigation.
+      </div>
+
+    </footer>
+
+  </div>
+
+
+
+  <!-- ==================================================
+       MANUAL LANGUAGE TOGGLE
+  ================================================== -->
+
+  <script>
+
+    const translations = {
+
+      en: {
+
+        title:
+          "Chib — Mr. Tofu Ciabatta",
+
+        description:
+          "The official record of Mr. Tofu Ciabatta, known as Chib.",
+
+
+        navAbout:
+          "About",
+
+        navChronicles:
+          "Chronicles",
+
+        navMiracles:
+          "Titles",
+
+        navPhotos:
+          "Photos",
+
+
+        heroDescription:
+          "A long-haired Syrian hamster.<br>He fills his pouch, and eats my couch.<br>Join us in watching his wheel turn.",
+
+        meetChib:
+          "Meet Chib",
+
+        small:
+          "Small",
+
+        creature:
+          "creature.",
+
+        largeWorld:
+          "Large world.",
+
+
+        speciesProfile:
+          "Species profile",
+
+        speciesCopy:
+          "<em>Mesocricetus auratus.</em><br>White. Fluffy. Round-eared.<br><br>At various angles, Chib appears to be part hamster, but also possibly part cow, and part polar bear. Taxonomists have declined to comment.<br><br>His four little paws are used for climbing, gathering provisions, and reliably displaying the number four.",
+
+
+        commonName:
+          "Common name",
+
+        formalName:
+          "Formal name",
+
+        activity:
+          "Activity",
+
+        activityValue:
+          "Primarily nocturnal",
+
+        knownRange:
+          "Known range",
+
+        knownRangeValue:
+          "One very large enclosure",
+
+
+        fieldNotes:
+          "Field<br>notes",
+
+        fieldIntro:
+          "Observations collected from inside the known range of Mr. Tofu Ciabatta.",
+
+
+        obs1Title:
+          "The nightly migration",
+
+        obs1Copy:
+          "Shortly after dark, Chib begins a sustained journey across the rotating plains. The wheel turns beneath him for considerable distances while Chib himself remains, geographically speaking, almost exactly where he started. His step counts are substantial.",
+
+
+        obs2Title:
+          "The gathering of provisions",
+
+        obs2Copy:
+          "Chib approaches food with the seriousness of an animal who has never once been told there will be more tomorrow. Each item is inspected, reconsidered, stuffed into a cheek, removed from the cheek, and occasionally hidden somewhere to be discovered during vacuuming months later. His logistical system is opaque but apparently effective.",
+
+
+        obs3Title:
+          "The shrimp state",
+
+        obs3Copy:
+          "During waking hours, Chib is roughly hamster-shaped. During sleep, this classification becomes less reliable. He may curl inward, flatten, or assume a form that independent observers have described as “a shrimp.” The transformation is temporary.",
+
+
+        sacredClassification:
+          "Names & titles",
+
+        holyTitle:
+          "Names, titles & concentration of power.",
+
+        holyCopy1:
+          "He is formally Mr. Tofu Ciabatta. He has also been known as Chester Mofu Thibatta, Senator Tofu Ciabatta, Emperor Tofu Ciabatta, and Totalitarian Tofu, as his power has become increasingly centralized.",
+
+        holyCopy2:
+          "On certain occasions he has additionally been identified as a Japanese Mouse, despite no supporting evidence from geography, taxonomy, or Japan. No elections are currently scheduled.",
+
+        miracleSeal:
+          "centralized<br>authority",
+
+
+        sightings:
+          "Sightings",
+
+        photographicRecord:
+          "Photographic record",
+
+        galleryIntro:
+          "A selection of verified encounters from Chib's known territory and several supervised expeditions beyond it.",
+
+
+        cap4:
+          "Industrial consultation",
+
+        cap5:
+          "First contact",
+
+        cap6:
+          "The mushroom spring",
+
+        cap7:
+          "Emergence from the orange citadel",
+
+        cap8:
+          "The western boundary",
+
+        cap9:
+          "The coconut sanctuary",
+
+        cap15:
+          "Expedition to the softlands",
+
+        cap16:
+          "Ceremonial provisions",
+
+        cap0:
+          "Survey of the home province",
+
+        capHero:
+          "The official field portrait",
+
+
+        secondaryNote:
+          "Four paws.<br>One wheel.<br>No limits. ♡",
+
+        factNut: "Favorite nut",
+        factNutVal: "Pine",
+        factCount: "Counting ability",
+        factSleep: "Sleep morphology",
+        factSleepVal: "shrimp",
+        factWheel: "Wheel policy",
+        factWheelVal: "turn",
+        factMilk: "Milk",
+        factMilkVal: "interested",
+        factYogurt: "Yogurt",
+        factYogurtVal: "plain only",
+        factPaws: "Paws",
+        factPawsVal: "yes",
+        factConflict: "Conflict posture",
+        factConflictVal: "will kill 4 carrot slices",
+
+        dietLabel: "Private dietary preferences",
+        dietTitle: "The approved diet is sensible. The private one is not.",
+        dietCopy1: "Chib has shown particular interest in milk and plain yogurt, perhaps because he himself resembles a small dairy product.",
+        dietCopy2: "His favorite nut is the pine nut. He receives one, sometimes two, per day. Artificial intelligence has repeatedly advised that this may constitute excessive fat intake.",
+        dietCopy3: "Chib has reviewed the recommendation. He continues to receive pine nuts.",
+
+        anatomyLabel: "Comparative anatomy",
+        anatomyTitle: "The resemblance is not facial.",
+        anatomyCopy: "Chib is notable for a white coat, round ears, tiny pink paws, and an unusually confident rear profile. He has occasionally been compared to former DOGE staffer Edward Coristine, better known online as “Big Balls.” The resemblance is not facial. When Chib runs, the relevant anatomy may visibly wiggle. No further comment is available at this time.",
+
+        footerSpecies:
+          "Long-haired Syrian hamster",
+
+        footerCopy:
+          "The official record of Chib.<br>All observations subject to further investigation."
+
+      },
+
+
+
+      uk: {
+
+        title:
+          "Чіб — Mr. Tofu Ciabatta",
+
+        description:
+          "Офіційний архів Mr. Tofu Ciabatta, відомого як Чіб.",
+
+
+        navAbout:
+          "Про Чіба",
+
+        navChronicles:
+          "Хроніки",
+
+        navMiracles:
+          "Титули",
+
+        navPhotos:
+          "Фото",
+
+
+        heroDescription:
+          "Довгошерстий сирійський хом’як.<br>Набиває щоки й гризе мій диван.<br>Спостерігайте разом з нами, як крутиться його колесо.",
+
+        meetChib:
+          "Познайомитися з Чібом",
+
+        small:
+          "Маленька",
+
+        creature:
+          "істота.",
+
+        largeWorld:
+          "Великий світ.",
+
+
+        speciesProfile:
+          "Видовий профіль",
+
+        speciesCopy:
+          "<em>Mesocricetus auratus.</em><br>Білий. Пухнастий. Кругловухий.<br><br>Під різними кутами Чіб виглядає як хом’як, але, можливо, також як корова і білий ведмідь. Таксономісти утримуються від коментарів.<br><br>Його чотири маленькі лапки використовуються для лазіння, збирання припасів і надійної демонстрації числа чотири.",
+
+
+        commonName:
+          "Звичне ім’я",
+
+        formalName:
+          "Повне ім’я",
+
+        activity:
+          "Активність",
+
+        activityValue:
+          "Переважно нічна",
+
+        knownRange:
+          "Відомий ареал",
+
+        knownRangeValue:
+          "Один дуже великий вольєр",
+
+
+        fieldNotes:
+          "Польові<br>нотатки",
+
+        fieldIntro:
+          "Спостереження, зібрані в межах відомого ареалу Mr. Tofu Ciabatta.",
+
+
+        obs1Title:
+          "Нічна міграція",
+
+        obs1Copy:
+          "Невдовзі після настання темряви Чіб вирушає у тривалу подорож обертовими рівнинами. Колесо рухається під ним на значні відстані, тоді як сам Чіб, географічно кажучи, залишається майже точно там, де й почав. Його кількість кроків значна.",
+
+
+        obs2Title:
+          "Збір припасів",
+
+        obs2Copy:
+          "Чіб ставиться до їжі з серйозністю тварини, якій ніхто ніколи не казав, що завтра буде ще. Кожен шматочок оглядається, переосмислюється, запихається за щоку, виймається з неї, а іноді ховається десь, щоб його знайшли пилососом через кілька місяців. Його логістична система непрозора, але, схоже, ефективна.",
+
+
+        obs3Title:
+          "Стан креветки",
+
+        obs3Copy:
+          "У стані неспання Чіб приблизно хом’якоподібний. Під час сну ця класифікація стає менш надійною. Він може згорнутися, розпластатися або набути форми, яку незалежні спостерігачі описували як «креветку». Перетворення тимчасове.",
+
+
+        sacredClassification:
+          "Імена й титули",
+
+        holyTitle:
+          "Імена, титули та концентрація влади.",
+
+        holyCopy1:
+          "Формально він Mr. Tofu Ciabatta. Також відомий як Chester Mofu Thibatta, Senator Tofu Ciabatta, Emperor Tofu Ciabatta та Totalitarian Tofu, оскільки його влада дедалі більше централізується.",
+
+        holyCopy2:
+          "Іноді його також ідентифікують як японську мишу, попри повну відсутність доказів із географії, таксономії чи Японії. Вибори наразі не заплановані.",
+
+        miracleSeal:
+          "централізована<br>влада",
+
+
+        sightings:
+          "Спостереження",
+
+        photographicRecord:
+          "Фотографічний архів",
+
+        galleryIntro:
+          "Добірка підтверджених зустрічей у межах відомої території Чіба та кількох контрольованих експедицій за її межі.",
+
+
+        cap4:
+          "Промислова консультація",
+
+        cap5:
+          "Перший контакт",
+
+        cap6:
+          "Грибне джерело",
+
+        cap7:
+          "Вихід з помаранчевої цитаделі",
+
+        cap8:
+          "Західний кордон",
+
+        cap9:
+          "Кокосове святилище",
+
+        cap15:
+          "Експедиція до м’яких земель",
+
+        cap16:
+          "Церемоніальні припаси",
+
+        cap0:
+          "Огляд домашньої провінції",
+
+        capHero:
+          "Офіційний польовий портрет",
+
+
+        secondaryNote:
+          "Чотири лапки.<br>Одне колесо.<br>Жодних меж. ♡",
+
+        factNut: "Улюблений горіх",
+        factNutVal: "Кедровий",
+        factCount: "Лічильна здатність",
+        factSleep: "Морфологія сну",
+        factSleepVal: "креветка",
+        factWheel: "Політика колеса",
+        factWheelVal: "крутити",
+        factMilk: "Молоко",
+        factMilkVal: "цікавить",
+        factYogurt: "Йогурт",
+        factYogurtVal: "лише натуральний",
+        factPaws: "Лапки",
+        factPawsVal: "так",
+        factConflict: "Бойова позиція",
+        factConflictVal: "уб’є 4 скибочки моркви",
+
+        dietLabel: "Приватні харчові вподобання",
+        dietTitle: "Схвалений раціон розумний. Приватний — ні.",
+        dietCopy1: "Чіб виявляє особливий інтерес до молока та натурального йогурту, можливо, тому що сам дещо нагадує молочний продукт.",
+        dietCopy2: "Його улюблений горіх — кедровий. Він отримує один, іноді два на день. Штучний інтелект неодноразово попереджав, що це може бути надмірною кількістю жиру.",
+        dietCopy3: "Чіб ознайомився з рекомендацією. Кедрові горіхи він отримує й надалі.",
+
+        anatomyLabel: "Порівняльна анатомія",
+        anatomyTitle: "Схожість не в обличчі.",
+        anatomyCopy: "Чіб вирізняється білим хутром, круглими вухами, крихітними рожевими лапками та напрочуд упевненим заднім профілем. Його іноді порівнювали з колишнім співробітником DOGE Едвардом Корістіном, відомим онлайн як «Big Balls». Схожість не в обличчі. Коли Чіб біжить, відповідна анатомія може помітно коливатися. Подальших коментарів наразі немає.",
+
+        footerSpecies:
+          "Довгошерстий сирійський хом’як",
+
+        footerCopy:
+          "Офіційний архів Чіба.<br>Усі спостереження підлягають подальшому дослідженню."
+
+      }
+
+    };
+
+
+
+    function setLanguage(language) {
+
+      const selected =
+        translations[language]
+          ? language
+          : "en";
+
+
+      document.documentElement.lang =
+        selected === "uk"
+          ? "uk"
+          : "en";
+
+
+      document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+          const key =
+            element.dataset.i18n;
+
+          if (
+            translations[selected][key] !== undefined
+          ) {
+
+            element.textContent =
+              translations[selected][key];
+
+          }
+
+        });
+
+
+      document
+        .querySelectorAll("[data-i18n-html]")
+        .forEach(element => {
+
+          const key =
+            element.dataset.i18nHtml;
+
+          if (
+            translations[selected][key] !== undefined
+          ) {
+
+            element.innerHTML =
+              translations[selected][key];
+
+          }
+
+        });
+
+
+      document.title =
+        translations[selected].title;
+
+
+      document
+        .getElementById("meta-description")
+        .setAttribute(
+          "content",
+          translations[selected].description
+        );
+
+
+      document
+        .getElementById("lang-en")
+        .classList
+        .toggle(
+          "active",
+          selected === "en"
+        );
+
+
+      document
+        .getElementById("lang-ua")
+        .classList
+        .toggle(
+          "active",
+          selected === "uk"
+        );
+
+
+      document
+        .getElementById("lang-en")
+        .setAttribute(
+          "aria-pressed",
+          selected === "en"
+            ? "true"
+            : "false"
+        );
+
+
+      document
+        .getElementById("lang-ua")
+        .setAttribute(
+          "aria-pressed",
+          selected === "uk"
+            ? "true"
+            : "false"
+        );
+
+
+      try {
+
+        localStorage.setItem(
+          "chib-language",
+          selected
+        );
+
+      } catch (error) {
+
+      }
+
+    }
+
+
+
+    let savedLanguage = "en";
+
+
+    try {
+
+      savedLanguage =
+        localStorage.getItem(
+          "chib-language"
+        ) || "en";
+
+    } catch (error) {
+
+      savedLanguage = "en";
+
+    }
+
+
+    setLanguage(savedLanguage);
+
+  </script>
+
+
+</body>
+</html>
