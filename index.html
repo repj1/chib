@@ -1013,6 +1013,14 @@
       font-weight: 600;
     }
 
+    .footer-counter {
+      white-space: nowrap;
+    }
+
+    #visitCount {
+      font-variant-numeric: tabular-nums;
+    }
+
 
     /* ==================================================
        UKRAINIAN
@@ -2226,6 +2234,14 @@
         All observations subject to further investigation.
       </div>
 
+
+      <div class="footer-counter">
+        <span data-i18n="footerVisits">
+          Documented visits
+        </span>:
+        <span id="visitCount">&hellip;</span>
+      </div>
+
     </footer>
 
   </div>
@@ -2422,6 +2438,9 @@
         footerSpecies:
           "Long-haired Syrian hamster",
 
+        footerVisits:
+          "Documented visits",
+
         footerCopy:
           "The official record of Chib.<br>All observations subject to further investigation."
 
@@ -2611,6 +2630,9 @@
         footerSpecies:
           "Довгошерстий сирійський хом’як",
 
+        footerVisits:
+          "Задокументовані відвідини",
+
         footerCopy:
           "Офіційний архів Чіба.<br>Усі спостереження підлягають подальшому дослідженню."
 
@@ -2755,6 +2777,46 @@
 
 
     setLanguage(savedLanguage);
+
+  </script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script>
+
+    (function () {
+
+      var el = document.getElementById("visitCount");
+      if (!el) return;
+
+      function render(n) {
+        el.textContent = Number(n || 0).toLocaleString("en-US");
+      }
+
+      try {
+
+        firebase.initializeApp({
+          databaseURL: "https://chib-counter-default-rtdb.europe-west1.firebasedatabase.app"
+        });
+
+        var ref = firebase.database().ref("visits");
+
+        ref.transaction(function (current) {
+          return (current || 0) + 1;
+        });
+
+        ref.on("value", function (snap) {
+          render(snap.val());
+        }, function () {
+          el.textContent = "\u2014";
+        });
+
+      } catch (e) {
+        el.textContent = "\u2014";
+      }
+
+    })();
 
   </script>
 
