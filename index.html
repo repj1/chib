@@ -723,6 +723,26 @@
       to { transform: scaleY(1); }
     }
 
+    #stepsChart .bar {
+      transition: opacity .15s ease;
+    }
+
+    #stepsChart .bar:hover,
+    #stepsChart .bar:focus-visible {
+      opacity: .82;
+    }
+
+    .locomotion-hint {
+      margin-top: 10px;
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+      letter-spacing: .12em;
+
+      color: var(--muted);
+    }
+
     #stepsChart .bar-label {
       font-size: 13px;
 
@@ -1975,6 +1995,7 @@
 
               <div
                 class="locomotion-unit"
+                id="stepsUnit"
                 data-i18n="stepsLastNight"
               >
                 steps last night
@@ -2003,6 +2024,14 @@
             role="img"
             aria-label="Wheel rotations for the last ten nights"
           ></svg>
+
+          <div
+            class="locomotion-hint"
+            id="stepsHint"
+            data-i18n="stepsHint"
+          >
+            Tap a bar to inspect that night.
+          </div>
 
           <div
             class="locomotion-empty"
@@ -2727,6 +2756,9 @@
         stepsTenNights:
           "Last 10 nights",
 
+        stepsHint:
+          "Tap a bar to inspect that night.",
+
         stepsAwaiting:
           "No measurements yet. The wheel turns; science awaits its numbers.",
 
@@ -2941,6 +2973,9 @@
         stepsTenNights:
           "Останні 10 ночей",
 
+        stepsHint:
+          "Торкніться стовпчика, щоб переглянути ніч.",
+
         stepsAwaiting:
           "Вимірювань ще немає. Колесо крутиться; наука чекає на цифри.",
 
@@ -3138,6 +3173,9 @@
 
       var NAMESPACE = "http://www.w3.org/2000/svg";
 
+      var selectedDate = null;
+      var firstRender = true;
+
       var METERS_PER_ROTATION = 0.878;
 
       var STRINGS = {
@@ -3236,6 +3274,7 @@
         var emptyEl = document.getElementById("stepsEmpty");
         var summaryEl = document.getElementById("stepsSummary");
         var distEl = document.getElementById("stepsDist");
+        var hintEl = document.getElementById("stepsHint");
 
 
         while (svg.firstChild) {
@@ -3249,6 +3288,7 @@
           if (distEl) distEl.textContent = "";
 
           svg.style.display = "none";
+          if (hintEl) hintEl.style.display = "none";
           emptyEl.hidden = false;
           summaryEl.textContent = "";
 
@@ -3258,6 +3298,7 @@
 
 
         svg.style.display = "";
+        if (hintEl) hintEl.style.display = "";
         emptyEl.hidden = true;
 
         svg.setAttribute(
@@ -3266,15 +3307,34 @@
         );
 
 
-        var latest = log[log.length - 1];
+        var sel = -1;
+        if (selectedDate) {
+          for (var s = 0; s < log.length; s++) {
+            if (log[s].d === selectedDate) { sel = s; break; }
+          }
+        }
+        if (sel < 0) sel = log.length - 1;
+
+        var selEntry = log[sel];
 
         latestEl.textContent =
-          Number(latest.s).toLocaleString(
+          Number(selEntry.s).toLocaleString(
             language === "uk" ? "uk-UA" : "en-US"
           );
 
         if (distEl) {
-          distEl.textContent = STRINGS[language].distance(latest.s);
+          distEl.textContent = STRINGS[language].distance(selEntry.s);
+        }
+
+        var unitEl = document.getElementById("stepsUnit");
+        if (unitEl) {
+          if (sel === log.length - 1) {
+            unitEl.textContent = translations[language].stepsLastNight;
+          } else {
+            unitEl.textContent =
+              (language === "uk" ? "обертів · " : "rotations · ") +
+              formatDay(selEntry.d, language);
+          }
         }
 
 
@@ -3315,11 +3375,32 @@
 
           rect.setAttribute(
             "fill",
-            index === log.length - 1 ? "#d87b36" : "#ead9c2"
+            index === sel ? "#d87b36" : "#ead9c2"
           );
 
           rect.setAttribute("class", "bar");
-          rect.style.animationDelay = (index * 0.06) + "s";
+          if (firstRender) {
+            rect.style.animationDelay = (index * 0.06) + "s";
+          } else {
+            rect.style.animation = "none";
+            rect.style.transform = "none";
+          }
+          rect.style.cursor = "pointer";
+          rect.setAttribute("tabindex", "0");
+
+          (function (ent) {
+            rect.addEventListener("click", function () {
+              selectedDate = ent.d;
+              renderSteps();
+            });
+            rect.addEventListener("keydown", function (ev) {
+              if (ev.key === "Enter" || ev.key === " ") {
+                ev.preventDefault();
+                selectedDate = ent.d;
+                renderSteps();
+              }
+            });
+          })(entry);
 
 
           var tip = document.createElementNS(NAMESPACE, "title");
@@ -3367,6 +3448,7 @@
 
 
       renderSteps();
+      firstRender = false;
 
 
       ["lang-en", "lang-ua"].forEach(function (id) {
