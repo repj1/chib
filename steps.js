@@ -1,7 +1,7 @@
 /* ==================================================
    CHIB'S LOCOMOTION LOG
 
-   Joseph sends step counts; they are recorded here.
+   Joseph sends wheel-rotation counts; they are recorded here.
    Append the newest night at the END of the list as
      { d: "YYYY-MM-DD", s: <steps> },
    keeping the 10 most recent entries.
