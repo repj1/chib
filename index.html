@@ -576,6 +576,69 @@
     }
 
     /* ==================================================
+       ARCADE
+    ================================================== */
+
+    .arcade {
+      padding: 120px 0;
+
+      border-top:
+        1px solid var(--line);
+    }
+
+    .arcade-head {
+      display: grid;
+      grid-template-columns: .68fr 1.32fr;
+
+      gap: 70px;
+
+      margin-bottom: 56px;
+    }
+
+    .arcade-head h2 {
+      margin: 0 0 20px;
+
+      font-size:
+        clamp(40px,4.6vw,68px);
+
+      line-height: .98;
+
+      letter-spacing: -.045em;
+      font-weight: 500;
+    }
+
+    .arcade-head p {
+      margin: 0;
+
+      max-width: 430px;
+
+      color: var(--muted);
+
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .game-frame {
+      border:
+        1px solid var(--line);
+
+      background: #f4efe5;
+
+      overflow: hidden;
+    }
+
+    #chibGame {
+      display: block;
+
+      width: 100%;
+      height: auto;
+
+      touch-action: none;
+      cursor: pointer;
+    }
+
+
+    /* ==================================================
        LOCOMOTION LOG
     ================================================== */
 
@@ -1623,6 +1686,20 @@
         padding: 28px 22px 22px;
       }
 
+      .arcade {
+        padding: 90px 0;
+      }
+
+      .arcade-head {
+        display: block;
+
+        margin-bottom: 36px;
+      }
+
+      .arcade-head .section-label {
+        margin-bottom: 24px;
+      }
+
       .locomotion-top {
         align-items: flex-start;
       }
@@ -2265,6 +2342,57 @@
 
 
       <!-- ==================================================
+           ARCADE
+      ================================================== -->
+
+      <section
+        class="arcade"
+        id="arcade"
+      >
+
+        <div class="arcade-head">
+
+          <div>
+
+            <div
+              class="section-label"
+              data-i18n="gameLabel"
+            >
+              Amusement
+            </div>
+
+          </div>
+
+          <div>
+
+            <h2 data-i18n-html="gameTitle">
+              The nightly migration,<br>now playable.
+            </h2>
+
+            <p data-i18n="gameIntro">
+              Space, ↑, or tap to leap the snacks. The wheel is closed for maintenance.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="game-frame">
+
+          <canvas
+            id="chibGame"
+            width="900"
+            height="280"
+          ></canvas>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==================================================
            SIGHTINGS
       ================================================== -->
 
@@ -2765,6 +2893,25 @@
         rotationNote:
           "One wheel rotation \u2248 0.878 m (87.8 cm).",
 
+
+        gameLabel:
+          "Amusement",
+
+        gameTitle:
+          "The nightly migration,<br>now playable.",
+
+        gameIntro:
+          "Space, \u2191, or tap to leap the snacks. The wheel is closed for maintenance.",
+
+        gameStart:
+          "Space or tap to start",
+
+        gameOver:
+          "Pouched.",
+
+        gameRetry:
+          "Space or tap to run it back",
+
         factNut: "Favorite nut",
         factNutVal: "Pine",
         factCount: "Counting Ability",
@@ -2982,6 +3129,25 @@
         rotationNote:
           "Один оберт колеса \u2248 0,878 м (87,8 см).",
 
+
+        gameLabel:
+          "Розвага",
+
+        gameTitle:
+          "Нічна міграція,<br>тепер інтерактивна.",
+
+        gameIntro:
+          "Пробіл, \u2191 або дотик, щоб перестрибнути смаколики. Колесо зачинено на техобслуговування.",
+
+        gameStart:
+          "Пробіл або дотик, щоб почати",
+
+        gameOver:
+          "В щоках.",
+
+        gameRetry:
+          "Пробіл або дотик, щоб спробувати ще",
+
         factNut: "Улюблений горіх",
         factNutVal: "Кедровий",
         factCount: "Здатність до лічби",
@@ -3159,6 +3325,439 @@
 
 
     setLanguage(savedLanguage);
+
+  </script>
+
+
+  <script>
+
+    (function () {
+
+      var canvas = document.getElementById("chibGame");
+      if (!canvas) return;
+
+      var ctx = canvas.getContext("2d");
+
+      var W = 900;
+      var H = 280;
+      var GROUND = 238;
+
+      var dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      function lang() {
+        return document.documentElement.lang === "uk" ? "uk" : "en";
+      }
+
+      function T(key) {
+        return translations[lang()][key];
+      }
+
+      var GRAV = 2600;
+      var JUMP_V = 880;
+
+      var state = "ready"; // ready | running | over
+      var elapsed = 0;
+      var nowSec = 0;
+      var speed = 380;
+      var score = 0;
+      var hiScore = 0;
+
+      try {
+        hiScore = Number(localStorage.getItem("chib-hiscore")) || 0;
+      } catch (e) {}
+
+      var ham = { x: 90, y: GROUND, vy: 0, airborne: false };
+      var obstacles = [];
+      var clouds = [];
+      var puffs = [];
+      var gapLeft = 520;
+      var worldX = 0;
+
+      function rand(a, b) { return a + Math.random() * (b - a); }
+      function pick(a) { return a[(Math.random() * a.length) | 0]; }
+
+      for (var ci = 0; ci < 4; ci++) {
+        clouds.push({ x: rand(0, W), y: rand(36, 120), s: rand(0.7, 1.2), v: rand(22, 48) });
+      }
+
+      function reset() {
+        elapsed = 0;
+        speed = 380;
+        score = 0;
+        ham.y = GROUND;
+        ham.vy = 0;
+        ham.airborne = false;
+        obstacles = [];
+        puffs = [];
+        gapLeft = 520;
+        worldX = 0;
+      }
+
+      function gameOver() {
+        state = "over";
+        var s = Math.floor(score);
+        if (s > hiScore) {
+          hiScore = s;
+          try { localStorage.setItem("chib-hiscore", String(hiScore)); } catch (e) {}
+        }
+      }
+
+      function jump() {
+        if (state !== "running") {
+          reset();
+          state = "running";
+          return;
+        }
+        if (!ham.airborne) {
+          ham.airborne = true;
+          ham.vy = -JUMP_V;
+        }
+      }
+
+      var TYPES = ["peanut", "peanutBig", "peanutPair", "carrot", "carrotBig", "pinenuts"];
+
+      function spawnObstacle() {
+        var kind = pick(TYPES);
+        var dims = {
+          peanut:     { w: 38, h: 28 },
+          peanutBig:  { w: 54, h: 40 },
+          peanutPair: { w: 78, h: 28 },
+          carrot:     { w: 28, h: 46 },
+          carrotBig:  { w: 34, h: 56 },
+          pinenuts:   { w: 54, h: 18 }
+        }[kind];
+        obstacles.push({ kind: kind, x: W + 40, w: dims.w, h: dims.h });
+      }
+
+      function hitTest(ob) {
+        var hx0 = ham.x - 17, hx1 = ham.x + 17;
+        var hy0 = ham.y - 44, hy1 = ham.y - 3;
+        var ox0 = ob.x - ob.w * 0.40, ox1 = ob.x + ob.w * 0.40;
+        var oy0 = GROUND - ob.h * 0.85, oy1 = GROUND;
+        return hx0 < ox1 && hx1 > ox0 && hy0 < oy1 && hy1 > oy0;
+      }
+
+      function update(dt) {
+        elapsed += dt;
+        speed = Math.min(380 + elapsed * 10, 940);
+        score += dt * speed * 0.025;
+        worldX += speed * dt;
+
+        if (ham.airborne) {
+          ham.vy += GRAV * dt;
+          ham.y += ham.vy * dt;
+          if (ham.y >= GROUND) {
+            ham.y = GROUND;
+            ham.vy = 0;
+            ham.airborne = false;
+          }
+        } else if (Math.random() < dt * 7) {
+          puffs.push({ x: ham.x - 26, y: GROUND - 5, r: 3, life: 0.45, max: 0.45 });
+        }
+
+        for (var i = puffs.length - 1; i >= 0; i--) {
+          var p = puffs[i];
+          p.life -= dt;
+          p.x -= speed * dt * 0.35;
+          p.y -= 26 * dt;
+          p.r += 16 * dt;
+          if (p.life <= 0) puffs.splice(i, 1);
+        }
+
+        gapLeft -= speed * dt;
+        if (gapLeft <= 0) {
+          spawnObstacle();
+          gapLeft = rand(480, 860) * (0.8 + speed / 1600);
+        }
+
+        for (var j = obstacles.length - 1; j >= 0; j--) {
+          var ob = obstacles[j];
+          ob.x -= speed * dt;
+          if (ob.x < -90) {
+            obstacles.splice(j, 1);
+            continue;
+          }
+          if (hitTest(ob)) {
+            gameOver();
+            return;
+          }
+        }
+
+        for (var k = 0; k < clouds.length; k++) {
+          var c = clouds[k];
+          c.x -= c.v * dt;
+          if (c.x < -90) {
+            c.x = W + 90;
+            c.y = rand(36, 120);
+          }
+        }
+      }
+
+      /* ---------------- drawing ---------------- */
+
+      function drawHamster() {
+        var bob = ham.airborne ? 0 : Math.sin(nowSec * 14) * 1.6;
+        var swing = ham.airborne ? 0 : Math.sin(nowSec * 14) * 4;
+
+        ctx.save();
+        ctx.translate(ham.x, ham.y + bob);
+
+        var line = "#d8d0bf";
+
+        function ell(x, y, rx, ry, fill) {
+          ctx.beginPath();
+          ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2);
+          ctx.fillStyle = fill;
+          ctx.fill();
+          ctx.strokeStyle = line;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+
+        ell(-29, -20, 6, 6, "#ffffff");          // tail
+        ell(0, -23, 26, 19, "#ffffff");          // body
+
+        ctx.beginPath();                        // belly shade
+        ctx.ellipse(2, -16, 17, 11, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "#f4efe4";
+        ctx.fill();
+
+        var fy1 = ham.airborne ? -10 : -4 + swing;   // feet
+        var fy2 = ham.airborne ? -10 : -4 - swing;
+        ell(-11, fy1, 7, 4, "#f1e9d8");
+        ell(11, fy2, 7, 4, "#f1e9d8");
+
+        ell(21, -38, 13, 12, "#ffffff");        // head
+        ell(13, -49, 5, 5.5, "#ffffff");        // ears
+        ell(27, -49, 5, 5.5, "#ffffff");
+        ctx.beginPath(); ctx.arc(13, -49, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "#f2b8c6"; ctx.fill();
+        ctx.beginPath(); ctx.arc(27, -49, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "#f2b8c6"; ctx.fill();
+
+        ctx.beginPath(); ctx.arc(26, -40, 2.6, 0, Math.PI * 2);
+        ctx.fillStyle = "#2b2926"; ctx.fill();   // eye
+
+        ctx.beginPath();
+        ctx.ellipse(33, -34, 2.6, 2, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "#e79fb0"; ctx.fill();   // nose
+
+        ctx.strokeStyle = "#cfc6b2";            // whiskers
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(30, -33); ctx.lineTo(40, -35);
+        ctx.moveTo(30, -31); ctx.lineTo(40, -29);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      function drawPeanut(x, s) {
+        ctx.save();
+        ctx.translate(x, GROUND);
+        ctx.scale(s, s);
+        ctx.lineWidth = 2;
+        var lobes = [[-8, -11, 0.18], [8, -11, -0.18]];
+        for (var i = 0; i < lobes.length; i++) {
+          ctx.beginPath();
+          ctx.ellipse(lobes[i][0], lobes[i][1], 9, 11, lobes[i][2], 0, Math.PI * 2);
+          ctx.fillStyle = "#dfae63";
+          ctx.fill();
+          ctx.strokeStyle = "#b9833f";
+          ctx.stroke();
+        }
+        ctx.fillStyle = "#b9833f";
+        var dots = [[-11, -14], [-5, -8], [5, -15], [11, -8], [0, -18]];
+        for (var d = 0; d < dots.length; d++) {
+          ctx.beginPath();
+          ctx.arc(dots[d][0], dots[d][1], 1.3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function drawCarrot(x, s) {
+        ctx.save();
+        ctx.translate(x, GROUND);
+        ctx.scale(s, s);
+        ctx.strokeStyle = "#5f8f4e";
+        ctx.lineWidth = 3;
+        ctx.lineCap = "round";
+        var fronds = [[-6, -34, -12, -44], [0, -36, 0, -47], [6, -34, 12, -44]];
+        for (var i = 0; i < fronds.length; i++) {
+          var f = fronds[i];
+          ctx.beginPath();
+          ctx.moveTo(f[0], f[1]);
+          ctx.quadraticCurveTo(f[0] * 1.4, f[1] - 6, f[2], f[3]);
+          ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.moveTo(-9, -34);
+        ctx.quadraticCurveTo(0, -38, 9, -34);
+        ctx.lineTo(2, -2);
+        ctx.quadraticCurveTo(0, 2, -2, -2);
+        ctx.closePath();
+        ctx.fillStyle = "#e08a3c";
+        ctx.fill();
+        ctx.strokeStyle = "#b96a26";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.lineWidth = 1.5;
+        var ridges = [-24, -16, -9];
+        for (var r = 0; r < ridges.length; r++) {
+          ctx.beginPath();
+          ctx.moveTo(-6, ridges[r]);
+          ctx.lineTo(6, ridges[r]);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function drawPinenuts(x) {
+        ctx.save();
+        ctx.translate(x, GROUND);
+        var nuts = [[-16, 0.9], [0, 1.1], [16, 0.9]];
+        for (var i = 0; i < nuts.length; i++) {
+          var nx = nuts[i][0], ns = nuts[i][1];
+          ctx.beginPath();
+          ctx.ellipse(nx, -8 * ns, 6 * ns, 8 * ns, 0, 0, Math.PI * 2);
+          ctx.fillStyle = "#a4713e";
+          ctx.fill();
+          ctx.strokeStyle = "#7d5228";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.ellipse(nx - 2, -10 * ns, 2 * ns, 3 * ns, -0.3, 0, Math.PI * 2);
+          ctx.fillStyle = "#c08d52";
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function drawObstacle(ob) {
+        if (ob.kind === "peanut") drawPeanut(ob.x, 1);
+        else if (ob.kind === "peanutBig") drawPeanut(ob.x, 1.45);
+        else if (ob.kind === "peanutPair") { drawPeanut(ob.x - 20, 1); drawPeanut(ob.x + 20, 0.9); }
+        else if (ob.kind === "carrot") drawCarrot(ob.x, 1);
+        else if (ob.kind === "carrotBig") drawCarrot(ob.x, 1.25);
+        else if (ob.kind === "pinenuts") drawPinenuts(ob.x);
+      }
+
+      function drawCloud(c) {
+        ctx.save();
+        ctx.fillStyle = "#ffffff";
+        ctx.strokeStyle = "#e3dccb";
+        ctx.lineWidth = 2;
+        var puffs3 = [[0, 0, 16], [18, -4, 12], [-18, -2, 11]];
+        for (var i = 0; i < puffs3.length; i++) {
+          ctx.beginPath();
+          ctx.arc(c.x + puffs3[i][0] * c.s, c.y + puffs3[i][1] * c.s, puffs3[i][2] * c.s, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function centerText(main, sub, y) {
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#3a3733";
+        ctx.font = "600 30px Inter, ui-sans-serif, sans-serif";
+        ctx.fillText(main, W / 2, y);
+        if (sub) {
+          ctx.fillStyle = "#8a8478";
+          ctx.font = "500 14px Inter, ui-sans-serif, sans-serif";
+          ctx.fillText(sub, W / 2, y + 30);
+        }
+        ctx.textAlign = "left";
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        var i;
+
+        for (i = 0; i < clouds.length; i++) drawCloud(clouds[i]);
+
+        ctx.strokeStyle = "#d9d2c2";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, GROUND + 0.5);
+        ctx.lineTo(W, GROUND + 0.5);
+        ctx.stroke();
+
+        ctx.fillStyle = "#d9d2c2";
+        var slot = 130;
+        var startIdx = Math.floor(worldX / slot);
+        for (i = startIdx; i * slot < worldX + W + slot; i++) {
+          var hh = Math.abs(Math.sin(i * 12.9898) * 43758.5453) % 1;
+          var px = i * slot - worldX + hh * 80;
+          if (px > -20 && px < W) ctx.fillRect(px, GROUND + 13, 13, 3);
+        }
+
+        for (i = 0; i < puffs.length; i++) {
+          var p = puffs[i];
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(196, 186, 168," + (p.life / p.max * 0.55).toFixed(3) + ")";
+          ctx.fill();
+        }
+
+        for (i = 0; i < obstacles.length; i++) drawObstacle(obstacles[i]);
+
+        drawHamster();
+
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#8a8478";
+        ctx.font = "600 15px Inter, ui-sans-serif, sans-serif";
+        var s = String(Math.floor(score)).padStart(5, "0");
+        var hs = String(hiScore).padStart(5, "0");
+        ctx.fillText("HI " + hs + "  " + s, W - 18, 32);
+        ctx.textAlign = "left";
+
+        if (state === "ready") {
+          centerText(T("gameStart"), null, 132);
+        } else if (state === "over") {
+          centerText(T("gameOver"), T("gameRetry"), 128);
+        }
+      }
+
+      /* ---------------- input ---------------- */
+
+      function inView() {
+        var r = canvas.getBoundingClientRect();
+        return r.bottom > 40 && r.top < window.innerHeight - 40;
+      }
+
+      window.addEventListener("keydown", function (ev) {
+        if (ev.code !== "Space" && ev.code !== "ArrowUp") return;
+        if (!inView()) return;
+        ev.preventDefault();
+        jump();
+      });
+
+      canvas.addEventListener("pointerdown", function (ev) {
+        ev.preventDefault();
+        jump();
+      });
+
+      /* ---------------- main loop ---------------- */
+
+      var last = 0;
+      function frame(ts) {
+        requestAnimationFrame(frame);
+        var dt = Math.min(0.05, ((ts - last) / 1000) || 0);
+        last = ts;
+        nowSec = ts / 1000;
+        if (state === "running") update(dt);
+        draw();
+      }
+      requestAnimationFrame(frame);
+
+    })();
+
 
   </script>
 
