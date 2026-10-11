@@ -660,6 +660,31 @@
       color: var(--muted);
     }
 
+    .locomotion-dist {
+      margin-top: 8px;
+
+      color: var(--muted);
+
+      font-size: 15px;
+      letter-spacing: -.01em;
+
+      font-variant-numeric:
+        tabular-nums;
+    }
+
+    .locomotion-head a {
+      color: var(--accent);
+
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .locomotion-note {
+      margin-top: 8px;
+
+      font-size: 13px;
+    }
+
     .locomotion-range {
       padding-top: 10px;
 
@@ -1925,8 +1950,8 @@
             The wheel<br>keeps score.
           </h2>
 
-          <p data-i18n="locomotionIntro">
-            Ten nights of recorded rotation, tallied nightly by persons unknown.
+          <p data-i18n-html="locomotionIntro">
+            Ten nights of recorded rotation, tallied by Chib's humans with help from <a href="https://www.niteangelpet.com/" target="_blank" rel="noopener">Niteangel</a>.
           </p>
 
         </div>
@@ -1952,6 +1977,11 @@
                 steps last night
               </div>
 
+              <div
+                class="locomotion-dist"
+                id="stepsDist"
+              ></div>
+
             </div>
 
             <div
@@ -1968,7 +1998,7 @@
             id="stepsChart"
             viewBox="0 0 600 230"
             role="img"
-            aria-label="Step counts for the last ten nights"
+            aria-label="Wheel rotations for the last ten nights"
           ></svg>
 
           <div
@@ -1983,6 +2013,13 @@
           <div class="locomotion-foot">
 
             <span id="stepsSummary"></span>
+
+            <div
+              class="locomotion-note"
+              data-i18n="rotationNote"
+            >
+              One wheel rotation &asymp; 0.878 m (87.8 cm).
+            </div>
 
           </div>
 
@@ -2679,16 +2716,19 @@
           "The wheel<br>keeps score.",
 
         locomotionIntro:
-          "Ten nights of recorded rotation, tallied nightly by persons unknown.",
+          "Ten nights of recorded rotation, tallied by Chib's humans with help from <a href=\"https://www.niteangelpet.com/\" target=\"_blank\" rel=\"noopener\">Niteangel</a>.",
 
         stepsLastNight:
-          "steps last night",
+          "rotations last night",
 
         stepsTenNights:
           "Last 10 nights",
 
         stepsAwaiting:
           "No measurements yet. The wheel turns; science awaits its numbers.",
+
+        rotationNote:
+          "One wheel rotation \u2248 0.878 m (87.8 cm).",
 
         factNut: "Favorite nut",
         factNutVal: "Pine",
@@ -2890,16 +2930,19 @@
           "Колесо<br>веде рахунок.",
 
         locomotionIntro:
-          "Десять ночей зафіксованого обертання. Підрахунок щоночі ведуть невідомі особи.",
+          "Десять ночей зафіксованого обертання. Підрахунок ведуть люди Чіба за допомогою <a href=\"https://www.niteangelpet.com/\" target=\"_blank\" rel=\"noopener\">Niteangel</a>.",
 
         stepsLastNight:
-          "кроків минулої ночі",
+          "обертів минулої ночі",
 
         stepsTenNights:
           "Останні 10 ночей",
 
         stepsAwaiting:
           "Вимірювань ще немає. Колесо крутиться; наука чекає на цифри.",
+
+        rotationNote:
+          "Один оберт колеса \u2248 0,878 м (87,8 см).",
 
         factNut: "Улюблений горіх",
         factNutVal: "Кедровий",
@@ -3092,20 +3135,30 @@
 
       var NAMESPACE = "http://www.w3.org/2000/svg";
 
+      var METERS_PER_ROTATION = 0.878;
+
       var STRINGS = {
 
         en: {
 
           ariaLabel:
-            "Step counts for the last ten nights",
+            "Wheel rotations for the last ten nights",
 
           summary: function (total, nights, avg) {
+            var avgKm = formatKm(avg * METERS_PER_ROTATION / 1000, "en");
             return (
               total.toLocaleString("en-US") +
-              " steps across " + nights +
+              " rotations across " + nights +
               " nights \u00b7 " +
-              avg.toLocaleString("en-US") +
-              " a night on average"
+              avgKm + " km a night on average"
+            );
+          },
+
+          distance: function (rotations) {
+            return (
+              "\u2248 " +
+              formatKm(rotations * METERS_PER_ROTATION / 1000, "en") +
+              " km"
             );
           }
 
@@ -3114,21 +3167,37 @@
         uk: {
 
           ariaLabel:
-            "Кількість кроків за останні десять ночей",
+            "Оберти колеса за останні десять ночей",
 
           summary: function (total, nights, avg) {
+            var avgKm = formatKm(avg * METERS_PER_ROTATION / 1000, "uk");
             return (
               total.toLocaleString("uk-UA") +
-              " кроків за " + nights +
+              " обертів за " + nights +
               " ночей \u00b7 " +
-              avg.toLocaleString("uk-UA") +
-              " за ніч у середньому"
+              avgKm + " км за ніч у середньому"
+            );
+          },
+
+          distance: function (rotations) {
+            return (
+              "\u2248 " +
+              formatKm(rotations * METERS_PER_ROTATION / 1000, "uk") +
+              " км"
             );
           }
 
         }
 
       };
+
+
+      function formatKm(km, language) {
+        return km.toLocaleString(
+          language === "uk" ? "uk-UA" : "en-US",
+          { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+        );
+      }
 
 
       function currentLanguage() {
@@ -3163,6 +3232,7 @@
         var latestEl = document.getElementById("stepsLatest");
         var emptyEl = document.getElementById("stepsEmpty");
         var summaryEl = document.getElementById("stepsSummary");
+        var distEl = document.getElementById("stepsDist");
 
 
         while (svg.firstChild) {
@@ -3173,6 +3243,7 @@
         if (!log.length) {
 
           latestEl.textContent = "\u2014";
+          if (distEl) distEl.textContent = "";
 
           svg.style.display = "none";
           emptyEl.hidden = false;
@@ -3198,6 +3269,10 @@
           Number(latest.s).toLocaleString(
             language === "uk" ? "uk-UA" : "en-US"
           );
+
+        if (distEl) {
+          distEl.textContent = STRINGS[language].distance(latest.s);
+        }
 
 
         var W = 600;
