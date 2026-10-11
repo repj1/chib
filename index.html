@@ -576,6 +576,162 @@
     }
 
     /* ==================================================
+       LOCOMOTION LOG
+    ================================================== */
+
+    .locomotion {
+      padding: 120px 0;
+
+      display: grid;
+      grid-template-columns: .68fr 1.32fr;
+
+      gap: 70px;
+
+      border-top:
+        1px solid var(--line);
+    }
+
+    .locomotion-head .section-label {
+      margin-bottom: 30px;
+    }
+
+    .locomotion-head h2 {
+      margin: 0 0 20px;
+
+      font-size:
+        clamp(40px,4.6vw,68px);
+
+      line-height: .98;
+
+      letter-spacing: -.045em;
+      font-weight: 500;
+    }
+
+    .locomotion-head p {
+      margin: 0;
+
+      max-width: 340px;
+
+      color: var(--muted);
+
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .locomotion-card {
+      background: var(--white);
+
+      border:
+        1px solid var(--line);
+
+      padding: 36px 36px 28px;
+    }
+
+    .locomotion-top {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 20px;
+    }
+
+    .locomotion-big {
+      font-size:
+        clamp(52px,5.4vw,84px);
+
+      line-height: 1;
+
+      letter-spacing: -.05em;
+      font-weight: 500;
+
+      font-variant-numeric:
+        tabular-nums;
+    }
+
+    .locomotion-unit {
+      margin-top: 10px;
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+      letter-spacing: .14em;
+
+      color: var(--muted);
+    }
+
+    .locomotion-range {
+      padding-top: 10px;
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+      letter-spacing: .14em;
+
+      color: var(--muted);
+
+      white-space: nowrap;
+    }
+
+    #stepsChart {
+      display: block;
+
+      width: 100%;
+      height: auto;
+
+      margin-top: 18px;
+    }
+
+    #stepsChart .bar {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+
+      transform: scaleY(0);
+
+      animation:
+        bar-grow .8s
+        cubic-bezier(.22,.8,.3,1)
+        forwards;
+    }
+
+    @keyframes bar-grow {
+      to { transform: scaleY(1); }
+    }
+
+    #stepsChart .bar-label {
+      font-size: 13px;
+
+      fill: var(--muted);
+
+      letter-spacing: .02em;
+    }
+
+    .locomotion-foot {
+      margin-top: 18px;
+      padding-top: 16px;
+
+      border-top:
+        1px solid var(--line);
+
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .locomotion-empty {
+      padding: 46px 10px 30px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+
+    /* ==================================================
        FIELD NOTES
     ================================================== */
 
@@ -1405,6 +1561,24 @@
         margin-right: 14px;
       }
 
+      .locomotion {
+        display: block;
+
+        padding: 90px 0;
+      }
+
+      .locomotion-head {
+        margin-bottom: 44px;
+      }
+
+      .locomotion-card {
+        padding: 28px 22px 22px;
+      }
+
+      .locomotion-top {
+        align-items: flex-start;
+      }
+
       .extra-facts {
         grid-template-columns: 1fr;
       }
@@ -1726,6 +1900,95 @@
         One wheel.<br>
         No limits. ♡
       </div>
+
+
+
+      <!-- ==================================================
+           LOCOMOTION LOG
+      ================================================== -->
+
+      <section
+        class="locomotion"
+        id="locomotion"
+      >
+
+        <div class="locomotion-head">
+
+          <div
+            class="section-label"
+            data-i18n="locomotionLabel"
+          >
+            Locomotion log
+          </div>
+
+          <h2 data-i18n-html="locomotionTitle">
+            The wheel<br>keeps score.
+          </h2>
+
+          <p data-i18n="locomotionIntro">
+            Ten nights of recorded rotation, tallied nightly by persons unknown.
+          </p>
+
+        </div>
+
+
+        <div class="locomotion-card">
+
+          <div class="locomotion-top">
+
+            <div>
+
+              <div
+                class="locomotion-big"
+                id="stepsLatest"
+              >
+                &hellip;
+              </div>
+
+              <div
+                class="locomotion-unit"
+                data-i18n="stepsLastNight"
+              >
+                steps last night
+              </div>
+
+            </div>
+
+            <div
+              class="locomotion-range"
+              data-i18n="stepsTenNights"
+            >
+              Last 10 nights
+            </div>
+
+          </div>
+
+
+          <svg
+            id="stepsChart"
+            viewBox="0 0 600 230"
+            role="img"
+            aria-label="Step counts for the last ten nights"
+          ></svg>
+
+          <div
+            class="locomotion-empty"
+            id="stepsEmpty"
+            data-i18n="stepsAwaiting"
+            hidden
+          >
+            No measurements yet. The wheel turns; science awaits its numbers.
+          </div>
+
+          <div class="locomotion-foot">
+
+            <span id="stepsSummary"></span>
+
+          </div>
+
+        </div>
+
+      </section>
 
 
 
@@ -2408,6 +2671,25 @@
         secondaryNote:
           "Four paws.<br>One wheel.<br>No limits. ♡",
 
+
+        locomotionLabel:
+          "Locomotion log",
+
+        locomotionTitle:
+          "The wheel<br>keeps score.",
+
+        locomotionIntro:
+          "Ten nights of recorded rotation, tallied nightly by persons unknown.",
+
+        stepsLastNight:
+          "steps last night",
+
+        stepsTenNights:
+          "Last 10 nights",
+
+        stepsAwaiting:
+          "No measurements yet. The wheel turns; science awaits its numbers.",
+
         factNut: "Favorite nut",
         factNutVal: "Pine",
         factCount: "Counting Ability",
@@ -2600,6 +2882,25 @@
         secondaryNote:
           "Чотири лапки.<br>Одне колесо.<br>Жодних меж. ♡",
 
+
+        locomotionLabel:
+          "Журнал пересування",
+
+        locomotionTitle:
+          "Колесо<br>веде рахунок.",
+
+        locomotionIntro:
+          "Десять ночей зафіксованого обертання. Підрахунок щоночі ведуть невідомі особи.",
+
+        stepsLastNight:
+          "кроків минулої ночі",
+
+        stepsTenNights:
+          "Останні 10 ночей",
+
+        stepsAwaiting:
+          "Вимірювань ще немає. Колесо крутиться; наука чекає на цифри.",
+
         factNut: "Улюблений горіх",
         factNutVal: "Кедровий",
         factCount: "Здатність до лічби",
@@ -2777,6 +3078,232 @@
 
 
     setLanguage(savedLanguage);
+
+  </script>
+
+
+  <script src="steps.js"></script>
+  <script>
+
+    (function () {
+
+      var svg = document.getElementById("stepsChart");
+      if (!svg) return;
+
+      var NAMESPACE = "http://www.w3.org/2000/svg";
+
+      var STRINGS = {
+
+        en: {
+
+          ariaLabel:
+            "Step counts for the last ten nights",
+
+          summary: function (total, nights, avg) {
+            return (
+              total.toLocaleString("en-US") +
+              " steps across " + nights +
+              " nights \u00b7 " +
+              avg.toLocaleString("en-US") +
+              " a night on average"
+            );
+          }
+
+        },
+
+        uk: {
+
+          ariaLabel:
+            "Кількість кроків за останні десять ночей",
+
+          summary: function (total, nights, avg) {
+            return (
+              total.toLocaleString("uk-UA") +
+              " кроків за " + nights +
+              " ночей \u00b7 " +
+              avg.toLocaleString("uk-UA") +
+              " за ніч у середньому"
+            );
+          }
+
+        }
+
+      };
+
+
+      function currentLanguage() {
+        return document.documentElement.lang === "uk"
+          ? "uk"
+          : "en";
+      }
+
+
+      function formatDay(iso, language) {
+        var parts = iso.split("-");
+
+        var date = new Date(
+          Number(parts[0]),
+          Number(parts[1]) - 1,
+          Number(parts[2])
+        );
+
+        return date.toLocaleDateString(
+          language === "uk" ? "uk-UA" : "en-GB",
+          { day: "numeric", month: "short" }
+        );
+      }
+
+
+      function renderSteps() {
+
+        var language = currentLanguage();
+
+        var log = (window.STEP_LOG || []).slice(-10);
+
+        var latestEl = document.getElementById("stepsLatest");
+        var emptyEl = document.getElementById("stepsEmpty");
+        var summaryEl = document.getElementById("stepsSummary");
+
+
+        while (svg.firstChild) {
+          svg.removeChild(svg.firstChild);
+        }
+
+
+        if (!log.length) {
+
+          latestEl.textContent = "\u2014";
+
+          svg.style.display = "none";
+          emptyEl.hidden = false;
+          summaryEl.textContent = "";
+
+          return;
+
+        }
+
+
+        svg.style.display = "";
+        emptyEl.hidden = true;
+
+        svg.setAttribute(
+          "aria-label",
+          STRINGS[language].ariaLabel
+        );
+
+
+        var latest = log[log.length - 1];
+
+        latestEl.textContent =
+          Number(latest.s).toLocaleString(
+            language === "uk" ? "uk-UA" : "en-US"
+          );
+
+
+        var W = 600;
+        var H = 230;
+        var padTop = 14;
+        var padBottom = 36;
+
+        var max = Math.max.apply(
+          null,
+          log.map(function (entry) { return entry.s; })
+        );
+
+        var slot = W / log.length;
+        var barWidth = Math.min(46, slot * 0.56);
+
+        var scale = max > 0
+          ? (H - padTop - padBottom) / max
+          : 0;
+
+
+        log.forEach(function (entry, index) {
+
+          var x = slot * index + (slot - barWidth) / 2;
+          var barH = Math.max(3, entry.s * scale);
+          var y = H - padBottom - barH;
+
+          var rect = document.createElementNS(NAMESPACE, "rect");
+
+          rect.setAttribute("x", x.toFixed(1));
+          rect.setAttribute("y", y.toFixed(1));
+          rect.setAttribute("width", barWidth.toFixed(1));
+          rect.setAttribute("height", barH.toFixed(1));
+          rect.setAttribute(
+            "rx",
+            Math.min(7, barWidth / 2).toFixed(1)
+          );
+
+          rect.setAttribute(
+            "fill",
+            index === log.length - 1 ? "#d87b36" : "#ead9c2"
+          );
+
+          rect.setAttribute("class", "bar");
+          rect.style.animationDelay = (index * 0.06) + "s";
+
+
+          var tip = document.createElementNS(NAMESPACE, "title");
+
+          tip.textContent =
+            formatDay(entry.d, language) +
+            ": " +
+            Number(entry.s).toLocaleString(
+              language === "uk" ? "uk-UA" : "en-US"
+            );
+
+          rect.appendChild(tip);
+          svg.appendChild(rect);
+
+
+          var label = document.createElementNS(NAMESPACE, "text");
+
+          label.setAttribute(
+            "x",
+            (slot * index + slot / 2).toFixed(1)
+          );
+          label.setAttribute("y", H - 12);
+          label.setAttribute("text-anchor", "middle");
+          label.setAttribute("class", "bar-label");
+
+          label.textContent = formatDay(entry.d, language);
+
+          svg.appendChild(label);
+
+        });
+
+
+        var total = log.reduce(
+          function (sum, entry) { return sum + entry.s; },
+          0
+        );
+
+        summaryEl.textContent = STRINGS[language].summary(
+          total,
+          log.length,
+          Math.round(total / log.length)
+        );
+
+      }
+
+
+      renderSteps();
+
+
+      ["lang-en", "lang-ua"].forEach(function (id) {
+
+        var button = document.getElementById(id);
+
+        if (button) {
+          button.addEventListener("click", function () {
+            setTimeout(renderSteps, 0);
+          });
+        }
+
+      });
+
+    })();
 
   </script>
 
