@@ -1,1 +1,21 @@
-LyogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICAgQ0hJQidTIExPQ09NT1RJT04gTE9HCgogICBKb3NlcGggc2VuZHMgd2hlZWwtcm90YXRpb24gY291bnRzOyB0aGV5IGFyZSByZWNvcmRlZCBoZXJlLgogICBBcHBlbmQgdGhlIG5ld2VzdCBuaWdodCBhdCB0aGUgRU5EIG9mIHRoZSBsaXN0IGFzCiAgICAgeyBkOiAiWVlZWS1NTS1ERCIsIHM6IDxzdGVwcz4gfSwKICAga2VlcGluZyB0aGUgMTAgbW9zdCByZWNlbnQgZW50cmllcy4KPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0gKi8KCnZhciBTVEVQX0xPRyA9IFsKICB7IGQ6ICIyMDI2LTEwLTEwIiwgczogMjQ1OSB9LAogIHsgZDogIjIwMjYtMTAtMTEiLCBzOiAxNTY5IH0sCiAgeyBkOiAiMjAyNi0xMC0xMiIsIHM6IDU3MyB9LAogIHsgZDogIjIwMjYtMTAtMTMiLCBzOiAyMjU5IH0sCiAgeyBkOiAiMjAyNi0xMC0xNCIsIHM6IDIyOTkgfSwKICB7IGQ6ICIyMDI2LTEwLTE1IiwgczogMjAxMSB9LAogIHsgZDogIjIwMjYtMTAtMTYiLCBzOiAyMTc5IH0sCiAgeyBkOiAiMjAyNi0xMC0xNyIsIHM6IDIyMDIgfSwKICB7IGQ6ICIyMDI2LTEwLTE4IiwgczogMjcyMSB9LAogIHsgZDogIjIwMjYtMTAtMTkiLCBzOiAxNTk5IH0KXTsK
+/* ==================================================
+   CHIB'S LOCOMOTION LOG
+
+   Joseph sends wheel-rotation counts; they are recorded here.
+   Append the newest night at the END of the list as
+     { d: "YYYY-MM-DD", s: <steps> },
+   keeping the 10 most recent entries.
+================================================== */
+
+var STEP_LOG = [
+  { d: "2026-10-11", s: 1569 },
+  { d: "2026-10-12", s: 573 },
+  { d: "2026-10-13", s: 2259 },
+  { d: "2026-10-14", s: 2299 },
+  { d: "2026-10-15", s: 2011 },
+  { d: "2026-10-16", s: 2179 },
+  { d: "2026-10-17", s: 2202 },
+  { d: "2026-10-18", s: 2721 },
+  { d: "2026-10-19", s: 1599 },
+  { d: "2026-10-21", s: 1418 }
+];
