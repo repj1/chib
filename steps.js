@@ -5,6 +5,8 @@
    Append the newest night at the END of the list as
      { d: "YYYY-MM-DD", s: <steps> },
    keeping the 10 most recent entries.
+   Also append every night to history.js (FULL_LOG),
+   which keeps the complete archive and is never trimmed.
 ================================================== */
 
 var STEP_LOG = [
