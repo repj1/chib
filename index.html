@@ -841,19 +841,41 @@
     }
 
 
-    .history {
-      padding: 10px 24px 70px;
-
-      max-width: 860px;
-      margin: 0 auto;
+    .locomotion-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
     }
 
-    .history h2 {
-      margin: 10px 0 14px;
+    .history-toggle {
+      background: none;
+      border: 0;
+      padding: 8px 0 0;
+
+      font: inherit;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .history-toggle:hover {
+      color: #d87b36;
+      text-decoration: underline;
+    }
+
+    .history-panel {
+      margin-top: 8px;
     }
 
     .history-month {
-      margin-top: 38px;
+      margin-top: 30px;
+    }
+
+    .history-panel .history-month:first-child {
+      margin-top: 18px;
     }
 
     .history-month-head {
@@ -1844,13 +1866,6 @@
             Photos
           </a>
 
-          <a
-            href="#history"
-            data-i18n="navHistory"
-          >
-            &#8635; History
-          </a>
-
         </nav>
 
 
@@ -2147,11 +2162,26 @@
 
             </div>
 
-            <div
-              class="locomotion-range"
-              data-i18n="stepsTenNights"
-            >
-              Last 10 nights
+            <div class="locomotion-side">
+
+              <div
+                class="locomotion-range"
+                data-i18n="stepsTenNights"
+              >
+                Last 10 nights
+              </div>
+
+              <button
+                type="button"
+                class="history-toggle"
+                id="historyToggle"
+                data-i18n="navHistory"
+                aria-expanded="false"
+                aria-controls="historyPanel"
+              >
+                &#8635; History
+              </button>
+
             </div>
 
           </div>
@@ -2194,37 +2224,17 @@
 
           </div>
 
+          <div
+            class="history-panel"
+            id="historyPanel"
+            hidden
+          >
+
+            <div id="historyList"></div>
+
+          </div>
+
         </div>
-
-      </section>
-
-
-
-      <!-- ==================================================
-           FULL HISTORY
-      ================================================== -->
-
-      <section
-        class="history"
-        id="history"
-      >
-
-        <div
-          class="section-label"
-          data-i18n="historyLabel"
-        >
-          &#8635; Full history
-        </div>
-
-        <h2 data-i18n-html="historyTitle">
-          Every night<br>on record.
-        </h2>
-
-        <p data-i18n-html="historyIntro">
-          The complete locomotion archive, grouped by month. The chart above keeps only the latest ten nights; the full record lives here, and nothing is ever deleted.
-        </p>
-
-        <div id="historyList"></div>
 
       </section>
 
@@ -2989,15 +2999,6 @@
         navHistory:
           "\u21ba History",
 
-        historyLabel:
-          "\u21ba Full history",
-
-        historyTitle:
-          "Every night<br>on record.",
-
-        historyIntro:
-          "The complete locomotion archive, grouped by month. The chart above keeps only the latest ten nights; the full record lives here, and nothing is ever deleted.",
-
         historyNights:
           "nights",
 
@@ -3246,15 +3247,6 @@
 
         navHistory:
           "\u21ba Історія",
-
-        historyLabel:
-          "\u21ba Повна історія",
-
-        historyTitle:
-          "Кожна ніч<br>у записі.",
-
-        historyIntro:
-          "Повний архів пересування, згрупований за місяцями. Графік вище показує лише останні десять ночей; повний запис зберігається тут, і нічого ніколи не видаляється.",
 
         historyNights:
           "ночей",
@@ -4305,6 +4297,18 @@
           });
         }
       });
+
+      var toggle = document.getElementById("historyToggle");
+      var panel = document.getElementById("historyPanel");
+      if (toggle && panel) {
+        toggle.addEventListener("click", function () {
+          var opening = panel.hidden;
+          panel.hidden = !opening;
+          toggle.setAttribute(
+            "aria-expanded", opening ? "true" : "false"
+          );
+        });
+      }
 
     })();
 
