@@ -3557,7 +3557,7 @@
       }
 
       var LOW_TYPES = ["pillow", "bedding", "peanut", "pinenuts", "peanutPair"];
-      var MID_TYPES = ["hut", "bottle", "tunnel", "peanutBig"];
+      var MID_TYPES = ["hut", "bottle", "tunnel", "peanutBig", "airnut", "airnut", "airpine"];
 
       function spawnObstacle() {
         var midChance = Math.min(0.2 + elapsed * 0.012, 0.7);
@@ -3573,9 +3573,15 @@
           pinenuts:   { w: 54, h: 18 },
           hut:        { w: 66, h: 54 },
           bottle:     { w: 30, h: 64 },
-          tunnel:     { w: 78, h: 46 }
+          tunnel:     { w: 78, h: 46 },
+          airnut:     { w: 38, h: 28 },
+          airpine:    { w: 54, h: 18 }
         }[kind];
-        obstacles.push({ kind: kind, x: W + 40, w: dims.w, h: dims.h });
+        var ob = { kind: kind, x: W + 40, w: dims.w, h: dims.h };
+        if (kind === "airnut" || kind === "airpine") {
+          ob.baseY = GROUND - 96;
+        }
+        obstacles.push(ob);
       }
 
       function spawnSnack() {
@@ -3606,7 +3612,8 @@
         var hx0 = ham.x - 17, hx1 = ham.x + 17;
         var hy0 = ham.y - 44, hy1 = ham.y - 3;
         var ox0 = ob.x - ob.w * 0.40, ox1 = ob.x + ob.w * 0.40;
-        var oy0 = GROUND - ob.h * 0.85, oy1 = GROUND;
+        var obase = ob.baseY === undefined ? GROUND : ob.baseY;
+        var oy0 = obase - ob.h * 0.85, oy1 = obase;
         return hx0 < ox1 && hx1 > ox0 && hy0 < oy1 && hy1 > oy0;
       }
 
@@ -3983,6 +3990,8 @@
         else if (ob.kind === "peanutBig") drawPeanut(ob.x, 1.45);
         else if (ob.kind === "peanutPair") { drawPeanut(ob.x - 20, 1); drawPeanut(ob.x + 20, 0.9); }
         else if (ob.kind === "pinenuts") drawPinenuts(ob.x);
+        else if (ob.kind === "airnut") drawPeanut(ob.x, 1, ob.baseY);
+        else if (ob.kind === "airpine") drawPinenuts(ob.x, ob.baseY);
       }
 
       function drawSnack(sn) {
