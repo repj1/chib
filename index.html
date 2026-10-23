@@ -3021,7 +3021,7 @@
           "The nightly migration,<br>now playable.",
 
         gameIntro:
-          "Space, \u2191, or tap to leap the fixtures and gather the snacks. The wheel is closed for maintenance.",
+          "Space, \u2191, or tap to leap the obstacles and gather the carrots. The wheel is closed for maintenance.",
 
         gameStart:
           "Space or tap to start",
@@ -3270,7 +3270,7 @@
           "Нічна міграція,<br>тепер інтерактивна.",
 
         gameIntro:
-          "Пробіл, \u2191 або дотик, щоб перестрибувати перешкоди й збирати смаколики. Колесо зачинено на техобслуговування.",
+          "Пробіл, \u2191 або дотик, щоб перестрибувати перешкоди й збирати моркву. Колесо зачинено на техобслуговування.",
 
         gameStart:
           "Пробіл або дотик, щоб почати",
@@ -3556,40 +3556,41 @@
         }
       }
 
-      var OBSTACLE_TYPES = ["pillow", "bedding", "hut", "bottle"];
+      var LOW_TYPES = ["pillow", "bedding", "peanut", "pinenuts", "peanutPair"];
+      var MID_TYPES = ["hut", "bottle", "tunnel", "peanutBig"];
 
       function spawnObstacle() {
-        var kind = pick(OBSTACLE_TYPES);
+        var midChance = Math.min(0.2 + elapsed * 0.012, 0.7);
+        var kind = pick(
+          Math.random() < midChance ? MID_TYPES : LOW_TYPES
+        );
         var dims = {
-          pillow:  { w: 64, h: 30 },
-          bedding: { w: 86, h: 26 },
-          hut:     { w: 66, h: 54 },
-          bottle:  { w: 30, h: 64 }
+          pillow:     { w: 64, h: 30 },
+          bedding:    { w: 86, h: 26 },
+          peanut:     { w: 38, h: 28 },
+          peanutBig:  { w: 54, h: 40 },
+          peanutPair: { w: 78, h: 28 },
+          pinenuts:   { w: 54, h: 18 },
+          hut:        { w: 66, h: 54 },
+          bottle:     { w: 30, h: 64 },
+          tunnel:     { w: 78, h: 46 }
         }[kind];
         obstacles.push({ kind: kind, x: W + 40, w: dims.w, h: dims.h });
       }
 
-      var SNACK_TYPES = ["carrot", "peanut", "pinenuts"];
-
       function spawnSnack() {
-        var kind = pick(SNACK_TYPES);
-        var dims = {
-          carrot:   { w: 28, h: 46 },
-          peanut:   { w: 38, h: 28 },
-          pinenuts: { w: 54, h: 18 }
-        }[kind];
         var air = Math.random() < 0.45;
         snacks.push({
-          kind: kind,
+          kind: "carrot",
           x: W + 40,
-          w: dims.w,
-          h: dims.h,
+          w: 28,
+          h: 46,
           baseY: air ? GROUND - 96 : GROUND
         });
       }
 
       function spawnEntity() {
-        if (Math.random() < 0.45) spawnSnack();
+        if (Math.random() < 0.22) spawnSnack();
         else spawnObstacle();
       }
 
@@ -3950,17 +3951,42 @@
         ctx.restore();
       }
 
+      function drawTunnel(x) {
+        ctx.save();
+        ctx.translate(x, GROUND);
+        ctx.beginPath();
+        ctx.roundRect(-38, -44, 76, 44, 10);
+        ctx.fillStyle = "#dcb57f";
+        ctx.fill();
+        ctx.strokeStyle = "#b08d55";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.ellipse(0, -20, 15, 13, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "#8a6a3d";
+        ctx.fill();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.ellipse(0, -20, 10, 8.5, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "#5f4726";
+        ctx.fill();
+        ctx.restore();
+      }
+
       function drawObstacle(ob) {
         if (ob.kind === "pillow") drawPillow(ob.x);
         else if (ob.kind === "bedding") drawBedding(ob.x);
         else if (ob.kind === "hut") drawHut(ob.x);
         else if (ob.kind === "bottle") drawBottle(ob.x);
+        else if (ob.kind === "tunnel") drawTunnel(ob.x);
+        else if (ob.kind === "peanut") drawPeanut(ob.x, 1);
+        else if (ob.kind === "peanutBig") drawPeanut(ob.x, 1.45);
+        else if (ob.kind === "peanutPair") { drawPeanut(ob.x - 20, 1); drawPeanut(ob.x + 20, 0.9); }
+        else if (ob.kind === "pinenuts") drawPinenuts(ob.x);
       }
 
       function drawSnack(sn) {
-        if (sn.kind === "carrot") drawCarrot(sn.x, 1, sn.baseY);
-        else if (sn.kind === "peanut") drawPeanut(sn.x, 1, sn.baseY);
-        else if (sn.kind === "pinenuts") drawPinenuts(sn.x, sn.baseY);
+        drawCarrot(sn.x, 1, sn.baseY);
       }
 
       function drawCloud(c) {
