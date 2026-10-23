@@ -841,6 +841,59 @@
     }
 
 
+    .history {
+      padding: 10px 24px 70px;
+
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .history h2 {
+      margin: 10px 0 14px;
+    }
+
+    .history-month {
+      margin-top: 38px;
+    }
+
+    .history-month-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      padding-bottom: 8px;
+      border-bottom: 2px solid #ead9c2;
+
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .history-month-total {
+      color: var(--muted);
+
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .history-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+
+      padding: 7px 2px;
+      border-bottom: 1px dotted #e3d5bf;
+
+      font-size: 15px;
+    }
+
+    .history-row-count {
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+
     /* ==================================================
        FIELD NOTES
     ================================================== */
@@ -1791,6 +1844,13 @@
             Photos
           </a>
 
+          <a
+            href="#history"
+            data-i18n="navHistory"
+          >
+            &#8635; History
+          </a>
+
         </nav>
 
 
@@ -2135,6 +2195,36 @@
           </div>
 
         </div>
+
+      </section>
+
+
+
+      <!-- ==================================================
+           FULL HISTORY
+      ================================================== -->
+
+      <section
+        class="history"
+        id="history"
+      >
+
+        <div
+          class="section-label"
+          data-i18n="historyLabel"
+        >
+          &#8635; Full history
+        </div>
+
+        <h2 data-i18n-html="historyTitle">
+          Every night<br>on record.
+        </h2>
+
+        <p data-i18n-html="historyIntro">
+          The complete locomotion archive, grouped by month. The chart above keeps only the latest ten nights; the full record lives here, and nothing is ever deleted.
+        </p>
+
+        <div id="historyList"></div>
 
       </section>
 
@@ -2896,6 +2986,28 @@
           "One wheel rotation \u2248 0.878 m (87.8 cm).",
 
 
+        navHistory:
+          "\u21ba History",
+
+        historyLabel:
+          "\u21ba Full history",
+
+        historyTitle:
+          "Every night<br>on record.",
+
+        historyIntro:
+          "The complete locomotion archive, grouped by month. The chart above keeps only the latest ten nights; the full record lives here, and nothing is ever deleted.",
+
+        historyNights:
+          "nights",
+
+        historyRotations:
+          "rotations",
+
+        historyKm:
+          "km",
+
+
         gameLabel:
           "Amusement",
 
@@ -3130,6 +3242,28 @@
 
         rotationNote:
           "Один оберт колеса \u2248 0,878 м (87,8 см).",
+
+
+        navHistory:
+          "\u21ba Історія",
+
+        historyLabel:
+          "\u21ba Повна історія",
+
+        historyTitle:
+          "Кожна ніч<br>у записі.",
+
+        historyIntro:
+          "Повний архів пересування, згрупований за місяцями. Графік вище показує лише останні десять ночей; повний запис зберігається тут, і нічого ніколи не видаляється.",
+
+        historyNights:
+          "ночей",
+
+        historyRotations:
+          "обертів",
+
+        historyKm:
+          "км",
 
 
         gameLabel:
@@ -3765,6 +3899,7 @@
 
 
   <script src="steps.js"></script>
+  <script src="history.js"></script>
   <script>
 
     (function () {
@@ -4062,6 +4197,113 @@
           });
         }
 
+      });
+
+    })();
+
+  </script>
+
+
+  <script>
+
+    (function () {
+
+      function renderHistory() {
+
+        var list = document.getElementById("historyList");
+        if (!list || !window.FULL_LOG) return;
+
+        var language =
+          document.documentElement.lang === "uk" ? "uk" : "en";
+        var locale = language === "uk" ? "uk-UA" : "en-GB";
+        var T = (typeof translations !== "undefined")
+          ? translations[language]
+          : {};
+
+        function km(rotations) {
+          return (rotations * 0.878 / 1000).toLocaleString(
+            locale,
+            { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+          ) + " " + (T.historyKm || "km");
+        }
+
+        var months = {};
+        window.FULL_LOG.forEach(function (entry) {
+          var key = entry.d.slice(0, 7);
+          if (!months[key]) months[key] = [];
+          months[key].push(entry);
+        });
+
+        list.innerHTML = "";
+
+        Object.keys(months).sort().reverse().forEach(function (key) {
+
+          var entries = months[key].slice().reverse();
+          var total = entries.reduce(function (sum, e) {
+            return sum + e.s;
+          }, 0);
+
+          var parts = key.split("-");
+          var monthName = new Date(
+            Number(parts[0]), Number(parts[1]) - 1, 1
+          ).toLocaleDateString(locale, {
+            month: "long", year: "numeric"
+          });
+
+          var block = document.createElement("div");
+          block.className = "history-month";
+
+          var head = document.createElement("div");
+          head.className = "history-month-head";
+          head.innerHTML =
+            "<span></span><span class=\"history-month-total\"></span>";
+          head.firstChild.textContent = monthName;
+          head.lastChild.textContent =
+            entries.length + " " + (T.historyNights || "nights") +
+            " \u00b7 " +
+            total.toLocaleString(
+              language === "uk" ? "uk-UA" : "en-US"
+            ) +
+            " " + (T.historyRotations || "rotations") +
+            " \u00b7 " + km(total);
+          block.appendChild(head);
+
+          entries.forEach(function (entry) {
+            var row = document.createElement("div");
+            row.className = "history-row";
+            var day = document.createElement("span");
+            day.textContent = new Date(
+              entry.d + "T12:00:00"
+            ).toLocaleDateString(locale, {
+              weekday: "short", day: "numeric", month: "short"
+            });
+            var count = document.createElement("span");
+            count.className = "history-row-count";
+            count.textContent =
+              entry.s.toLocaleString(
+                language === "uk" ? "uk-UA" : "en-US"
+              ) + " \u00b7 " + km(entry.s);
+            row.appendChild(day);
+            row.appendChild(count);
+            block.appendChild(row);
+          });
+
+          list.appendChild(block);
+
+        });
+
+      }
+
+      renderHistory();
+      window.addEventListener("load", renderHistory);
+
+      ["lang-en", "lang-ua"].forEach(function (id) {
+        var button = document.getElementById(id);
+        if (button) {
+          button.addEventListener("click", function () {
+            setTimeout(renderHistory, 0);
+          });
+        }
       });
 
     })();
