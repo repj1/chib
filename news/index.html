@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ciabatta News — Sunday, October 25, 2026</title>
+<style>
+  :root {
+    --ink: #111;
+    --gray: #555;
+    --rule: #111;
+    --paper: #fff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0 18px 60px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", Times, serif;
+  }
+
+  .paper {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    text-align: center;
+    padding: 26px 0 8px;
+    border-bottom: 4px double var(--rule);
+  }
+
+  .masthead h1 {
+    margin: 0;
+    font-size: clamp(56px, 9vw, 104px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  .motto {
+    margin: 10px 0 0;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--gray);
+  }
+
+  .dateline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    justify-content: space-between;
+    padding: 10px 2px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .topnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    justify-content: center;
+    padding: 12px 0;
+    border-bottom: 3px solid var(--rule);
+    font-size: 15px;
+  }
+
+  .topnav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .topnav a:hover { text-decoration: underline; }
+
+  /* ---------- Articles ---------- */
+  .kicker {
+    margin: 0 0 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .byline {
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  .byline b { color: var(--ink); }
+
+  p.body {
+    margin: 0 0 12px;
+    font-size: 16.5px;
+    line-height: 1.55;
+  }
+
+  figure { margin: 0; }
+
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--gray);
+  }
+
+  figcaption b { color: var(--ink); }
+
+  /* Lead story */
+  .lead {
+    padding: 26px 0 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .lead h2 {
+    margin: 0 0 14px;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+  }
+
+  .lead-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 26px;
+    align-items: start;
+  }
+
+  /* Second story */
+  .second {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 26px;
+    align-items: start;
+    padding: 24px 0;
+    border-bottom: 3px solid var(--rule);
+  }
+
+  .second h2 {
+    margin: 0 0 12px;
+    font-size: clamp(26px, 3.4vw, 40px);
+    line-height: 1.05;
+  }
+
+  /* Story grid */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 26px;
+    padding-top: 24px;
+  }
+
+  .grid article {
+    padding-top: 4px;
+  }
+
+  .grid h3 {
+    margin: 0 0 10px;
+    font-size: 23px;
+    line-height: 1.12;
+  }
+
+  .grid figure { margin-bottom: 12px; }
+
+  .grid .filephoto img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  /* Broadcast desk box */
+  .desk {
+    margin-top: 34px;
+    padding: 20px 22px;
+    border: 1px solid var(--rule);
+  }
+
+  .desk h3 {
+    margin: 0 0 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .desk p {
+    margin: 0 0 8px;
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+
+  .desk p:last-child { margin-bottom: 0; }
+
+  footer {
+    margin-top: 30px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--gray);
+    text-align: center;
+  }
+
+  footer a { color: var(--ink); }
+
+  @media (max-width: 760px) {
+    .lead-grid, .second, .grid { grid-template-columns: 1fr; }
+    .dateline { justify-content: center; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="paper">
+
+  <header class="masthead">
+    <h1>Ciabatta News</h1>
+    <p class="motto">All the News That's Fit to Pouch</p>
+  </header>
+
+  <div class="dateline">
+    <span>Sunday, October 25, 2026</span>
+    <span>Prague</span>
+    <span>Late Enclosure Edition</span>
+    <span>Price: One Carrot</span>
+  </div>
+
+  <nav class="topnav">
+    <a href="/">Home</a>
+    <a href="/encyclopedia.html">Encyclopedia</a>
+    <a href="/">Locomotion Log</a>
+  </nav>
+
+  <!-- LEAD: tonight's rebound -->
+  <article class="lead">
+    <p class="kicker">Wheel Report &middot; Top Story</p>
+    <h2>Wheel Roars Back Past 1,600 as Recovery Completes</h2>
+    <div class="lead-grid">
+      <div>
+        <p class="byline">By <b>NORA</b>, Ciabatta News Desk</p>
+        <p class="body">PRAGUE &mdash; The rebound is complete. Last night's wheel count climbed to just over 1,600 rotations, the second strong night in a row after the 1,594-rotation marathon, and a long way back from the 128-rotation collapse earlier this week.</p>
+        <p class="body">Analysts are calling it a full recovery. The wheel, for its part, has offered no comment, though it is said to be spinning smoothly.</p>
+        <p class="body">The count restores the champion's standing after a week of wild swings, from a personal best of 2,721 down to 128 and back again. Officials urge fans to check the log in the morning.</p>
+      </div>
+      <figure>
+        <img id="news-wheel" alt="Mr. Tofu Ciabatta sprinting on his wheel before an audience">
+        <figcaption><b>Mr. Tofu Ciabatta, mid-rebound,</b> before an audience of admirers. Illustration: Ciabatta News.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- SECOND: bedding burial -->
+  <article class="second">
+    <figure>
+      <img id="news-bedding" alt="Mr. Tofu Ciabatta kicking bedding over his burrow">
+      <figcaption><b>The winterization project, underway.</b> Bedding, everywhere. Illustration: Ciabatta News.</figcaption>
+    </figure>
+    <div>
+      <p class="kicker">Housing &middot; Enclosure</p>
+      <h2>Burrow Buried in Bedding in Apparent Winterization Drive</h2>
+      <p class="byline">By <b>NORA</b>, Ciabatta News Desk</p>
+      <p class="body">PRAGUE &mdash; The enclosure has been redecorated. Overnight, Chib kicked bedding all over the place, piling it high around the burrow in what officials are describing as a winterization project.</p>
+      <p class="body">The burrow entrance is now substantially buried. Whether this is insulation against the coming cold or simply interior design remains unclear, but sources close to the cage say the burrow has never looked cozier.</p>
+    </div>
+  </article>
+
+  <!-- GRID: earlier bulletins -->
+  <div class="grid">
+
+    <article>
+      <p class="kicker">October 24 Bulletin</p>
+      <h3>1,594 Rotations Leave Champion Tired and Irritable</h3>
+      <figure class="filephoto">
+        <img src="../images/chib-14.jpeg" alt="Mr. Tofu Ciabatta, file photo">
+        <figcaption><b>Mr. Tofu Ciabatta.</b> File photo.</figcaption>
+      </figure>
+      <p class="byline">By <b>NORA</b>, Ciabatta News Desk</p>
+      <p class="body">After a marathon night of 1,594 rotations, Chib woke up tired and, by all accounts, thoroughly irritable. Sources close to the cage report he glared at his water bottle, declined a morning carrot, and retreated to his hut for what officials are calling an unscheduled rest.</p>
+      <p class="body">Analysts say the outburst was inevitable: after two quiet nights of 128 and 428 rotations, the surge was the hamster equivalent of running a marathon with no training.</p>
+    </article>
+
+    <article>
+      <p class="kicker">October 24 Bulletin</p>
+      <h3>Carrot Declined at Dawn, Eaten &ldquo;Without Enthusiasm&rdquo;</h3>
+      <p class="byline">By <b>NORA</b>, Ciabatta News Desk</p>
+      <p class="body">The carrot economy remains stable. One carrot was offered at dawn and, despite the grumpiness, was eventually accepted, though witnesses say it was eaten, quote, &ldquo;without enthusiasm.&rdquo;</p>
+      <p class="body">The wheel maintenance crew has confirmed the wheel is in full working order and denies any responsibility for the mood, noting that nobody forced anyone onto it at midnight.</p>
+    </article>
+
+    <article>
+      <p class="kicker">October 24 Bulletin</p>
+      <h3>Press Office Calls Peanut Bowl an &ldquo;Unrelated Incident&rdquo;</h3>
+      <figure>
+        <img id="news-peanut" alt="A knocked-over peanut bowl beside an innocent-looking hamster">
+        <figcaption><b>The scene, after the incident.</b> Illustration: Ciabatta News.</figcaption>
+      </figure>
+      <p class="byline">By <b>NORA</b>, Ciabatta News Desk</p>
+      <p class="body">The press office declined to comment on the knocked-over peanut bowl, calling it an unrelated incident. The bowl has since been restored to its upright position. No further incidents have been reported.</p>
+    </article>
+
+    <article>
+      <p class="kicker">October 22 Bulletin</p>
+      <h3>Shock on the Rotating Plains: Just 128 Rotations</h3>
+      <figure>
+        <img id="news-silentwheel" alt="Mr. Tofu Ciabatta beside a still wheel">
+        <figcaption><b>The wheel, silent.</b> Illustration: Ciabatta News.</figcaption>
+      </figure>
+      <p class="byline">By <b>NORA</b>, Ciabatta News Desk</p>
+      <p class="body">The Locomotion Log confirms just 128 wheel rotations last night, a collapse from 1,418 the night before and a fraction of the personal best of 2,721. Last night's effort totals roughly 112 meters.</p>
+      <p class="body">Officials have offered no explanation. Possible causes under review include a very good nap.</p>
+    </article>
+
+    <article>
+      <p class="kicker">October 22 Bulletin</p>
+      <h3>Pine Nut Policy Unchanged Despite Advisories</h3>
+      <p class="byline">By <b>NORA</b>, Ciabatta News Desk</p>
+      <p class="body">The Emperor continues to receive one, sometimes two pine nuts per day, despite repeated advisories about fat intake. He has reviewed the recommendation. He continues to receive pine nuts.</p>
+    </article>
+
+    <article>
+      <p class="kicker">October 22 Bulletin &middot; Sightings</p>
+      <h3>Orange Citadel Emergence Verified; Shrimp State Out in Daylight</h3>
+      <p class="byline">By <b>NORA</b>, Ciabatta News Desk</p>
+      <p class="body">The Sightings desk reports a verified emergence from the orange citadel and a routine patrol of the western boundary. The mushroom spring situation remains unresolved.</p>
+      <p class="body">The shrimp state has again been observed during daylight hours. Its classification remains temporary.</p>
+    </article>
+
+  </div>
+
+  <aside class="desk">
+    <h3>From the Broadcast Desk</h3>
+    <p>Every story on this page began as a 90-second Ciabatta News bulletin read by Nora: October 22 (the 128 collapse), October 24 (the 1,594 marathon and the grumpy morning), and tonight, October 25 (the rebound past 1,600 and the bedding burial).</p>
+    <p>New bulletins appear when the news warrants. The wheel log on the home page carries the full nightly record.</p>
+  </aside>
+
+  <footer>
+    <p>Ciabatta News is a work of affectionate fiction about one hamster. All wheel counts are real.</p>
+    <p><a href="/">Home</a> &middot; <a href="/encyclopedia.html">Encyclopedia</a></p>
+  </footer>
+
+</div>
+
+<script src="news-wheel.js"></script>
+<script src="news-bedding.js"></script>
+<script src="news-peanut.js"></script>
+<script src="news-silentwheel.js"></script>
+<script>
+["wheel","bedding","peanut","silentwheel"].forEach(function (n) { document.getElementById("news-" + n).src = window.NEWS_IMG[n]; });
+</script>
+</body>
+</html>
