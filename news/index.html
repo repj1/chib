@@ -68,6 +68,19 @@
   }
 
   .sitenav a:hover, .sitenav a[aria-current="page"] { text-decoration: underline; }
+  .sitenav.open {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 16px 22px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    z-index: 10;
+  }
 
   .language-toggle {
     display: flex;
@@ -93,7 +106,7 @@
   .language-toggle button.active, .language-toggle button:hover { color: var(--ink); }
 
   .menu-btn {
-    display: none;
+    display: block;
     appearance: none;
     border: 0;
     padding: 0;
@@ -278,21 +291,7 @@
   @media (max-width: 760px) {
     .lead-grid, .second, .grid { grid-template-columns: 1fr; }
     .dateline { justify-content: center; text-align: center; }
-    .menu-btn { display: block; }
     .sitenav { display: none; }
-    .sitenav.open {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: var(--paper);
-      border: 1px solid var(--rule);
-      padding: 16px 22px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.12);
-      z-index: 10;
-    }
   }
 </style>
 </head>
