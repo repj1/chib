@@ -163,6 +163,7 @@
       grid-row: 1;
 
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: flex-end;
 
@@ -170,16 +171,19 @@
     }
 
     .menu-btn {
-      display: none;
+      display: block;
       appearance: none;
       border: 0;
       padding: 0;
-      background: transparent;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.88);
       font: inherit;
-      font-size: 22px;
-      line-height: 1;
-      color: rgba(255,255,255,.96);
-      text-shadow: 0 1px 14px rgba(0,0,0,.30);
+      font-size: 20px;
+      line-height: 38px;
+      text-align: center;
+      color: #151515;
       cursor: pointer;
     }
 
@@ -202,6 +206,18 @@
 
     .hero-nav a:hover {
       opacity: .65;
+    }
+
+    .hero-nav.open {
+      display: flex;
+      flex-basis: 100%;
+      order: 3;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 14px;
+      padding: 16px 20px;
+      background: rgba(20,18,16,.95);
     }
 
     .language-toggle {
@@ -1380,6 +1396,30 @@
        FOOTER
     ================================================== */
 
+    .hero-announce {
+      grid-column: 1 / -1;
+      grid-row: 3;
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+
+      margin-top: 24px;
+      padding: 13px 18px;
+
+      background: rgba(20,18,16,.72);
+
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .hero-announce a {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
     .subpages {
       padding: 64px 0 56px;
       border-top: 1px solid var(--line);
@@ -1428,26 +1468,8 @@
     }
 
     @media (max-width: 620px) {
-      .hero-tools {
-        flex-wrap: wrap;
-      }
-
       .hero-nav {
         display: none;
-      }
-
-      .hero-nav.open {
-        display: flex;
-        flex-basis: 100%;
-        order: 3;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 12px;
-        padding-top: 12px;
-      }
-
-      .menu-btn {
-        display: block;
       }
 
       .subpages-grid {
@@ -2109,6 +2131,27 @@
         <span class="hero-heart">
           ♡
         </span>
+
+      </div>
+
+
+      <div class="hero-announce">
+
+        <span data-i18n="heroNewLabel">
+          New pages:
+        </span>
+
+        <a href="/news/" data-i18n="navNews">
+          News
+        </a>
+
+        <span aria-hidden="true">
+          ·
+        </span>
+
+        <a href="/encyclopedia.html" data-i18n="navEncyclopedia">
+          Encyclopedia
+        </a>
 
       </div>
 
@@ -3063,6 +3106,10 @@
           "News",
 
 
+        heroNewLabel:
+          "New pages:",
+
+
         moreLabel:
           "More from Chib.run",
 
@@ -3354,6 +3401,10 @@
 
         navNews:
           "Новини",
+
+
+        heroNewLabel:
+          "Нові сторінки:",
 
 
         moreLabel:
