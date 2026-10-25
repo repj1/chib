@@ -227,8 +227,18 @@
         <tr><td data-i18n="sp5">Chinese</td><td data-i18n="sp5s">10–12 cm, long tail</td><td data-i18n="sp5t">A climber; the only common species with a real tail</td></tr>
       </table>
 
+      <figure>
+        <img id="ency-lineup" alt="Five pet hamster species standing in a row by size">
+        <figcaption data-i18n="capLineup">Artist's impression: the five pet species, left to right, largest to smallest — Syrian, Campbell's, Winter White, Roborovski, and the long-tailed Chinese.</figcaption>
+      </figure>
+
       <h2 id="pouches" data-i18n="h3">3. Cheek pouches</h2>
       <p data-i18n="p3">A hamster's cheek pouches are stretchy pockets that run back to the shoulders. They are not for chewing, they are for carrying: a hamster can stuff them so full that its head looks twice as wide, then waddle home and unpack everything into a secret pantry. Our specimen's own policy is strict. Carrots are collectible. Everything nut-shaped is an obstacle, and airborne nuts at carrot height are to be run under, never jumped into.</p>
+
+      <figure class="small">
+        <img id="ency-pouches" alt="A hamster with cheeks stuffed full of seeds">
+        <figcaption data-i18n="capPouches">Artist's impression: cheek pouches at full capacity. This hamster is not smiling. It is storing.</figcaption>
+      </figure>
 
       <h2 id="teeth" data-i18n="h4">4. Teeth that never stop</h2>
       <p data-i18n="p4">A hamster's front teeth grow continuously throughout its life. In the wild they are worn down by gnawing seeds, stems and the occasional enclosure fixture. Give a hamster nothing to chew and its teeth will overgrow, which is why a hamster's home should always contain something legal to destroy.</p>
@@ -250,6 +260,11 @@
 
       <h2 id="sleep" data-i18n="h7">7. Sleep and the night shift</h2>
       <p data-i18n="p7">Hamsters are nocturnal, or more precisely crepuscular: busiest at dawn and dusk, asleep for most of the day. A hamster woken mid-nap is a grumpy hamster. After his 1,594-rotation night of 23 October, Mr. Tofu Ciabatta was officially recorded as tired and irritable, and declined a morning carrot without enthusiasm. The record stands as a warning to all wheels.</p>
+
+      <figure class="small">
+        <img id="ency-sleepy" alt="A sleepy hamster tucked into a tiny bed">
+        <figcaption data-i18n="capSleepy">Artist's impression: the night shift ends. Do not wake this hamster.</figcaption>
+      </figure>
 
       <h2 id="history" data-i18n="h8">8. A short history</h2>
       <p data-i18n="p8">Pet hamsters descend from a single litter found in Syria in 1930. A zoologist collected a mother and her pups, and almost every Syrian hamster kept since is descended from that family. From a Syrian field to a wheel in Prague in under a century: a remarkable career, and one this encyclopedia's editor takes personally.</p>
@@ -385,6 +400,9 @@ g4d: "Лежати пласко, як маленький килимок, заз�
 g5t: "Запас (іменник)",
 g5d: "Комора, схованка, пенсійний план. Ніколи не питайте хом'яка, де він.",
 sources: "Джерела: загальні довідкові праці про хом'яків, зокрема статті Вікіпедії про хом'яків, для фактів про тварин; журнал пересування на цьому ж сайті — для фактів про Чіабату. Ілюстрації з позначкою «ілюстрація художника» вигадані. Портрети професора та дослідника — відредаговані фотографії справжнього Чіабати. Це неофіційна, любляча енциклопедія, і жодного хом'яка не консультували.",
+capLineup: "Ілюстрація художника: п'ять домашніх видів, зліва направо, від найбільшого до найменшого — сирійський, Кемпбелла, білоногий, Роборовського та довгохвостий китайський.",
+capPouches: "Ілюстрація художника: защічні мішки на повну потужність. Цей хом'як не усміхається. Він запасає.",
+capSleepy: "Ілюстрація художника: нічна зміна закінчилася. Не будіть цього хом'яка.",
 back: "Назад до Чіабати"
 }
 };
@@ -403,8 +421,11 @@ function setLanguage(lang) {
 <script src="ency-burrow.js"></script>
 <script src="ency-professor.js"></script>
 <script src="ency-explorer.js"></script>
+<script src="ency-lineup.js"></script>
+<script src="ency-pouches.js"></script>
+<script src="ency-sleepy.js"></script>
 <script>
-["astronaut","burrow","professor","explorer"].forEach(function (n) { document.getElementById("ency-" + n).src = window.ENCY_IMG[n]; });
+["astronaut","burrow","professor","explorer","lineup","pouches","sleepy"].forEach(function (n) { document.getElementById("ency-" + n).src = window.ENCY_IMG[n]; });
 </script>
 </body>
 </html>
