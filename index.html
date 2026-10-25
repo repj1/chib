@@ -169,6 +169,20 @@
       gap: 36px;
     }
 
+    .menu-btn {
+      display: none;
+      appearance: none;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      font: inherit;
+      font-size: 22px;
+      line-height: 1;
+      color: rgba(255,255,255,.96);
+      text-shadow: 0 1px 14px rgba(0,0,0,.30);
+      cursor: pointer;
+    }
+
     .hero-nav {
       display: flex;
       align-items: center;
@@ -1366,6 +1380,81 @@
        FOOTER
     ================================================== */
 
+    .subpages {
+      padding: 64px 0 56px;
+      border-top: 1px solid var(--line);
+    }
+
+    .subpages-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .subpage-card {
+      display: block;
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 26px 28px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .subpage-card strong {
+      display: block;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -.01em;
+    }
+
+    .subpage-card span.desc {
+      display: block;
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .subpage-card span.arrow {
+      display: block;
+      margin-top: 14px;
+      font-size: 18px;
+      color: var(--accent);
+    }
+
+    .subpage-card:hover {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 620px) {
+      .hero-tools {
+        flex-wrap: wrap;
+      }
+
+      .hero-nav {
+        display: none;
+      }
+
+      .hero-nav.open {
+        display: flex;
+        flex-basis: 100%;
+        order: 3;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 12px;
+        padding-top: 12px;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .subpages-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     footer {
       padding:
         42px 0 56px;
@@ -1871,7 +1960,7 @@
 
       <div class="hero-tools">
 
-        <nav class="hero-nav">
+        <nav class="hero-nav" id="heroNav">
 
           <a
             href="#species"
@@ -1945,6 +2034,17 @@
           </button>
 
         </div>
+
+
+        <button
+          type="button"
+          class="menu-btn"
+          id="menuBtn"
+          aria-label="Menu"
+          aria-expanded="false"
+        >
+          &#9776;
+        </button>
 
       </div>
 
@@ -2847,6 +2947,46 @@
 
 
 
+    <section class="subpages">
+
+      <div class="section-label" data-i18n="moreLabel">
+        More from Chib.run
+      </div>
+
+      <div class="subpages-grid">
+
+        <a class="subpage-card" href="/encyclopedia.html">
+
+          <strong data-i18n="moreEncyTitle">
+            The Hamster Encyclopedia
+          </strong>
+
+          <span class="desc" data-i18n="moreEncyText">
+            Real facts, lightly seasoned with nonsense, about hamsters in general and one specimen in particular.
+          </span>
+
+          <span class="arrow">→</span>
+
+        </a>
+
+        <a class="subpage-card" href="/news/">
+
+          <strong data-i18n="moreNewsTitle">
+            Ciabatta News
+          </strong>
+
+          <span class="desc" data-i18n="moreNewsText">
+            The front page: wheel reports, burrow bulletins, and the peanut bowl incident, as they happen.
+          </span>
+
+          <span class="arrow">→</span>
+
+        </a>
+
+      </div>
+
+    </section>
+
     <footer>
 
       <div>
@@ -2921,6 +3061,22 @@
 
         navNews:
           "News",
+
+
+        moreLabel:
+          "More from Chib.run",
+
+        moreEncyTitle:
+          "The Hamster Encyclopedia",
+
+        moreEncyText:
+          "Real facts, lightly seasoned with nonsense, about hamsters in general and one specimen in particular.",
+
+        moreNewsTitle:
+          "Ciabatta News",
+
+        moreNewsText:
+          "The front page: wheel reports, burrow bulletins, and the peanut bowl incident, as they happen.",
 
 
         encyclopediaPromo:
@@ -3198,6 +3354,22 @@
 
         navNews:
           "Новини",
+
+
+        moreLabel:
+          "Ще від Chib.run",
+
+        moreEncyTitle:
+          "Енциклопедія хом'яків",
+
+        moreEncyText:
+          "Справжні факти, злегка приправлені нісенітницею, про хом'яків загалом і одного екземпляра зокрема.",
+
+        moreNewsTitle:
+          "Ciabatta News",
+
+        moreNewsText:
+          "Перша шпальта: звіти про колесо, бюлетені з нори та інцидент з мискою арахісу — в міру подій.",
 
 
         encyclopediaPromo:
@@ -4721,6 +4893,26 @@
     })();
 
   </script>
+
+
+    <script>
+
+      (function () {
+
+        var btn = document.getElementById("menuBtn");
+        var nav = document.getElementById("heroNav");
+        if (!btn || !nav) return;
+
+        btn.addEventListener("click", function () {
+          var open = nav.classList.toggle("open");
+          btn.setAttribute(
+            "aria-expanded", open ? "true" : "false"
+          );
+        });
+
+      })();
+
+    </script>
 
 
 </body>
