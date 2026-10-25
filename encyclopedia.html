@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hamster Encyclopedia — Chib</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --text: #151515;
+      --muted: #77736d;
+      --line: #deddd8;
+      --accent: #d87b36;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* Top bar, in the spirit of the main page */
+    .topbar {
+      width: min(1380px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 34px 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .34em;
+      color: #4b4844;
+    }
+    .topnav { display: flex; align-items: center; gap: 30px; font-size: 14px; }
+    .topnav a:hover { opacity: .6; }
+    .language-toggle { display: flex; align-items: center; gap: 7px; padding-left: 17px; border-left: 1px solid var(--line); white-space: nowrap; }
+    .language-toggle button {
+      appearance: none; border: 0; padding: 0; background: transparent;
+      font: inherit; font-size: 12px; font-weight: 500; letter-spacing: .08em;
+      color: var(--muted); cursor: pointer;
+    }
+    .language-toggle button.active, .language-toggle button:hover { color: var(--text); }
+    .language-toggle button.active { font-weight: 700; }
+    .language-divider { font-size: 11px; color: var(--muted); }
+
+    .site { width: min(1380px, calc(100% - 48px)); margin: 0 auto; }
+
+    /* Header */
+    .page-head { padding: 70px 0 40px; border-bottom: 1px solid var(--line); }
+    .section-label {
+      font-size: 12px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted);
+    }
+    .page-head h1 {
+      margin: 14px 0 0;
+      font-size: clamp(52px, 6vw, 96px);
+      line-height: .95; font-weight: 400; letter-spacing: -.05em;
+    }
+    .page-head h1 em { color: var(--accent); font-style: normal; }
+    .subtitle {
+      max-width: 620px; margin: 26px 0 0;
+      font-size: 18px; line-height: 1.7; color: #5f5a55;
+    }
+
+    /* Wiki-style contents box */
+    .toc {
+      margin: 44px 0 0; padding: 26px 30px;
+      background: var(--white); border: 1px solid var(--line);
+      max-width: 520px;
+    }
+    .toc h2 { margin: 0 0 14px; font-size: 13px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
+    .toc ol { margin: 0; padding-left: 22px; line-height: 1.9; font-size: 15px; }
+    .toc a:hover { color: var(--accent); }
+
+    /* Article layout: infobox floated right, wiki-style */
+    .article { padding: 56px 0 30px; overflow: hidden; }
+    .infobox {
+      float: right; width: 322px; margin: 0 0 30px 44px;
+      background: var(--white); border: 1px solid var(--line);
+    }
+    .infobox h2 {
+      margin: 0; padding: 18px 22px;
+      font-size: 20px; letter-spacing: -.02em;
+      border-bottom: 1px solid var(--line);
+    }
+    .infobox img { width: 100%; display: block; object-fit: cover; }
+    .infobox table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+    .infobox td { padding: 10px 14px; vertical-align: top; border-top: 1px solid var(--line); }
+    .infobox td:first-child { color: var(--muted); width: 38%; }
+
+    .article h2 {
+      margin: 64px 0 16px; padding-top: 8px;
+      font-size: clamp(28px, 3vw, 42px); font-weight: 500; letter-spacing: -.04em;
+    }
+    .article h2:first-of-type { margin-top: 0; }
+    .article p { max-width: 760px; font-size: 17px; line-height: 1.75; color: #3a3733; }
+    .article p a { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
+    /* Did-you-know boxes */
+    .dyk {
+      max-width: 760px; margin: 26px 0; padding: 18px 22px;
+      background: #fdf6ef; border-left: 3px solid var(--accent);
+      font-size: 15px; line-height: 1.7;
+    }
+    .dyk strong { letter-spacing: .04em; }
+
+    /* Species table */
+    table.species {
+      width: 100%; max-width: 860px; border-collapse: collapse;
+      font-size: 15px; line-height: 1.6; margin: 8px 0 26px;
+    }
+    table.species th {
+      text-align: left; padding: 12px 14px;
+      font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted);
+      border-bottom: 2px solid var(--text);
+    }
+    table.species td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+
+    /* Figures */
+    figure { margin: 34px 0; max-width: 860px; }
+    figure img { width: 100%; display: block; border: 1px solid var(--line); background: #ece9e2; }
+    figcaption { margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+    figure.small { max-width: 620px; }
+
+    /* Glossary */
+    .glossary { max-width: 860px; }
+    .glossary dt { font-size: 17px; font-weight: 600; margin-top: 22px; }
+    .glossary dd { margin: 6px 0 0; font-size: 16px; line-height: 1.7; color: #3a3733; }
+
+    .sources {
+      margin: 70px 0 0; padding: 30px 0;
+      border-top: 1px solid var(--line);
+      font-size: 14px; line-height: 1.8; color: var(--muted); max-width: 860px;
+    }
+    .backlink {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin: 10px 0 90px; padding: 0 24px 0 30px; height: 56px;
+      border: 1px solid #77716a; border-radius: 999px;
+      text-transform: uppercase; letter-spacing: .2em; font-size: 12px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .backlink:hover { background: #211f1d; color: #fff; }
+
+    @media (max-width: 760px) {
+      .infobox { float: none; width: 100%; margin: 0 0 30px 0; }
+      .topnav { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">CHIB.RUN</div>
+    <div class="topnav">
+      <a href="/" data-i18n="navHome">Home</a>
+      <div class="language-toggle" aria-label="Language">
+        <button type="button" id="lang-en" class="active" onclick="setLanguage('en')">EN</button>
+        <span class="language-divider">/</span>
+        <button type="button" id="lang-ua" onclick="setLanguage('uk')">UA</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="site">
+
+    <header class="page-head">
+      <div class="section-label" data-i18n="kicker">A companion volume to chib.run</div>
+      <h1><span data-i18n="titleA">The Hamster</span> <em data-i18n="titleB">Encyclopedia</em></h1>
+      <p class="subtitle" data-i18n="subtitle">An affectionate, slightly unserious reference work. Real facts, lightly seasoned with nonsense, edited by our resident specimen, Mr. Tofu Ciabatta.</p>
+
+      <nav class="toc">
+        <h2 data-i18n="contents">Contents</h2>
+        <ol>
+          <li><a href="#what" data-i18n="c1">What is a hamster?</a></li>
+          <li><a href="#species" data-i18n="c2">Species guide</a></li>
+          <li><a href="#pouches" data-i18n="c3">Cheek pouches</a></li>
+          <li><a href="#teeth" data-i18n="c4">Teeth that never stop</a></li>
+          <li><a href="#wheel" data-i18n="c5">The wheel</a></li>
+          <li><a href="#burrows" data-i18n="c6">Burrows and hoarding</a></li>
+          <li><a href="#sleep" data-i18n="c7">Sleep and the night shift</a></li>
+          <li><a href="#history" data-i18n="c8">A short history</a></li>
+          <li><a href="#fieldnotes" data-i18n="c9">Field notes: the explorer</a></li>
+          <li><a href="#glossary" data-i18n="c10">Glossary of hamster behaviour</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <main class="article">
+
+      <!-- Specimen infobox, wiki-style -->
+      <aside class="infobox">
+        <h2 data-i18n="infoTitle">Mr. Tofu Ciabatta</h2>
+        <img src="images/chib-hero.jpeg" alt="Mr. Tofu Ciabatta in his enclosure">
+        <table>
+          <tr><td data-i18n="infoSpecies">Species</td><td data-i18n="infoSpeciesV">Syrian (golden) hamster</td></tr>
+          <tr><td data-i18n="infoCoat">Coat</td><td data-i18n="infoCoatV">Long-haired, white</td></tr>
+          <tr><td data-i18n="infoHome">Home</td><td data-i18n="infoHomeV">An enclosure in Prague</td></tr>
+          <tr><td data-i18n="infoRecord">Wheel record</td><td data-i18n="infoRecordV">3,273 rotations, 9 October</td></tr>
+          <tr><td data-i18n="infoSnack">Snack policy</td><td data-i18n="infoSnackV">Carrots: collectible. Nuts: obstacles.</td></tr>
+          <tr><td data-i18n="infoKnown">Known for</td><td data-i18n="infoKnownV">Filling his pouch, and eating the couch</td></tr>
+          <tr><td data-i18n="infoMood">After big nights</td><td data-i18n="infoMoodV">Tired and irritable (23 October)</td></tr>
+        </table>
+      </aside>
+
+      <h2 id="what" data-i18n="h1">1. What is a hamster?</h2>
+      <p data-i18n="p1">A hamster is a rodent of the subfamily Cricetinae. There are about eighteen species, from the palm-sized Roborovski to the Syrian, the classic pet-shop hamster. The word hamster comes from the German <i>hamstern</i>, meaning to hoard, which tells you everything you need to know about their priorities.</p>
+      <div class="dyk"><strong data-i18n="dyk1a">Did you know?</strong> <span data-i18n="dyk1b">A hamster's very name literally means "hoarder". The animal was named after its hobby.</span></div>
+
+      <h2 id="species" data-i18n="h2">2. Species guide</h2>
+      <p data-i18n="p2">Five species do most of the pet-keeping. Syrians are the big, fluffy classic; the dwarfs are smaller, faster, and considerably more opinionated per gram.</p>
+      <table class="species">
+        <tr><th data-i18n="thSpecies">Species</th><th data-i18n="thSize">Size</th><th data-i18n="thTemper">Temperament</th></tr>
+        <tr><td data-i18n="sp1">Syrian (golden)</td><td data-i18n="sp1s">About 15 cm</td><td data-i18n="sp1t">Solitary; must live alone</td></tr>
+        <tr><td data-i18n="sp2">Campbell's dwarf</td><td data-i18n="sp2s">About 10 cm</td><td data-i18n="sp2t">Social, but nippy when young</td></tr>
+        <tr><td data-i18n="sp3">Winter White dwarf</td><td data-i18n="sp3s">About 10 cm</td><td data-i18n="sp3t">Calm; coat whitens in winter</td></tr>
+        <tr><td data-i18n="sp4">Roborovski dwarf</td><td data-i18n="sp4s">About 5 cm</td><td data-i18n="sp4t">The fastest; prefers watching to cuddling</td></tr>
+        <tr><td data-i18n="sp5">Chinese</td><td data-i18n="sp5s">10–12 cm, long tail</td><td data-i18n="sp5t">A climber; the only common species with a real tail</td></tr>
+      </table>
+
+      <h2 id="pouches" data-i18n="h3">3. Cheek pouches</h2>
+      <p data-i18n="p3">A hamster's cheek pouches are stretchy pockets that run back to the shoulders. They are not for chewing, they are for carrying: a hamster can stuff them so full that its head looks twice as wide, then waddle home and unpack everything into a secret pantry. Our specimen's own policy is strict. Carrots are collectible. Everything nut-shaped is an obstacle, and airborne nuts at carrot height are to be run under, never jumped into.</p>
+
+      <h2 id="teeth" data-i18n="h4">4. Teeth that never stop</h2>
+      <p data-i18n="p4">A hamster's front teeth grow continuously throughout its life. In the wild they are worn down by gnawing seeds, stems and the occasional enclosure fixture. Give a hamster nothing to chew and its teeth will overgrow, which is why a hamster's home should always contain something legal to destroy.</p>
+
+      <h2 id="wheel" data-i18n="h5">5. The wheel</h2>
+      <p data-i18n="p5">In the wild, a Syrian hamster may cover eight kilometres in a single night of foraging. The exercise wheel is the pet hamster's answer to that commute. Our specimen, Mr. Tofu Ciabatta, holds a personal best of 3,273 rotations in one night (9 October), about 2.9 kilometres on his wheel. His wheel is occasionally closed for maintenance, at which point he is expected to be furious.</p>
+      <figure class="small">
+        <img id="ency-astronaut" alt="A hamster astronaut beside a wheel-shaped space station">
+        <figcaption data-i18n="capAstronaut">Artist's impression: the wheel, but in space. The wheel remains the hamster's answer to every commute, including the orbital one.</figcaption>
+      </figure>
+
+      <h2 id="burrows" data-i18n="h6">6. Burrows and hoarding</h2>
+      <p data-i18n="p6">Wild hamsters dig burrows up to two metres deep, with separate chambers for sleeping, nesting and, most importantly, food. A single wild pantry can hold tens of kilograms of grain, gathered one cheek-load at a time. At home, the same instinct produces a hamster who hides food in every corner and then looks at you as if to ask: what food?</p>
+      <figure>
+        <img id="ency-burrow" alt="Cutaway illustration of a hamster burrow with nesting and pantry chambers">
+        <figcaption data-i18n="capBurrow">Artist's impression: the ideal burrow. Bedroom on the left, pantry on the right, and a hamster in the middle doing the only job that matters.</figcaption>
+      </figure>
+      <div class="dyk"><strong data-i18n="dyk2a">Did you know?</strong> <span data-i18n="dyk2b">A Syrian hamster's burrow can be over ten times its own body length deep. The pantry is the point of the whole operation.</span></div>
+
+      <h2 id="sleep" data-i18n="h7">7. Sleep and the night shift</h2>
+      <p data-i18n="p7">Hamsters are nocturnal, or more precisely crepuscular: busiest at dawn and dusk, asleep for most of the day. A hamster woken mid-nap is a grumpy hamster. After his 1,594-rotation night of 23 October, Mr. Tofu Ciabatta was officially recorded as tired and irritable, and declined a morning carrot without enthusiasm. The record stands as a warning to all wheels.</p>
+
+      <h2 id="history" data-i18n="h8">8. A short history</h2>
+      <p data-i18n="p8">Pet hamsters descend from a single litter found in Syria in 1930. A zoologist collected a mother and her pups, and almost every Syrian hamster kept since is descended from that family. From a Syrian field to a wheel in Prague in under a century: a remarkable career, and one this encyclopedia's editor takes personally.</p>
+      <figure class="small">
+        <img id="ency-professor" alt="Chib wearing a tiny graduation cap in a miniature library">
+        <figcaption data-i18n="capProfessor">Professor Ciabatta, chair of hoarding studies, photographed in the library he refuses to lend books from.</figcaption>
+      </figure>
+
+      <h2 id="fieldnotes" data-i18n="h9">9. Field notes: the explorer</h2>
+      <p data-i18n="p9">In the wild, hamsters are explorers of steppe and farmland, navigating by smell and whisker more than by sight: their eyesight is poor, their noses excellent, and their whiskers do much of the steering. Chib's own expeditions are usually accompanied by his brick-built twin, who has never once complained about the pace.</p>
+      <figure class="small">
+        <img id="ency-explorer" alt="Chib as a tiny explorer with a backpack and map beside his brick-built twin">
+        <figcaption data-i18n="capExplorer">Field photograph, lightly edited: Chib on expedition with his brick-built twin and a map nobody has yet learned to read.</figcaption>
+      </figure>
+      <div class="dyk"><strong data-i18n="dyk3a">Did you know?</strong> <span data-i18n="dyk3b">Hamsters see poorly but smell superbly. If a hamster stares at you blankly, it has probably already identified you by scent and moved on.</span></div>
+
+      <h2 id="glossary" data-i18n="h10">10. Glossary of hamster behaviour</h2>
+      <dl class="glossary">
+        <dt data-i18n="g1t">Pouching (verb)</dt>
+        <dd data-i18n="g1d">To fill the cheeks and depart without explanation.</dd>
+        <dt data-i18n="g2t">Pouched. (verdict)</dt>
+        <dd data-i18n="g2d">The official ruling when a run ends. No appeal is possible.</dd>
+        <dt data-i18n="g3t">Zoomies (noun)</dt>
+        <dd data-i18n="g3d">A sudden sprint around the enclosure at 2 a.m., for reasons known only to the hamster.</dd>
+        <dt data-i18n="g4t">Pancaking (verb)</dt>
+        <dd data-i18n="g4d">Lying flat like a tiny rug, usually when warm or deeply relaxed.</dd>
+        <dt data-i18n="g5t">Hoard (noun)</dt>
+        <dd data-i18n="g5d">A pantry, a stash, a retirement plan. Never ask a hamster where it is.</dd>
+      </dl>
+
+      <div class="sources">
+        <span data-i18n="sources">Sources: general reference works on hamsters, including Wikipedia's hamster articles, for the animal facts; the locomotion log on this very site for the Ciabatta facts. Illustrations marked "artist's impression" are invented. The professor and explorer portraits are edited photographs of the real Chib. This is an unofficial, affectionate encyclopedia, and no hamster was consulted.</span>
+      </div>
+
+      <a class="backlink" href="/">
+        <span data-i18n="back">Back to Chib</span>
+        <span>→</span>
+      </a>
+
+    </main>
+  </div>
+
+<script>
+var translations = {
+en: {},
+uk: {
+navHome: "Головна",
+kicker: "Додатковий том до chib.run",
+titleA: "Енциклопедія",
+titleB: "хом'яків",
+subtitle: "Люблячий, трохи несерйозний довідник. Справжні факти, трохи приправлені нісенітницею, за редакцією нашого штатного зразка, містера Тофу Чіабати.",
+contents: "Зміст",
+c1: "Що таке хом'як?",
+c2: "Путівник видами",
+c3: "Защічні мішки",
+c4: "Зуби, що ніколи не зупиняються",
+c5: "Колесо",
+c6: "Нори та запаси",
+c7: "Сон і нічна зміна",
+c8: "Коротка історія",
+c9: "Польові нотатки: дослідник",
+c10: "Словник поведінки хом'яків",
+infoTitle: "Містер Тофу Чіабата",
+infoSpecies: "Вид",
+infoSpeciesV: "Сирійський (золотистий) хом'як",
+infoCoat: "Шерсть",
+infoCoatV: "Довгошерстий, білий",
+infoHome: "Дім",
+infoHomeV: "Вольєр у Празі",
+infoRecord: "Рекорд колеса",
+infoRecordV: "3 273 оберти, 9 жовтня",
+infoSnack: "Політика смаколиків",
+infoSnackV: "Морква: можна збирати. Горіхи: перешкоди.",
+infoKnown: "Відомий тим",
+infoKnownV: "Що набиває щоки та їсть диван",
+infoMood: "Після великих ночей",
+infoMoodV: "Втомлений і дратівливий (23 жовтня)",
+h1: "1. Що таке хом'як?",
+p1: "Хом'як — це гризун підродини Cricetinae. Існує близько вісімнадцяти видів, від крихітного хом'яка Роборовського до сирійського, класичного хом'яка з зоомагазину. Слово «хом'як» походить від німецького hamstern, що означає «запасати», і це розповідає про їхні пріоритети все.",
+dyk1a: "Чи знаєте ви?",
+dyk1b: "Сама назва хом'яка буквально означає «запасливий». Тварину назвали на честь її хобі.",
+h2: "2. Путівник видами",
+p2: "П'ять видів найчастіше тримають удома. Сирійські — великі, пухнасті класики; карликові — менші, швидші та значно більш вперті на грам ваги.",
+thSpecies: "Вид",
+thSize: "Розмір",
+thTemper: "Характер",
+sp1: "Сирійський (золотистий)",
+sp1s: "Близько 15 см",
+sp1t: "Одинак; має жити сам",
+sp2: "Карликовий Кемпбелла",
+sp2s: "Близько 10 см",
+sp2t: "Товариський, але кусається молодим",
+sp3: "Карликовий білоногий",
+sp3s: "Близько 10 см",
+sp3t: "Спокійний; шерсть біліє взимку",
+sp4: "Карликовий Роборовського",
+sp4s: "Близько 5 см",
+sp4t: "Найшвидший; любить спостерігати, а не обійматися",
+sp5: "Китайський",
+sp5s: "10–12 см, довгий хвіст",
+sp5t: "Лазун; єдиний поширений вид зі справжнім хвостом",
+h3: "3. Защічні мішки",
+p3: "Защічні мішки хом'яка — це еластичні кишені, що тягнуться аж до плечей. Вони не для жування, а для перенесення: хом'як може набити їх так, що голова здається вдвічі ширшою, а потім почвакати додому і розпакувати все в таємну комору. Політика нашого зразка сувора. Морква — для збирання. Усе горіхоподібне — перешкода, а повітряні горіхи на висоті моркви треба пробігати під ними, ніколи не стрибати в них.",
+h4: "4. Зуби, що ніколи не зупиняються",
+p4: "Передні зуби хом'яка ростуть протягом усього життя. У дикій природі вони сточуються об насіння, стебла та час від часу об деталі вольєра. Якщо хом'якові нічого гризти, зуби переростуть, тому в домі хом'яка завжди має бути щось законне для знищення.",
+h5: "5. Колесо",
+p5: "У дикій природі сирійський хом'як може подолати вісім кілометрів за одну ніч пошуків їжі. Бігове колесо — це відповідь домашнього хом'яка на такі поїздки. Наш зразок, містер Тофу Чіабата, тримає особистий рекорд — 3 273 оберти за одну ніч (9 жовтня), близько 2,9 кілометра на його колесі. Його колесо іноді закривають на обслуговування, і тоді він, як очікується, буде лютим.",
+capAstronaut: "Ілюстрація художника: колесо, але в космосі. Колесо лишається відповіддю хом'яка на будь-яку поїздку, включно з орбітальною.",
+h6: "6. Нори та запаси",
+p6: "Дикі хом'яки риють нори до двох метрів завглибшки, з окремими камерами для сну, гнізда і, найголовніше, їжі. Одна дика комора може вміщувати десятки кілограмів зерна, зібраного по одній щічній порції за раз. Удома той самий інстинкт породжує хом'яка, який ховає їжу в кожному кутку, а потім дивиться на вас так, ніби питає: яка їжа?",
+capBurrow: "Ілюстрація художника: ідеальна нора. Спальня ліворуч, комора праворуч, а посередині хом'як, що виконує єдину роботу, яка має значення.",
+dyk2a: "Чи знаєте ви?",
+dyk2b: "Нора сирійського хом'яка може бути глибшою за довжину його тіла більш ніж у десять разів. Комора — це сенс усієї операції.",
+h7: "7. Сон і нічна зміна",
+p7: "Хом'яки нічні, а точніше сутінкові: найактивніші на світанку та ввечері, а більшу частину дня сплять. Розбуджений посеред дрімоти хом'як — сердитий хом'як. Після ночі з 1 594 обертами 23 жовтня містер Тофу Чіабата був офіційно зафіксований як втомлений і дратівливий, а ранкову моркву відхилив без ентузіазму. Запис лишається застереженням для всіх коліс.",
+h8: "8. Коротка історія",
+p8: "Домашні хом'яки походять від одного виводка, знайденого в Сирії у 1930 році. Зоолог зібрав матір та її малят, і майже всі сирійські хом'яки, яких тримають відтоді, походять з тієї родини. Від сирійського поля до колеса в Празі менш ніж за століття: видатна кар'єра, яку редактор цієї енциклопедії сприймає особисто.",
+capProfessor: "Професор Чіабата, завідувач кафедри запасів, сфотографований у бібліотеці, з якої він відмовляється позичати книжки.",
+h9: "9. Польові нотатки: дослідник",
+p9: "У дикій природі хом'яки — дослідники степів і полів, що орієнтуються більше за запахом і вусами, ніж за зором: зір у них слабкий, нюх чудовий, а вуса роблять більшу частину керування. Власні експедиції Чіабати зазвичай супроводжує його цегляний двійник, який жодного разу не поскаржився на темп.",
+capExplorer: "Польове фото, трохи відредаговане: Чіабата в експедиції зі своїм цегляним двійником і картою, яку ще ніхто не навчився читати.",
+dyk3a: "Чи знаєте ви?",
+dyk3b: "Хом'яки погано бачать, але чудово нюхають. Якщо хом'як дивиться на вас порожнім поглядом, він, імовірно, вже впізнав вас за запахом і пішов далі.",
+h10: "10. Словник поведінки хом'яків",
+g1t: "Набивання щік (дієслово)",
+g1d: "Наповнити щоки і піти без пояснень.",
+g2t: "«У мішку». (вирок)",
+g2d: "Офіційне рішення про завершення забігу. Оскарженню не підлягає.",
+g3t: "Зуми (іменник)",
+g3d: "Раптовий спринт вольєром о 2-й ночі з причин, відомих лише хом'якові.",
+g4t: "Розпластування (дієслово)",
+g4d: "Лежати пласко, як маленький килимок, зазвичай коли тепло або дуже розслаблено.",
+g5t: "Запас (іменник)",
+g5d: "Комора, схованка, пенсійний план. Ніколи не питайте хом'яка, де він.",
+sources: "Джерела: загальні довідкові праці про хом'яків, зокрема статті Вікіпедії про хом'яків, для фактів про тварин; журнал пересування на цьому ж сайті — для фактів про Чіабату. Ілюстрації з позначкою «ілюстрація художника» вигадані. Портрети професора та дослідника — відредаговані фотографії справжнього Чіабати. Це неофіційна, любляча енциклопедія, і жодного хом'яка не консультували.",
+back: "Назад до Чіабати"
+}
+};
+function setLanguage(lang) {
+  var dict = translations[lang] || {};
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var key = el.getAttribute('data-i18n');
+    if (dict[key]) { el.textContent = dict[key]; }
+  });
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-ua').classList.toggle('active', lang === 'uk');
+  document.documentElement.lang = lang === 'uk' ? 'uk' : 'en';
+}
+</script>
+<script src="ency-astronaut.js"></script>
+<script src="ency-burrow.js"></script>
+<script src="ency-professor.js"></script>
+<script src="ency-explorer.js"></script>
+<script>
+["astronaut","burrow","professor","explorer"].forEach(function (n) { document.getElementById("ency-" + n).src = window.ENCY_IMG[n]; });
+</script>
+</body>
+</html>
