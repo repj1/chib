@@ -151,23 +151,45 @@
     }
     .backlink:hover { background: #211f1d; color: #fff; }
 
+    .sitenav { display: flex; align-items: center; gap: 30px; }
+    .sitenav a:hover { opacity: .6; }
+    .menu-btn {
+      display: none;
+      appearance: none; border: 0; background: transparent;
+      font-size: 22px; line-height: 1; color: var(--text); cursor: pointer; padding: 0;
+    }
+
     @media (max-width: 760px) {
       .infobox { float: none; width: 100%; margin: 0 0 30px 0; }
       .topnav { gap: 16px; }
+      .topbar { position: relative; }
+      .menu-btn { display: block; }
+      .sitenav { display: none; }
+      .sitenav.open {
+        display: flex; flex-direction: column; align-items: flex-start; gap: 14px;
+        position: absolute; top: 100%; right: 0;
+        background: var(--white); border: 1px solid var(--line);
+        padding: 16px 22px; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 10;
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="topbar">
-    <div class="brand">CHIB.RUN</div>
+    <a class="brand" href="/">CHIB.RUN</a>
     <div class="topnav">
-      <a href="/" data-i18n="navHome">Home</a>
+      <nav class="sitenav" id="siteNav">
+        <a href="/" data-i18n="navHome">Home</a>
+        <a href="/news/" data-i18n="navNews">News</a>
+        <a href="/encyclopedia.html" data-i18n="navEncy" aria-current="page">Encyclopedia</a>
+      </nav>
       <div class="language-toggle" aria-label="Language">
         <button type="button" id="lang-en" class="active" onclick="setLanguage('en')">EN</button>
         <span class="language-divider">/</span>
         <button type="button" id="lang-ua" onclick="setLanguage('uk')">UA</button>
       </div>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false">&#9776;</button>
     </div>
   </div>
 
@@ -403,6 +425,8 @@ sources: "Джерела: загальні довідкові праці про 
 capLineup: "Ілюстрація художника: п'ять домашніх видів, зліва направо, від найбільшого до найменшого — сирійський, Кемпбелла, білоногий, Роборовського та довгохвостий китайський.",
 capPouches: "Ілюстрація художника: защічні мішки на повну потужність. Цей хом'як не усміхається. Він запасає.",
 capSleepy: "Ілюстрація художника: нічна зміна закінчилася. Не будіть цього хом'яка.",
+navNews: "Новини",
+navEncy: "Енциклопедія",
 back: "Назад до Чіабати"
 }
 };
@@ -427,5 +451,17 @@ function setLanguage(lang) {
 <script>
 ["astronaut","burrow","professor","explorer","lineup","pouches","sleepy"].forEach(function (n) { document.getElementById("ency-" + n).src = window.ENCY_IMG[n]; });
 </script>
+  <script>
+    (function () {
+      var btn = document.getElementById('menuBtn');
+      var nav = document.getElementById('siteNav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    })();
+  </script>
+
 </body>
 </html>
