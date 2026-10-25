@@ -424,6 +424,10 @@
     .intro-copy {
       max-width: 850px;
       margin: 0;
+    }
+
+    .intro-headline {
+      margin: 0;
 
       font-size:
         clamp(20px,2.4vw,36px);
@@ -432,6 +436,15 @@
 
       letter-spacing: -.045em;
       font-weight: 500;
+    }
+
+    .intro-body {
+      margin: 22px 0 0;
+
+      font-size: 17px;
+      line-height: 1.7;
+
+      color: #5f5a55;
     }
 
     .intro-copy em {
@@ -458,9 +471,9 @@
 
 
     .encyclopedia-promo {
-      margin: 38px 0 0;
+      margin: 26px 0 0;
 
-      font-size: 17px;
+      font-size: 22px;
       font-weight: 700;
       line-height: 1.6;
     }
@@ -2023,15 +2036,40 @@
 
         <div class="intro-right">
 
-          <p
-            class="intro-copy"
-            data-i18n-html="speciesCopy"
-          >
-            <em>Mesocricetus auratus.</em><br>
-            White. Fluffy. Round-eared.<br><br>
-            At various angles, Chib appears to be part hamster, but also possibly part cow, and part polar bear. Taxonomists have declined to comment.<br><br>
-            His four little paws are used for climbing, gathering provisions, and reliably displaying the number four.
-          </p>
+          <div class="intro-copy">
+
+            <p
+              class="intro-headline"
+              data-i18n-html="speciesHeadline"
+            >
+              <em>Mesocricetus auratus.</em><br>
+              White. Fluffy. Round-eared.
+            </p>
+
+            <p
+              class="intro-body"
+              data-i18n="speciesBody1"
+            >
+              At various angles, Chib appears to be part hamster, but also possibly part cow, and part polar bear. Taxonomists have declined to comment.
+            </p>
+
+            <p
+              class="intro-body"
+              data-i18n="speciesBody2"
+            >
+              His four little paws are used for climbing, gathering provisions, and reliably displaying the number four.
+            </p>
+
+            <p class="encyclopedia-promo">
+              <a
+                href="/encyclopedia.html"
+                data-i18n="encyclopediaPromo"
+              >
+                Learn more at the ALL NEW Hamster Encyclopedia from the Chib.run team!
+              </a>
+            </p>
+
+          </div>
 
 
           <div class="species-portrait">
@@ -2044,16 +2082,6 @@
           </div>
 
         </div>
-
-
-        <p class="encyclopedia-promo">
-          <a
-            href="/encyclopedia.html"
-            data-i18n="encyclopediaPromo"
-          >
-            Learn more at the ALL NEW Hamster Encyclopedia from the Chib.run team!
-          </a>
-        </p>
 
 
       </section>
@@ -2907,8 +2935,24 @@
         speciesProfile:
           "Species profile",
 
-        speciesCopy:
-          "<em>Mesocricetus auratus.</em><br>White. Fluffy. Round-eared.<br><br>At various angles, Chib appears to be part hamster, but also possibly part cow, and part polar bear. Taxonomists have declined to comment.<br><br>His four little paws are used for climbing, gathering provisions, and reliably displaying the number four.",
+        speciesHeadline:
+
+
+          "<em>Mesocricetus auratus.</em><br>White. Fluffy. Round-eared.",
+
+
+
+        speciesBody1:
+
+
+          "At various angles, Chib appears to be part hamster, but also possibly part cow, and part polar bear. Taxonomists have declined to comment.",
+
+
+
+        speciesBody2:
+
+
+          "His four little paws are used for climbing, gathering provisions, and reliably displaying the number four.",
 
 
         commonName:
@@ -3164,8 +3208,24 @@
         speciesProfile:
           "Видовий профіль",
 
-        speciesCopy:
-          "<em>Mesocricetus auratus.</em><br>Білий. Пухнастий. Кругловухий.<br><br>Під різними кутами Чіб виглядає як хом’як, але, можливо, також як корова і білий ведмідь. Таксономісти утримуються від коментарів.<br><br>Його чотири маленькі лапки використовуються для лазіння, збирання припасів і надійної демонстрації числа чотири.",
+        speciesHeadline:
+
+
+          "<em>Mesocricetus auratus.</em><br>Білий. Пухнастий. Кругловухий.",
+
+
+
+        speciesBody1:
+
+
+          "Під різними кутами Чіб виглядає як хом’як, але, можливо, також як корова і білий ведмідь. Таксономісти утримуються від коментарів.",
+
+
+
+        speciesBody2:
+
+
+          "Його чотири маленькі лапки використовуються для лазіння, збирання припасів і надійної демонстрації числа чотири.",
 
 
         commonName:
