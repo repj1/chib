@@ -172,7 +172,7 @@
     }
 
     .menu-btn {
-      display: block;
+      display: none;
       appearance: none;
       border: 0;
       padding: 0;
@@ -217,10 +217,10 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 12px;
+      gap: 10px;
       width: max-content;
-      min-width: 210px;
-      padding: 16px 20px;
+      min-width: 170px;
+      padding: 14px 18px;
       background: rgba(87,82,77,.96);
       border-radius: 12px;
       text-align: right;
@@ -366,6 +366,10 @@
       color: white;
 
       transform: translateY(-2px);
+    }
+
+    .hero-button + .hero-button {
+      margin-top: 14px;
     }
 
     .hero-button .arrow {
@@ -1402,32 +1406,6 @@
        FOOTER
     ================================================== */
 
-    .hero-announce {
-      width: fit-content;
-      margin: 22px 0 0 auto;
-      padding: 12px 18px;
-
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px 12px;
-
-      background: #e7e5e0;
-      border: 1px solid var(--line);
-      border-left: 4px solid var(--accent);
-      border-radius: 12px;
-
-      font-size: 14px;
-      color: var(--text);
-      text-align: right;
-    }
-
-    .hero-announce a {
-      color: var(--accent);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
     .subpages {
       padding: 64px 0 56px;
       border-top: 1px solid var(--line);
@@ -1480,14 +1458,14 @@
         display: none;
       }
 
+      .menu-btn {
+        display: block;
+      }
+
       .subpages-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-announce {
-        font-size: 13px;
-        padding: 10px 14px;
-      }
     }
 
     footer {
@@ -2122,6 +2100,36 @@
 
           </a>
 
+          <a
+            href="/encyclopedia.html"
+            class="hero-button"
+          >
+
+            <span data-i18n="navEncyclopedia">
+              Encyclopedia
+            </span>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </a>
+
+          <a
+            href="/news/"
+            class="hero-button"
+          >
+
+            <span data-i18n="heroLiveNews">
+              Live News!
+            </span>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </a>
+
         </div>
 
       </div>
@@ -2157,27 +2165,6 @@
   <div class="site">
 
     <main>
-      <div class="hero-announce">
-
-        <span data-i18n="heroNewLabel">
-          New pages:
-        </span>
-
-        <a href="/news/" data-i18n="navNews">
-          News
-        </a>
-
-        <span aria-hidden="true">
-          ·
-        </span>
-
-        <a href="/encyclopedia.html" data-i18n="navEncyclopedia">
-          Encyclopedia
-        </a>
-
-      </div>
-
-
 
       <!-- ==================================================
            SPECIES
@@ -3148,6 +3135,9 @@
         meetChib:
           "Meet Chib",
 
+        heroLiveNews:
+          "Live News!",
+
         small:
           "Small",
 
@@ -3444,6 +3434,9 @@
 
         meetChib:
           "Познайомитися з Чібом",
+
+        heroLiveNews:
+          "Новини наживо!",
 
         small:
           "Маленька",
