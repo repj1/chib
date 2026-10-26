@@ -577,6 +577,12 @@ function setLanguage(lang) {
   document.getElementById('lang-en').classList.toggle('active', lang === 'en');
   document.getElementById('lang-ua').classList.toggle('active', lang === 'uk');
   document.documentElement.lang = lang === 'uk' ? 'uk' : 'en';
+  try {
+    var url = new URL(window.location.href);
+    if (lang === 'uk') url.searchParams.set('lang', 'uk');
+    else url.searchParams.delete('lang');
+    window.history.replaceState(null, '', url.toString());
+  } catch (e) {}
 }
 
 (function () {
@@ -587,6 +593,12 @@ function setLanguage(lang) {
     var open = nav.classList.toggle('open');
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
+})();
+
+(function () {
+  var p = null;
+  try { p = new URLSearchParams(window.location.search).get('lang'); } catch (e) {}
+  if (p === 'uk' || p === 'ua') setLanguage('uk');
 })();
 </script>
 </body>
